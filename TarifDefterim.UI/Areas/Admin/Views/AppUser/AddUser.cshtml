@@ -1,0 +1,168 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+@model TarifDefterim.UI.Areas.Admin.Models.VM.AppUserRoleAndStatus
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    Yeni Kullanıcı Ekleme Formu
+    <small>Kullanıcılar</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Bu sayfada sisteme yeni kullanıcı kayıt edilmektedir. </p>
+</div>
+
+@Html.Partial("_messages")
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-haze">
+                    <i class="icon-user-follow font-green-haze"></i>
+                    <span class="caption-subject bold uppercase"> Kullanıcı Ekleme Formu </span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="/Admin/AppUser/AddUser" method="post" role="form" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-body">
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Name">Ad<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Name" class="form-control" id="Name" placeholder="Ad giriniz" required />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="LastName">Soyad<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="text" name="LastName" class="form-control" id="LastName" placeholder="Soyad giriniz" required />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="UserName">Kullanıcı Adı<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="text" name="UserName" class="form-control" id="UserName" placeholder="Kullanıcı adı giriniz" required />                                    
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                                <span id="message" style="display:none"></span>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Email">E-mail</label>
+                                <div class="col-md-4">
+                                    <input type="email" name="Email" class="form-control" id="Email" placeholder="E-mail giriniz" />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Password">Şifre<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="password" name="Password" class="form-control" id="Password" placeholder="Şifre giriniz" required />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Address">Adres</label>
+                                <div class="col-md-6">
+                                    <textarea type="text" name="Address" class="form-control" id="Address" placeholder="Adres giriniz"></textarea>
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="PhoneNumber">Cep Telefonu Nu.</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="PhoneNumber" class="form-control" id="PhoneNumber" placeholder="Örn:5391234567" />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="BirthDate">Doğum Tarihi</label>
+                                <div class="col-md-2">
+                                    <input type="date" name="BirthDate" class="form-control" id="BirthDate">
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Image">Kullanıcı Resmi</label>
+                                <div class="col-md-2">
+                                    <input type="file" name="Image" class="form-control" id="Image" placeholder="Resim seçiniz..." />
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="Role">Rol<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-2">
+                                    @Html.EnumDropDownListFor(x => x.Role, new { @class = "form-control" })
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" class="btn green" id="kaydet" disabled>Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+</div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts3{
+    
+<script>
+    $("#UserName").change(function () {
+
+        var username = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            dataType: "Json",
+            url: "@Url.Action("CheckUserName", "AppUser")/" + username,
+            success: function (data) {
+                if (data) {
+                    $("#message").removeAttr("style");
+                    $("#message").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
+                    $("#kaydet").prop("disabled", true);
+                    $("#message").removeClass("alert alert-sucess");
+                    $("#message").addClass("alert alert-danger");
+                }
+                else {
+                    $("#message").removeAttr("style");
+                    $("#message").text("Bu isim kullanıma uygundur.");
+                    $("#kaydet").prop("disabled", false);
+                    $("#message").removeClass("alert alert-danger");
+                    $("#message").addClass("alert alert-success");
+                }
+            }
+
+        })
+
+    });
+</script>
+    
+}

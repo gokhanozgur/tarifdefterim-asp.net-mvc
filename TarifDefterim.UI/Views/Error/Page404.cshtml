@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "404 Page Not Found";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet/less" type="text/css" href="~/Content/css/ErrorPage.less" />
+</head>
+<body>
+
+    <div id="mainC">
+        <div class="message">
+            <h1>@Response.StatusCode</h1>
+            <h3>@ViewBag.Kaynak Aradığınız sayfa bulunamamaktadır.</h3>
+        </div>
+        <div class="footer">
+            <a href="/Admin/Account/LogOut" title="Anasayfa">Anasayfa<span></span></a>
+        </div>
+    </div>
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+
+</body>
+</html>

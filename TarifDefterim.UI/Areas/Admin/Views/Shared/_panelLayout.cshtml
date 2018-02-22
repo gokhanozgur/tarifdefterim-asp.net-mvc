@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+
+@using TarifDefterim.UI.Areas.Admin.Controllers
+@using TarifDefterim.Model.Option
+
+@{ 
+
+    AppUserController uc = new AppUserController();
+    AppUser appuser = uc.UserInfo();
+    
+
+}
+
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7.5
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="tr">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>tarifdefterim | CMS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="yeme,içme,tarif" name="description" />
+    <meta content="Gökhan ÖZGÜR" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Admin/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("style", false)
+    <!-- END BEGIN PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/Areas/Admin/Content/css/components.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/plugins.min.css" rel="stylesheet" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/Areas/Admin/Content/css/layout.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/darkblue.min.css" rel="stylesheet" id="style_color"/>
+    <link href="~/Areas/Admin/Content/css/custom.min.css" rel="stylesheet" />
+    <!-- END THEME LAYOUT STYLES -->
+
+    @RenderSection("style2", false)
+
+    <link rel="shortcut icon" href="~/Areas/Admin/Content/images/tarifdefterim_icon.png" />
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        @Html.Partial("_begin_header",new { userFullInfo = appuser })        
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            @Html.Partial("_begin_sidebar")            
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    @RenderBody()
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        @Html.Partial("_begin_footer")
+        <!-- END FOOTER -->
+    </div>
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/Areas/Admin/Content/js/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/js.cookie.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/jquery.blockui.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/bootstrap-switch.min.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("scripts", false)
+    <!-- END BEGIN PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/Areas/Admin/Content/js/app.min.js"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("scripts2", false)
+    <!-- END BEGIN PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/Areas/Admin/Content/js/layout.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/demo.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/quick-sidebar.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/quick-nav.min.js"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->    
+    @RenderSection("scripts3",false)
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@{ 
+    if (@TempData["Basarili"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Başarılı!</strong> @TempData["Basarili"]
+        </div>
+    }
+    if (@TempData["Hata"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Hata!</strong> @TempData["Hata"]
+        </div>
+    }
+    if (@TempData["Bilgi"] != null)
+    {
+        <div class="alert alert-info">
+            <strong>Bilgi!</strong> @TempData["Bilgi"]
+        </div>
+    }
+}

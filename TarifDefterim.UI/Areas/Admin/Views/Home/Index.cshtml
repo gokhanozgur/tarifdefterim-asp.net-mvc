@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    tarifdefterim
+    <small>Dashboard</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Sistem genel bilgisi görüntülenmektedir. </p>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+            <div class="visual">
+                <i class="fa fa-users"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="1349">1349</span>
+                </div>
+                <div class="desc"> Toplam Kullanıcı </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+            <div class="visual">
+                <i class="fa fa-book"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="12">12</span>
+                </div>
+                <div class="desc"> Toplam Tarif </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+            <div class="visual">
+                <i class="fa fa-list"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="20">20</span>
+                </div>
+                <div class="desc"> Toplam Kategori </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+            <div class="visual">
+                <i class="fa fa-commenting"></i>
+            </div>
+            <div class="details">
+                <div class="number">                    
+                    <span data-counter="counterup" data-value="89">89</span>
+                </div>
+                <div class="desc"> Toplam Yorum </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section scripts{
+
+<script src="~/Areas/Admin/Content/js/jquery.waypoints.min.js"></script>
+<script src="~/Areas/Admin/Content/js/jquery.counterup.min.js"></script>
+
+}

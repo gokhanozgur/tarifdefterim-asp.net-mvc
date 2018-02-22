@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    Yeni Kategori Ekleme Formu
+    <small>Kategoriler</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Bu sayfada sisteme yeni kategori kayıt edilmektedir. </p>
+</div>
+
+@Html.Partial("_messages")
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-haze">
+                    <i class="icon-plus font-green-haze"></i>
+                    <span class="caption-subject bold uppercase"> Yeni Kategori Ekleme Formu</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="/Admin/Category/AddCategory" method="post" role="form" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-body">
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="CategoryName">Kategori Adı<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="CategoryName" class="form-control" id="CategoryName" placeholder="Kategori adı giriniz" required />
+                                <div class="form-control-focus"> </div>
+                            </div>
+                            <span id="message" style="display:none"></span>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="Description">Açıklama</label>
+                            <div class="col-md-4">
+                                <input type="text" name="Description" class="form-control" id="Description" placeholder="Açıklama giriniz" required />
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn green" id="kaydet">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts3{
+
+    <script>
+    $("#CategoryName").change(function () {
+
+        var category = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            dataType: "Json",
+            url: "@Url.Action("CheckCategoryName", "Category")/" + category,
+            success: function (data) {
+                if (data) {
+                    $("#message").removeAttr("style");
+                    $("#message").text("Bu kategori daha önce kaydedilmiştir.").fadeIn(3000);
+                    $("#kaydet").prop("disabled", true);
+                    $("#message").removeClass("alert alert-sucess");
+                    $("#message").addClass("alert alert-danger");
+                }
+                else {
+                    $("#message").removeAttr("style");
+                    $("#message").text("Bu kategori kaydedilmeye uygundur.");
+                    $("#kaydet").prop("disabled", false);
+                    $("#message").removeClass("alert alert-danger");
+                    $("#message").addClass("alert alert-success");
+                }
+            }
+
+        })
+
+    });
+    </script>
+
+}

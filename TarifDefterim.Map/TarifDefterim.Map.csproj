@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A96090FE-1F90-4F79-BD40-F78E35F5F20E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TarifDefterim.Map</RootNamespace>
+    <AssemblyName>TarifDefterim.Map</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Option\AppUserMap.cs" />
+    <Compile Include="Option\AssignedCategoryMap.cs" />
+    <Compile Include="Option\CategoryMap.cs" />
+    <Compile Include="Option\CommentMap.cs" />
+    <Compile Include="Option\DinnerTableImageMap.cs" />
+    <Compile Include="Option\DinnerTableLikeMap.cs" />
+    <Compile Include="Option\DinnerTableMap.cs" />
+    <Compile Include="Option\FavoriteDinnerTableMap.cs" />
+    <Compile Include="Option\FavoriteMealMap.cs" />
+    <Compile Include="Option\FoodIngredientMap.cs" />
+    <Compile Include="Option\IngredientMap.cs" />
+    <Compile Include="Option\KindMap.cs" />
+    <Compile Include="Option\MealImageMap.cs" />
+    <Compile Include="Option\MealMap.cs" />
+    <Compile Include="Option\RecipeLikeMap.cs" />
+    <Compile Include="Option\RecipeMap.cs" />
+    <Compile Include="Option\SubCategoryMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
+      <Project>{46d6217c-a286-41c3-b850-3e822f55c95a}</Project>
+      <Name>TarifDefterim.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TarifDefterim.Model\TarifDefterim.Model.csproj">
+      <Project>{57b9f5da-6a8f-4082-8ae7-0e3d3f38a1d6}</Project>
+      <Name>TarifDefterim.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
