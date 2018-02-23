@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BaseService\MainService.cs" />
     <Compile Include="Option\AppUserService.cs" />
+    <Compile Include="Option\AssignedCategoryService.cs" />
     <Compile Include="Option\CategoryService.cs" />
     <Compile Include="Option\KindService.cs" />
     <Compile Include="Option\MealService.cs" />

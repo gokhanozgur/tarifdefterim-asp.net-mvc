@@ -13,13 +13,13 @@ namespace TarifDefterim.Model.Option
 
         public Guid CategoryID { get; set; }
 
-        public Guid SubCategoryID { get; set; }
+        /*public Guid SubCategoryID { get; set; }*/
 
         public virtual Meal Meal { get; set; }
 
         public virtual Category Category { get; set; }
 
-        public virtual SubCategory SubCategory { get; set; }
+        /*public virtual SubCategory SubCategory { get; set; }*/
 
     }
 }

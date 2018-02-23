@@ -31,9 +31,9 @@ namespace TarifDefterim.Map.Option
 
             // SubCategory table relation
 
-            HasMany(x => x.SubCategories)
+            /*HasMany(x => x.SubCategories)
                 .WithRequired(x => x.Category)
-                .HasForeignKey(x => x.CategoryID);
+                .HasForeignKey(x => x.CategoryID);*/
 
         }
 

@@ -13,7 +13,7 @@ namespace TarifDefterim.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802191702157_initial"; }
+            get { return "201802232024558_initial"; }
         }
         
         string IMigrationMetadata.Source

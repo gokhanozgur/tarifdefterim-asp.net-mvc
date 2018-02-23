@@ -43,7 +43,7 @@ namespace TarifDefterim.DAL.Context
             modelBuilder.Configurations.Add(new MealImageMap());
             modelBuilder.Configurations.Add(new RecipeMap());
             modelBuilder.Configurations.Add(new RecipeLikeMap());
-            modelBuilder.Configurations.Add(new SubCategoryMap());
+            //modelBuilder.Configurations.Add(new SubCategoryMap());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
@@ -86,7 +86,7 @@ namespace TarifDefterim.DAL.Context
 
         public DbSet<RecipeLike> RecipeLikes { get; set; }
 
-        public DbSet<SubCategory> SubCategories { get; set; }
+        /*public DbSet<SubCategory> SubCategories { get; set; }*/
 
 
         public override int SaveChanges()
