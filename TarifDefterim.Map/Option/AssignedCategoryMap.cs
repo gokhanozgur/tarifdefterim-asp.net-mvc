@@ -34,10 +34,10 @@ namespace TarifDefterim.Map.Option
 
             // SubCategory table relation
 
-            HasRequired(x => x.SubCategory)
+            /*HasRequired(x => x.SubCategory)
                 .WithMany(x => x.AssignedCategories)
                 .HasForeignKey(x => x.SubCategoryID)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
              
 
         }

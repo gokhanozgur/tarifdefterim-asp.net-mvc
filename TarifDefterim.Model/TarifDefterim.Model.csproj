@@ -63,7 +63,6 @@
     <Compile Include="Option\MealImage.cs" />
     <Compile Include="Option\Recipe.cs" />
     <Compile Include="Option\RecipeLike.cs" />
-    <Compile Include="Option\SubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

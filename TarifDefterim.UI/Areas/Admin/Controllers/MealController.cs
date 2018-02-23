@@ -16,12 +16,15 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         MealService _mealService;
         AppUserService _appUserService;
         CategoryService _categoryService;
+        AssignedCategoryService _assignedCategory;
+
 
         public MealController()
         {
             _mealService = new MealService();
             _appUserService = new AppUserService();
             _categoryService = new CategoryService();
+            _assignedCategory = new AssignedCategoryService();
         }
         
         public ActionResult AddMeal()
@@ -43,12 +46,28 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
 
             data.AppUserID = user.ID;
-
+            
 
             try
             {
 
                 _mealService.Add(data);
+
+                foreach (var categoryItem in Categories)
+                {
+                    Guid cGuid = new Guid(categoryItem);
+
+                    Category CatchedCategory = _categoryService.GetByID(cGuid);
+
+                    if (!_assignedCategory.IsAssignedCategoryAlreadyExist(data.ID,CatchedCategory.ID))
+                    {
+                        _assignedCategory.AddAssignedCategoryFromMealController(data.ID, CatchedCategory.ID);
+
+                    }
+
+                }
+
+
                 TempData["Basarili"] = "Temel yemek bilgisi sisteme başarıyla eklendi.";
                 return RedirectToAction("MealList","Meal");
 

@@ -15,7 +15,7 @@ namespace TarifDefterim.Model.Option
 
         public virtual List<AssignedCategory> AssignedCategories { get; set; }
 
-        public virtual List<SubCategory> SubCategories { get; set; }
+        /*public virtual List<SubCategory> SubCategories { get; set; }*/
 
     }
 }
