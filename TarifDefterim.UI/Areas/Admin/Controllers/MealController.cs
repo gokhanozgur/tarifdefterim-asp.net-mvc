@@ -46,9 +46,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
 
             data.AppUserID = user.ID;
-
-            // Tüm seçilen kategoriler yakalanmalı.
-
+            
 
             try
             {
