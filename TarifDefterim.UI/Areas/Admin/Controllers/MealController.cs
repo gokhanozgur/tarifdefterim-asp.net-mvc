@@ -35,7 +35,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddMeal(Meal data)
+        public ActionResult AddMeal(Meal data, string[] Categories)
         {
 
             data.Slug = GenerateSlug.GenerateSlugURL(data.Name);
