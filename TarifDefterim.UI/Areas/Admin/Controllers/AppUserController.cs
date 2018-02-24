@@ -35,22 +35,24 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             data.Name = data.Name.ToUpper().Trim();
             data.LastName = data.LastName.ToUpper().Trim();
             data.UserName = data.UserName.ToLower().Trim();
-            data.Email = data.Email.Trim();
-            data.Address = data.Address.Trim();                      
+            data.Email = data.Email.Trim();                   
 
             List<string> UploadedImagePaths = new List<string>();
 
             UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalProfileImagePath, Image, 1);
             
             data.UserImage = UploadedImagePaths[0];
-            data.XSmallUserImage = UploadedImagePaths[1];
-            data.CruptedUserImage = UploadedImagePaths[2];
 
             if (data.UserImage == "0" || data.UserImage == "1" || data.UserImage == "2")
             {
                 data.UserImage = ImageUploader.DefaultProfileImagePath;
                 data.XSmallUserImage = ImageUploader.DefaultXSmallProfileImage;
                 data.CruptedUserImage = ImageUploader.DefaulCruptedProfileImage;
+            }
+            else
+            {
+                data.XSmallUserImage = UploadedImagePaths[1];
+                data.CruptedUserImage = UploadedImagePaths[2];
             }
 
             try
@@ -143,9 +145,9 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             update.Name = data.Name.ToUpper().Trim();
             update.LastName = data.LastName.ToUpper().Trim();
             update.UserName = data.UserName.ToLower().Trim();
-            update.Email = data.Email.Trim();
-            update.Address = data.Address.Trim();
-            update.PhoneNumber = data.PhoneNumber.Trim();
+            update.Email = data.Email;
+            update.Address = data.Address;
+            update.PhoneNumber = data.PhoneNumber;
             update.Birthdate = data.Birthdate;
             update.Role = data.Role;
             update.Status = data.Status;

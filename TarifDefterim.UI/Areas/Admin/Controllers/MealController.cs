@@ -110,6 +110,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             model.VideoURL = meal.VideoURL;
             model.Status = meal.Status;
 
+            model.Categories = _categoryService.GetActive();
+
             // atanmış kategorilerden kontrol edilerek çekilmeli
 
             return View(model);

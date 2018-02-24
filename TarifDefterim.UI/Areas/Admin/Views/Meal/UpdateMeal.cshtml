@@ -82,7 +82,12 @@
                             </div>
                             <label class="col-md-2 control-label" for="Categories">Kategorisi<span class="required" aria-required="true">*</span></label>
                             <div class="col-md-2">
-                                @Html.EnumDropDownListFor(x => x.Categories, new { @class = "form-control" })
+                                <select multiple class="form-control" id="Categories" name="Categories" required>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <option value="@item.ID">@item.CategoryName</option>
+                                    }
+                                </select>
                                 <div class="form-control-focus"> </div>
                             </div>
                         </div>
