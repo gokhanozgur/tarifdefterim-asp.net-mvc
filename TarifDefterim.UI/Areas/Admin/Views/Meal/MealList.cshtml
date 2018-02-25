@@ -241,8 +241,8 @@
 
         function AddNewStep() {
             $("#dynamicRecipeContent").append(
-                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description' class='form-control' id='Description' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment' name='Alignment' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 100; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
-            );
+                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description' class='form-control' id='Description' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment' name='Alignment' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 50; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
+            ).hide().fadeIn(500);
             counter++;
         }
 
