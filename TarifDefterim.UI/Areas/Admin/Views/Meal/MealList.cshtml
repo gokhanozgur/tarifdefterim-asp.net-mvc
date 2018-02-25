@@ -140,13 +140,14 @@
                 <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Input Başlık</h4>
+                            <h4>Tarif Düzenleme</h4>
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
                             <div id="dynamicRecipeContent">
                                 
                             </div>
+                            <a href="javascript:;" onclick="AddNewStep()" class="btn btn-sm green btn-outline">Adım ekle</a>
                         </div>                        
                     </div>
                 </div>
@@ -190,12 +191,19 @@
                 url: "@Url.Action("GetRecipe", "Recipe")/" + mealID,
                 success: function (data) {
                     if (!data) {
+                        $("#dynamicRecipeContent").html("");
                         $("#message").removeAttr("style");
-                        $("#message").text("Bu yemeğin bir tarifi bulunmamaktadır.");
+                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif için formu doldurunuz.");
                         $("#message").addClass("note note-danger");
+                        $("#dynamicRecipeContent").append(
+                            "<p>1. Adım : <input type='text' name='Name' class='form-control' id='Name' placeholder='Tür giriniz' required /></p>"
+                        );
                     }
                     else {
+
+                        $("#dynamicRecipeContent").html("");
                         var count = Object.keys(data).length;
+                        $("#message").text("Seçilen yemeğin tarifi.");
 
                         if (count > 0) {
 
@@ -217,6 +225,21 @@
             })
         }
 
+        var counter = 2;
+
+        function AddNewStep() {
+            $("#dynamicRecipeContent").append(
+                "<p id='" + "row" + counter + "'>" + counter + ". Adım : <input type='text' name='Name' class='form-control' id='Name' placeholder='Tür giriniz' required /><button type='button' class='btn green' onclick ='DisposeNewStep(row" + counter + ")'>Kaydet</button></p>"
+            );
+            counter++;
+        }
+
+        function DisposeNewStep(element) {
+            console.log(element);
+            $(element).remove();
+            counter--;
+        }
+        
     </script>
     
 }

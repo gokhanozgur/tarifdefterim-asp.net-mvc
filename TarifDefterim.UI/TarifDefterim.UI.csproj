@@ -120,6 +120,7 @@
     <Content Include="Areas\Admin\Content\images\login\bg4.jpg" />
     <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
     <Content Include="Areas\Admin\Content\images\login\logo.png" />
+    <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc_disabled.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_both.png" />
