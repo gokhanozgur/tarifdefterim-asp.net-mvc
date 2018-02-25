@@ -52,5 +52,13 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         }
 
+
+        public JsonResult AddRecipeFromList(string id)
+        {
+            bool test = true;
+            return Json(test, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }

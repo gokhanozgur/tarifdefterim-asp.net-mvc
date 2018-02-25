@@ -128,33 +128,31 @@
     </div>
 </div>
 
-
 <div id="modal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Pencere Başlığı</h4>
+                <h4 class="modal-title">Tarif Düzenleme</h4>
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Tarif Düzenleme</h4>
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
                             <div id="dynamicRecipeContent">
                                 
-                            </div>
-                            <a href="javascript:;" onclick="AddNewStep()" class="btn btn-sm green btn-outline">Adım ekle</a>
+                            </div>                            
                         </div>                        
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <a href="javascript:;" onclick="AddNewStep()" class="btn yellow btn-outline">Adım ekle</a>
                 <button type="button" data-dismiss="modal" class="btn blue btn-outline">Kapat</button>
-                <button type="button" class="btn green">Kaydet</button>
+                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">kaydet</a>
             </div>
         </div>
     </div>
@@ -178,10 +176,10 @@
 @section scripts3{
         
     <script>
-
+        var mealID;
         function CheckRecipe(val) {
 
-            var mealID = val;
+            mealID = val;
             console.log(mealID);
 
             $.ajax({
@@ -193,11 +191,8 @@
                     if (!data) {
                         $("#dynamicRecipeContent").html("");
                         $("#message").removeAttr("style");
-                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif için formu doldurunuz.");
+                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adım ekleyiniz.");
                         $("#message").addClass("note note-danger");
-                        $("#dynamicRecipeContent").append(
-                            "<p>1. Adım : <input type='text' name='Name' class='form-control' id='Name' placeholder='Tür giriniz' required /></p>"
-                        );
                     }
                     else {
 
@@ -225,11 +220,28 @@
             })
         }
 
-        var counter = 2;
+        function SendRecipe() {
+
+            console.log(mealID + " bilgisini tariflere göndermeye çalışıyorum.");
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                url: "@Url.Action("AddRecipeFromList", "Recipe")/" + mealID,
+                success: function (data) {
+                    console.log(data);
+                }
+
+            })
+
+        }
+
+        var counter = 1;
 
         function AddNewStep() {
             $("#dynamicRecipeContent").append(
-                "<p id='" + "row" + counter + "'>" + counter + ". Adım : <input type='text' name='Name' class='form-control' id='Name' placeholder='Tür giriniz' required /><button type='button' class='btn green' onclick ='DisposeNewStep(row" + counter + ")'>Kaydet</button></p>"
+                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description' class='form-control' id='Description' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment' name='Alignment' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 100; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
             );
             counter++;
         }
@@ -239,7 +251,7 @@
             $(element).remove();
             counter--;
         }
-        
+
     </script>
     
 }
