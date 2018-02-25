@@ -191,7 +191,7 @@
                     if (!data) {
                         $("#dynamicRecipeContent").html("");
                         $("#message").removeAttr("style");
-                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adım ekleyiniz.");
+                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adımı ekleyiniz.");
                         $("#message").addClass("note note-danger");
                     }
                     else {
@@ -199,6 +199,7 @@
                         $("#dynamicRecipeContent").html("");
                         var count = Object.keys(data).length;
                         $("#message").text("Seçilen yemeğin tarifi.");
+                        $("#message").addClass("note note-info");
 
                         if (count > 0) {
 
