@@ -144,6 +144,9 @@
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
+                            <div id="dynamicRecipeContent">
+                                
+                            </div>
                         </div>                        
                     </div>
                 </div>
@@ -184,17 +187,30 @@
 
                 type: "POST",
                 dataType: "Json",
-                url: "@Url.Action("CheckMealRecipe","Recipe")/" + mealID,
+                url: "@Url.Action("GetRecipe", "Recipe")/" + mealID,
                 success: function (data) {
-                    if (data) {
-                        $("#message").removeAttr("style");
-                        $("#message").text("Bu yemeğin bir tarifi bulundu.");
-                        console.log("Tarif var.");
-                    }
-                    else {
+                    if (!data) {
                         $("#message").removeAttr("style");
                         $("#message").text("Bu yemeğin bir tarifi bulunmamaktadır.");
-                        console.log("Tarif yok.");
+                        $("#message").addClass("note note-danger");
+                    }
+                    else {
+                        var count = Object.keys(data).length;
+
+                        if (count > 0) {
+
+                            $.each(data, function (key, item) {
+
+                                $("#dynamicRecipeContent").append(
+                                    "<p>" + item.mealID + "</p>"+
+                                    "<p>" + item.Description + "</p>" +
+                                    "<p>" + item.Alignment + "</p>"
+                                );
+
+                            });
+
+                        }
+
                     }
                 }
 
