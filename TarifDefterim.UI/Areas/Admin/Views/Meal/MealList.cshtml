@@ -128,29 +128,31 @@
     </div>
 </div>
 
-
 <div id="modal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Pencere Başlığı</h4>
+                <h4 class="modal-title">Tarif Düzenleme</h4>
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Input Başlık</h4>
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
+                            <div id="dynamicRecipeContent">
+                                
+                            </div>                            
                         </div>                        
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <a href="javascript:;" onclick="AddNewStep()" class="btn yellow btn-outline">Adım ekle</a>
                 <button type="button" data-dismiss="modal" class="btn blue btn-outline">Kapat</button>
-                <button type="button" class="btn green">Kaydet</button>
+                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">kaydet</a>
             </div>
         </div>
     </div>
@@ -174,31 +176,81 @@
 @section scripts3{
         
     <script>
-
+        var mealID;
         function CheckRecipe(val) {
 
-            var mealID = val;
+            mealID = val;
             console.log(mealID);
 
             $.ajax({
 
                 type: "POST",
                 dataType: "Json",
-                url: "@Url.Action("CheckMealRecipe","Recipe")/" + mealID,
+                url: "@Url.Action("GetRecipe", "Recipe")/" + mealID,
                 success: function (data) {
-                    if (data) {
+                    if (!data) {
+                        $("#dynamicRecipeContent").html("");
                         $("#message").removeAttr("style");
-                        $("#message").text("Bu yemeğin bir tarifi bulundu.");
-                        console.log("Tarif var.");
+                        $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adımı ekleyiniz.");
+                        $("#message").addClass("note note-danger");
                     }
                     else {
-                        $("#message").removeAttr("style");
-                        $("#message").text("Bu yemeğin bir tarifi bulunmamaktadır.");
-                        console.log("Tarif yok.");
+
+                        $("#dynamicRecipeContent").html("");
+                        var count = Object.keys(data).length;
+                        $("#message").text("Seçilen yemeğin tarifi.");
+                        $("#message").addClass("note note-info");
+
+                        if (count > 0) {
+
+                            $.each(data, function (key, item) {
+
+                                $("#dynamicRecipeContent").append(
+                                    "<p>" + item.mealID + "</p>"+
+                                    "<p>" + item.Description + "</p>" +
+                                    "<p>" + item.Alignment + "</p>"
+                                );
+
+                            });
+
+                        }
+
                     }
                 }
 
             })
+        }
+
+        function SendRecipe() {
+
+            console.log(mealID + " bilgisini tariflere göndermeye çalışıyorum.");
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                url: "@Url.Action("AddRecipeFromList", "Recipe")/" + mealID,
+                success: function (data) {
+                    console.log(data);
+                }
+
+            })
+
+        }
+
+        var counter = 1;
+
+        function AddNewStep() {
+            $("#dynamicRecipeContent").append(
+                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description' class='form-control' id='Description' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment' name='Alignment' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 50; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
+            ).hide().fadeIn(500);
+            counter++;
+        }
+
+        function DisposeNewStep(element) {
+            console.log(element);
+            $(element).remove();
+            counter--;
         }
 
     </script>

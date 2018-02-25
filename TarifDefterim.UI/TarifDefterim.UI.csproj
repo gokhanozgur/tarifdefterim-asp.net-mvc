@@ -120,6 +120,7 @@
     <Content Include="Areas\Admin\Content\images\login\bg4.jpg" />
     <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
     <Content Include="Areas\Admin\Content\images\login\logo.png" />
+    <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc_disabled.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_both.png" />
@@ -255,7 +256,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
-    <Folder Include="Areas\Admin\Views\SubCategory\" />
     <Folder Include="Content\js\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />

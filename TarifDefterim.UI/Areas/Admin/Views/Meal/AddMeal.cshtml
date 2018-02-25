@@ -76,7 +76,6 @@
                             <label class="col-md-2 control-label" for="Categories">Kategorisi<span class="required" aria-required="true">*</span></label>
                             <div class="col-md-2">
                                 <select multiple class="form-control" id="Categories" name="Categories" required>
-                                    <option value="-1">Seçiniz</option>
                                     @foreach (var item in Model.Categories)
                                     {
                                         <option value="@item.ID">@item.CategoryName</option>

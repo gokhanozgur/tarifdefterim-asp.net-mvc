@@ -16,5 +16,13 @@ namespace TarifDefterim.Service.Option
             return Any(x => x.MealID == id);
         }
 
+        public List<Recipe> GetRecipeInfo(Guid id)
+        {
+
+            List<Recipe> recipe = GetByExp(x => x.MealID == id && x.Status != Core.Enum.Status.Deleted);
+            return recipe;
+
+        }
+
     }
 }
