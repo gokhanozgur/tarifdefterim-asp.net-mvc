@@ -132,7 +132,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="ClearData()"></button>
                 <h4 class="modal-title">Tarif Düzenleme</h4>
             </div>
             <div class="modal-body">
@@ -151,8 +151,8 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" onclick="AddNewStep()" class="btn yellow btn-outline">Adım ekle</a>
-                <button type="button" data-dismiss="modal" class="btn blue btn-outline">Kapat</button>
-                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">kaydet</a>
+                <a href="javascript:;" onclick="ClearData()" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
+                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">Kaydet</a>
             </div>
         </div>
     </div>
@@ -221,9 +221,12 @@
             })
         }
 
+        var recippeStepArray = [];
+
         function SendRecipe() {
 
             console.log(mealID + " bilgisini tariflere göndermeye çalışıyorum.");
+            console.log(recippeStepArray);
 
             $.ajax({
 
@@ -242,7 +245,7 @@
 
         function AddNewStep() {
             $("#dynamicRecipeContent").append(
-                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description' class='form-control' id='Description' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment' name='Alignment' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 50; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
+                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description" + counter + "' class='form-control' id='Description" + counter + "' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment" + counter + "' name='Alignment" + counter+"' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 50; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
             ).hide().fadeIn(500);
             counter++;
         }
@@ -251,6 +254,11 @@
             console.log(element);
             $(element).remove();
             counter--;
+        }
+
+        function ClearData() {
+            counter = 1;
+            console.log(counter);
         }
 
     </script>
