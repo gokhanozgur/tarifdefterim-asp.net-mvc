@@ -53,10 +53,23 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
 
-        public JsonResult AddRecipeFromList(string id)
+        public bool AddRecipeFromList(string id, string[] Description, string[] Alignment)
         {
-            bool test = true;
-            return Json(test, JsonRequestBehavior.AllowGet);
+
+            Guid mealID = new Guid(id);
+
+            List<string> descriptionList = new List<string>(Description);
+            List<string> alignmentList = new List<string>(Alignment);
+
+            try
+            {
+                _recipeService.AddRecipeFromList(mealID,);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }            
 
         }
 

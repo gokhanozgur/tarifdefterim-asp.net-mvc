@@ -24,5 +24,18 @@ namespace TarifDefterim.Service.Option
 
         }
 
+        public bool AddRecipeFromList(Guid id,List<Recipe> mealList)
+        {
+            try
+            {
+                Add(mealList);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

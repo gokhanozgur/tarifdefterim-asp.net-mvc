@@ -142,6 +142,20 @@
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
+                            <p id="row">
+                                Tarifin adımını giriniz:
+                                <input type="text" name="Description" class="form-control" id="Description" placeholder="Adım giriniz" required />
+                                Kaçıncı adım?
+                                <select class="form-control" id="Alignment" name="Alignment" required>
+                                    <option value="-1">Seçiniz</option>
+                                    @for (int i = 1; i <= 50; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                                <br>
+                                <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
+                            </p>
                             <div id="dynamicRecipeContent">
                                 
                             </div>                            
@@ -150,8 +164,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="javascript:;" onclick="AddNewStep()" class="btn yellow btn-outline">Adım ekle</a>
-                <a href="javascript:;" onclick="ClearData()" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
+                <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
                 <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">Kaydet</a>
             </div>
         </div>
@@ -208,7 +221,7 @@
                                 $("#dynamicRecipeContent").append(
                                     "<p>" + item.mealID + "</p>"+
                                     "<p>" + item.Description + "</p>" +
-                                    "<p>" + item.Alignment + "</p>"
+                                    "<p>" + item.Alignment + "</p><br>"
                                 );
 
                             });
@@ -221,44 +234,40 @@
             })
         }
 
-        var recippeStepArray = [];
+        var recipeDescriptionArray = [];
+        var recipeStepArray = [];
+
+
+        function PutList() {
+
+            var description = $("#Description").val();
+            var alignment = $("#Alignment").val();
+
+            recipeDescriptionArray.push(description);
+            recipeStepArray.push(alignment);
+
+            console.log(recipeDescriptionArray + " - " + recipeStepArray);
+
+        }
+
 
         function SendRecipe() {
 
             console.log(mealID + " bilgisini tariflere göndermeye çalışıyorum.");
-            console.log(recippeStepArray);
+            console.log(recipeStepArray);
 
             $.ajax({
 
                 type: "POST",
                 dataType: "Json",
-                url: "@Url.Action("AddRecipeFromList", "Recipe")/" + mealID,
+                data: { ID: mealID, Description: recipeDescriptionArray, Alignment: recipeStepArray},
+                url: "@Url.Action("AddRecipeFromList", "Recipe")",
                 success: function (data) {
                     console.log(data);
                 }
 
             })
 
-        }
-
-        var counter = 1;
-
-        function AddNewStep() {
-            $("#dynamicRecipeContent").append(
-                "<p id='" + "row" + counter + "'>Tarifin adımını giriniz: <input type='text' name='Description" + counter + "' class='form-control' id='Description" + counter + "' placeholder='Adım giriniz' required />Kaçıncı adım?<select class='form-control' id='Alignment" + counter + "' name='Alignment" + counter+"' required><option value='-1'>Seçiniz</option>@for(int i = 1; i <= 50; i++){<option value='@i'>@i</option>}</select><br><button type='button' class='btn red btn-outline' onclick ='DisposeNewStep(row" + counter + ")'>Adımı Sil</button></p>"
-            ).hide().fadeIn(500);
-            counter++;
-        }
-
-        function DisposeNewStep(element) {
-            console.log(element);
-            $(element).remove();
-            counter--;
-        }
-
-        function ClearData() {
-            counter = 1;
-            console.log(counter);
         }
 
     </script>
