@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
+using TarifDefterim.UI.Areas.Admin.Models.VM;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
@@ -37,17 +38,24 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         public JsonResult GetRecipe(string id)
         {
 
-            Guid mealID = new Guid(id);
-
-            if (CheckMealRecipe(mealID))
+            if (id != null)
             {
-                List<Recipe> list = _recipeService.GetRecipeInfo(mealID);
+                Guid mealID = new Guid(id);
 
-                return Json(list,JsonRequestBehavior.AllowGet);
+                if (CheckMealRecipe(mealID))
+                {
+                    List<RecipeVM> list = _recipeService.GetRecipeInfo(mealID);
+
+                    return Json(list, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Empty", JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
-                return Json(false, JsonRequestBehavior.AllowGet);
+                return Json("Empty", JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -56,14 +64,32 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         public bool AddRecipeFromList(string id, string[] Description, string[] Alignment)
         {
 
+            if (id == null || Description.Count() <= 0 || Alignment.Count() <= 0)
+            {
+                return false;
+            }
+
             Guid mealID = new Guid(id);
 
-            List<string> descriptionList = new List<string>(Description);
-            List<string> alignmentList = new List<string>(Alignment);
+            List<Recipe> recipeList = new List<Recipe>();
+
+            Recipe recipe;
+
+            for (int i = 0; i < Description.Length; i++)
+            {
+                recipe = new Recipe();
+                recipe.MealID = mealID;
+                recipe.Description = Description[i];
+                recipe.Alignment = Convert.ToInt16(Alignment[i]);
+
+                recipeList.Add(recipe);
+
+            }
+
 
             try
             {
-                _recipeService.AddRecipeFromList(mealID,);
+                _recipeService.AddRecipeFromList(recipeList);
                 return true;
             }
             catch (Exception ex)

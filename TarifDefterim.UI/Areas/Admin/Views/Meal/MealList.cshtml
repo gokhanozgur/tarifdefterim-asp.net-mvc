@@ -201,7 +201,11 @@
                 dataType: "Json",
                 url: "@Url.Action("GetRecipe", "Recipe")/" + mealID,
                 success: function (data) {
-                    if (!data) {
+
+                    var count = Object.keys(data).length;
+
+                    if (count == 0) {
+                        $("#message").html("");
                         $("#dynamicRecipeContent").html("");
                         $("#message").removeAttr("style");
                         $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adımı ekleyiniz.");
@@ -210,23 +214,11 @@
                     else {
 
                         $("#dynamicRecipeContent").html("");
-                        var count = Object.keys(data).length;
+                        $("#message").html("");
                         $("#message").text("Seçilen yemeğin tarifi.");
                         $("#message").addClass("note note-info");
 
-                        if (count > 0) {
-
-                            $.each(data, function (key, item) {
-
-                                $("#dynamicRecipeContent").append(
-                                    "<p>" + item.mealID + "</p>"+
-                                    "<p>" + item.Description + "</p>" +
-                                    "<p>" + item.Alignment + "</p><br>"
-                                );
-
-                            });
-
-                        }
+                        
 
                     }
                 }

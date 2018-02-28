@@ -45,6 +45,7 @@ namespace TarifDefterim.Service.BaseService
         public void Add(List<T> items)
         {
             dbContext.Set<T>().AddRange(items);
+            Save();
         }
 
         public bool Any(Expression<Func<T, bool>> exp)
