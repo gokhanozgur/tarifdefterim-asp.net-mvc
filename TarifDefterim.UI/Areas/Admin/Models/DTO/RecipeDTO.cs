@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TarifDefterim.UI.Areas.Admin.Models.VM
+namespace TarifDefterim.UI.Areas.Admin.Models.DTO
 {
-    public class RecipeVM
+    public class RecipeDTO
     {
         public Guid ID { get; set; }
         public string Description { get; set; }

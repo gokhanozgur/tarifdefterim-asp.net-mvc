@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
-using TarifDefterim.UI.Areas.Admin.Models.VM;
+using TarifDefterim.UI.Areas.Admin.Models.DTO;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
@@ -44,7 +44,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
                 if (CheckMealRecipe(mealID))
                 {
-                    List<RecipeVM> list = _recipeService.GetRecipeInfo(mealID);
+                    List<RecipeDTO> list = _recipeService.GetRecipeInfo(mealID); // Dikkat
 
                     return Json(list, JsonRequestBehavior.AllowGet);
                 }

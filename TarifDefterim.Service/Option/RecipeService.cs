@@ -10,7 +10,7 @@ namespace TarifDefterim.Service.Option
 {
     public class RecipeService:MainService<Recipe>
     {
-
+           
         public bool IsRecipAlreadyExist(Guid id)
         {
             return Any(x => x.MealID == id);
