@@ -136,7 +136,7 @@
                 <h4 class="modal-title">Tarif Düzenleme</h4>
             </div>
             <div class="modal-body">
-                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                <div class="scroller" style="height:400px" data-always-visible="1" data-rail-visible1="1">
                     <div class="row">
                         <div class="col-md-12">
                             <p>
@@ -195,6 +195,9 @@
             mealID = val;
             console.log(mealID);
 
+            $("#Description").val("");
+            $("#Alignment").val('-1');
+
             $.ajax({
 
                 type: "POST",
@@ -204,10 +207,14 @@
 
                     var count = Object.keys(data).length;
 
-                    if (count == 0) {
-                        $("#message").html("");
+                    console.log(count);
+
+                    if (count == 0 || data == "Empty") {
+
                         $("#dynamicRecipeContent").html("");
+                        $("#message").html("");
                         $("#message").removeAttr("style");
+                        $("#message").removeClass("note note-info");
                         $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adımı ekleyiniz.");
                         $("#message").addClass("note note-danger");
                     }
@@ -215,9 +222,16 @@
 
                         $("#dynamicRecipeContent").html("");
                         $("#message").html("");
-                        $("#message").text("Seçilen yemeğin tarifi.");
+                        $("#message").removeAttr("style");
+                        $("#message").removeClass("note note-danger");
+                        $("#message").text("İşte seçilen yemeğin tarifi. Dilerseniz ek tarif adımı ekleyebilirsiniz.");
                         $("#message").addClass("note note-info");
 
+                        $.each(data, function (key, item) {
+
+                            $("#dynamicRecipeContent").append("<h5><a href='javascript:;' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'>" + item.Alignment + ". Adım: " + item.Description + "</span></h5>");
+
+                        });
                         
 
                     }

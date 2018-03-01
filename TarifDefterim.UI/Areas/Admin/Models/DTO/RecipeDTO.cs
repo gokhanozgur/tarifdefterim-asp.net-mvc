@@ -10,5 +10,6 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
         public Guid ID { get; set; }
         public string Description { get; set; }
         public Int16 Alignment { get; set; }
+
     }
 }
