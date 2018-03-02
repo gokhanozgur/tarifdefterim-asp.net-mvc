@@ -107,9 +107,13 @@
                                     {
                                         <span class="label label-success">@item.Status</span>
                                     }
-                                    else
+                                    else if (item.Status == TarifDefterim.Core.Enum.Status.Updated)
                                     {
                                         <span class="label label-warning">@item.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">@item.Status</span>
                                     }
                                 </td>
                                 <td>@item.CreatedDate</td>
@@ -142,14 +146,14 @@
                             <p>
                                 <span id="message" style="display:none"></span>
                             </p>
-                            <h3>Mevcut Tarif Adımları</h3>
+                            <h4>Mevcut Tarif Adımları</h4>
                             <hr />
                             <p>
                                 <span id="existListMessage">Henüz tarif ile ilgili bir veri bulunmamaktadır.</span>
                             </p> 
                             <div id="dynamicRecipeContent"></div>  
                             <hr />
-                            <h3>Tarif Adımı Eklem İşlemleri</h3>
+                            <h4>Tarif Adımı Eklem İşlemleri</h4>
                             <p id="row">
                                 Tarifin adımını giriniz:
                                 <input type="text" name="Description" class="form-control" id="Description" placeholder="Adım giriniz" required />
@@ -167,7 +171,7 @@
                             <p>
                                 <span id="processMessage" style="display:none"></span>
                             </p>
-                            <h3>Eklenmesini İstediğiniz Tarif Adımları</h3>
+                            <h4>Eklenmesini İstediğiniz Tarif Adımları</h4>
                             <hr />
                             <p>
                                 <span id="tempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
@@ -179,7 +183,7 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
-                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline" id="tarifKaydet" disabled>Kaydet</a>
+                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline" id="tarifKaydet">Kaydet</a>
             </div>
         </div>
     </div>
@@ -245,14 +249,14 @@
                         $("#message").text("Yemeğin tarifi mevcut. Dilerseniz tarif adımlarını düzenleyebilirsiniz.");
                         $("#message").addClass("note note-info");
                         $("#existListMessage").css("display","none");
-                        
+
 
                         $.each(data, function (key, item) {
 
-                            $("#dynamicRecipeContent").append("<h5><a href='javascript:;' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'>" + item.Alignment + ". Adım: " + item.Description + "</span></h5>");
+                            $("#dynamicRecipeContent").append(`<h5 id="existRow${item.ID}"><a href='javascript:;'  onclick='$.ExistItem.DeleteRecipe("${item.ID}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'> ${item.Alignment}. Adım: ${item.Description} </span></h5>`);
 
                         });
-                        
+
 
                     }
                 }
@@ -287,30 +291,30 @@
             }
             else {
 
-                SetProcessMessage("note note-danger","Tarife eklenecek bilgileri eksiksiz belirtiniz.")
+                SetProcessMessage("#processMessage","note note-danger","Tarife eklenecek bilgileri eksiksiz belirtiniz.")
 
             }
 
         }
 
-        function SetProcessMessage(className, message) {
-            
+        function SetProcessMessage(elementID,className, message) {
 
-            $("#processMessage").html("");
-            $("#processMessage").removeAttr("style");
+
+            $(elementID).html("");
+            $(elementID).removeAttr("style");
 
             var lastClassName = $("#processMessage").attr("class");
 
             if (lastClassName == "note note-danger") {
-                $("#processMessage").removeClass("note note-danger");
+                $(elementID).removeClass("note note-danger");
             }
             else {
-                $("#processMessage").removeClass("note note-success");
+                $(elementID).removeClass("note note-success");
             }
 
             if (className != null || message != null) {
-                $("#processMessage").addClass(className);
-                $("#processMessage").append(message);
+                $(elementID).addClass(className);
+                $(elementID).append(message);
             }
 
         }
@@ -327,7 +331,7 @@
             recipeDescriptionArray.splice(index, 1);
 
             recipeStepArray.splice(index, 1);
-            
+
             console.log(recipeDescriptionArray);
 
             var count = recipeStepArray.length;
@@ -374,6 +378,39 @@
 
             })
 
+        }
+
+        function RemoveFromExistRecipeList(param) { $(param).remove(); }
+
+        $.ExistItem = {
+
+            DeleteRecipe: function RemoveItemFromDatabase(selectedID) {
+
+                result = confirm("Bu işlemi yapmak istediğinizden emin misiniz?");
+
+                if (result == false) {
+                    return false;
+                }
+                else {                    
+                    console.log(selectedID);
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "Json",
+                        url: "@Url.Action("RemoveRecipe", "Recipe")/" + selectedID,
+                        success: function (data) {
+                            if (data != false) {
+                                SetProcessMessage("#message", "note note-success", "Tariften bir adım çıkardınız.")
+                                RemoveFromExistRecipeList("existRow" + selectedID);
+                            }
+                            else {
+                                SetProcessMessage("#message","note note-danger", "Tariften adım çıkarma işlemi başarısız.")
+                            }
+                        }
+                    })
+                }
+
+            }
         }
 
     </script>

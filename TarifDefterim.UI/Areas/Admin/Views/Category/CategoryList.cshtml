@@ -95,9 +95,13 @@
                                     {
                                         <span class="label label-success">@item.Status</span>
                                     }
-                                    else
+                                    else if (item.Status == TarifDefterim.Core.Enum.Status.Updated)
                                     {
                                         <span class="label label-warning">@item.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">@item.Status</span>
                                     }
                                 </td>
                                 <td>@item.CreatedDate</td>

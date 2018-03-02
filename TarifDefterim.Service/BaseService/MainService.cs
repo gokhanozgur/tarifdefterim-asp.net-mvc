@@ -87,6 +87,7 @@ namespace TarifDefterim.Service.BaseService
         public void Remove(Guid id)
         {
             T item = GetByID(id);
+            item.Status = Status.Deleted;
             Update(item);
         }
 

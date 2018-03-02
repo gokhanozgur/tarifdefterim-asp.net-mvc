@@ -117,7 +117,7 @@ namespace TarifDefterim.DAL.Context
                     }
                     else if (item.State == EntityState.Modified)
                     {
-                        entity.Status = Status.Updated;
+                        //entity.Status = Status.Updated;
                         entity.ModifiedUserName = identity;
                         entity.ModifiedComputerName = computerName;
                         entity.ModifiedDate = dateTime;

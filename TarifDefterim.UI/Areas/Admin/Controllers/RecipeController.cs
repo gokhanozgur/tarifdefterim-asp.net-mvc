@@ -108,5 +108,16 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         }
 
+        public JsonResult RemoveRecipe(string id)
+        {
+
+            Guid recipeID = new Guid(id);
+
+            bool result = _recipeService.RemoveRecipeFromSelectedItem(recipeID);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
