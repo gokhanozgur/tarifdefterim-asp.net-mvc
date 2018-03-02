@@ -132,7 +132,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="ClearData()"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Tarif Düzenleme</h4>
             </div>
             <div class="modal-body">
@@ -156,6 +156,19 @@
                                 <br>
                                 <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
                             </p>
+                            <p>
+                                <span id="processMessage" style="display:none"></span>
+                            </p>
+                            <h3>Eklenmesini İstediğiniz Tarif Adımları</h3>
+                            <p>
+                                <span id="tempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
+                            </p>
+                            <div id="tempList">
+                            </div>
+                            <h3>Mevcut Tarif Adımları</h3>
+                            <p>
+                                <span id="existListMessage">Henüz tarif ile ilgili bir veri bulunmamaktadır.</span>
+                            </p>
                             <div id="dynamicRecipeContent">
                                 
                             </div>                            
@@ -165,7 +178,7 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
-                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline">Kaydet</a>
+                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline" id="tarifKaydet" disabled>Kaydet</a>
             </div>
         </div>
     </div>
@@ -198,6 +211,9 @@
             $("#Description").val("");
             $("#Alignment").val('-1');
 
+            $("#tarifKaydet").prop("disabled", true);
+
+
             $.ajax({
 
                 type: "POST",
@@ -214,6 +230,7 @@
                         $("#dynamicRecipeContent").html("");
                         $("#message").html("");
                         $("#message").removeAttr("style");
+                        $("#existListMessage").removeAttr("style");
                         $("#message").removeClass("note note-info");
                         $("#message").text("Seçilen yemeğin bir tarifi bulunmamaktadır. Tarif adımı ekleyiniz.");
                         $("#message").addClass("note note-danger");
@@ -226,6 +243,8 @@
                         $("#message").removeClass("note note-danger");
                         $("#message").text("İşte seçilen yemeğin tarifi. Dilerseniz ek tarif adımı ekleyebilirsiniz.");
                         $("#message").addClass("note note-info");
+                        $("#existListMessage").css("display","none");
+                        
 
                         $.each(data, function (key, item) {
 
@@ -246,14 +265,81 @@
 
         function PutList() {
 
+            SetProcessMessage(null,null);
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
 
-            recipeDescriptionArray.push(description);
-            recipeStepArray.push(alignment);
+            if (description != "" || alignment != "-1") {
 
-            console.log(recipeDescriptionArray + " - " + recipeStepArray);
+                recipeDescriptionArray.push(description);
+                recipeStepArray.push(alignment);
 
+                $("#tempList").html("");
+
+                for (var i = 0; i < recipeDescriptionArray.length; i++) {
+                    $("#tempList").append("<h5 id='tempRow" + recipeStepArray[i] + "'><a href='javascript:;' id='tempRow" + recipeStepArray[i] + "' onclick='RemoveItemFromTempList(tempRow" + recipeStepArray[i] + ")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-warning'>" + recipeStepArray[i] + ". Adım: " + recipeDescriptionArray[i] + "</span></h5>");
+                }
+
+                $("#tarifKaydet").prop("disabled", false);
+
+                console.log(recipeDescriptionArray + " - " + recipeStepArray);
+            }
+            else {
+
+                SetProcessMessage("note note-danger","Tarife eklenecek bilgileri eksiksiz belirtiniz.")
+
+            }
+
+        }
+
+        function SetProcessMessage(className, message) {
+            
+
+            $("#processMessage").html("");
+            $("#processMessage").removeAttr("style");
+
+            var lastClassName = $("#processMessage").attr("class");
+
+            if (lastClassName == "note note-danger") {
+                $("#processMessage").removeClass("note note-danger");
+            }
+            else {
+                $("#processMessage").removeClass("note note-success");
+            }
+
+            if (className != null || className != null) {
+                $("#processMessage").addClass(className);
+                $("#processMessage").append(message);
+            }
+
+        }
+
+
+        function RemoveItemFromTempList(param) {
+
+            var tempRow = $(param).attr('id');
+
+            tempRowNumber = tempRow.replace("tempRow", "");
+
+            var index = recipeStepArray.indexOf(tempRowNumber);
+
+            recipeDescriptionArray.splice(index, 1);
+
+            recipeStepArray.splice(index, 1);
+            
+            console.log(recipeDescriptionArray);
+
+            var count = recipeStepArray.length;
+
+            if (count > 0) {
+                console.log(count);
+                $("#tempListMessage").css("display", "none");
+            }
+            else {
+                $("#tempListMessage").removeAttr("style");
+            }
+
+            $(param).remove();
         }
 
 
@@ -269,7 +355,20 @@
                 data: { ID: mealID, Description: recipeDescriptionArray, Alignment: recipeStepArray},
                 url: "@Url.Action("AddRecipeFromList", "Recipe")",
                 success: function (data) {
-                    console.log(data);
+                    if (data) {
+                        $("#message").html("");
+                        $("#message").removeAttr("style");
+                        $("#message").removeClass("note note-danger");
+                        $("#message").text("İşlem başarılı.");
+                        $("#message").addClass("note note-success");
+                    }
+                    else {
+                        $("#message").html("");
+                        $("#message").removeAttr("style");
+                        $("#message").removeClass("note note-success");
+                        $("#message").text("İşlem başarısız.");
+                        $("#message").addClass("note note-danger");
+                    }
                 }
 
             })
