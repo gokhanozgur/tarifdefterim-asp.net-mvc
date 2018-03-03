@@ -183,7 +183,7 @@
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
-                <a href="javascript:;" onclick="SendRecipe()" class="btn green btn-outline" id="tarifKaydet">Kaydet</a>
+                <button type="button" onclick="SendRecipe()" class="btn green btn-outline" id="tarifKaydet" disabled>Yeni Tarif Adımlarını Kaydet</button>
             </div>
         </div>
     </div>
@@ -208,16 +208,21 @@
         
     <script>
         var mealID;
+
+        var recipeDescriptionArray = [];
+        var recipeStepArray = [];
+        
+
         function CheckRecipe(val) {
 
             mealID = val;
             console.log(mealID);
 
+            recipeDescriptionArray.length = 0;
+            recipeStepArray.length = 0;
+
             $("#Description").val("");
             $("#Alignment").val('-1');
-
-            $("#tarifKaydet").prop("disabled", true);
-
 
             $.ajax({
 
@@ -264,13 +269,9 @@
             })
         }
 
-        var recipeDescriptionArray = [];
-        var recipeStepArray = [];
-
-
         function PutList() {
 
-            SetProcessMessage(null,null);
+            SetProcessMessage("#processMessage", null, null);
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
 
@@ -286,12 +287,12 @@
                 }
 
                 $("#tarifKaydet").prop("disabled", false);
+                $("#tempListMessage").css("display", "none");
 
-                console.log(recipeDescriptionArray + " - " + recipeStepArray);
             }
             else {
 
-                SetProcessMessage("#processMessage","note note-danger","Tarife eklenecek bilgileri eksiksiz belirtiniz.")
+                SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
 
             }
 
@@ -303,7 +304,7 @@
             $(elementID).html("");
             $(elementID).removeAttr("style");
 
-            var lastClassName = $("#processMessage").attr("class");
+            var lastClassName = $(elementID).attr("class");
 
             if (lastClassName == "note note-danger") {
                 $(elementID).removeClass("note note-danger");
@@ -315,6 +316,9 @@
             if (className != null || message != null) {
                 $(elementID).addClass(className);
                 $(elementID).append(message);
+            }
+            else {
+                $(elementID).css("display", "none");
             }
 
         }
@@ -336,12 +340,9 @@
 
             var count = recipeStepArray.length;
 
-            if (count > 0) {
-                console.log(count);
-                $("#tempListMessage").css("display", "none");
-            }
-            else {
+            if (count <= 0) {
                 $("#tempListMessage").removeAttr("style");
+                $("#tarifKaydet").prop("disabled", true);
             }
 
             $(param).remove();
