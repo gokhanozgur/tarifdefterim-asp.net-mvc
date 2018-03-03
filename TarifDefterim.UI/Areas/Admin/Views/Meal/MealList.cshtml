@@ -274,20 +274,29 @@
             SetProcessMessage("#processMessage", null, null);
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
-
+            
             if (description != "" && alignment != "-1") {
 
-                recipeDescriptionArray.push(description);
-                recipeStepArray.push(alignment);
+                if (jQuery.inArray(alignment, recipeStepArray) == -1) {
 
-                $("#tempList").html("");
+                    recipeDescriptionArray.push(description);
+                    recipeStepArray.push(alignment);
 
-                for (var i = 0; i < recipeDescriptionArray.length; i++) {
-                    $("#tempList").append("<h5 id='tempRow" + recipeStepArray[i] + "'><a href='javascript:;' id='tempRow" + recipeStepArray[i] + "' onclick='RemoveItemFromTempList(tempRow" + recipeStepArray[i] + ")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-warning'>" + recipeStepArray[i] + ". Adım: " + recipeDescriptionArray[i] + "</span></h5>");
+                    $("#tempList").html("");
+
+                    for (var i = 0; i < recipeDescriptionArray.length; i++) {
+
+                        $("#tempList").append("<h5 id='tempRow" + recipeStepArray[i] + "'><a href='javascript:;' id='tempRow" + recipeStepArray[i] + "' onclick='RemoveItemFromTempList(tempRow" + recipeStepArray[i] + ")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-warning'>" + recipeStepArray[i] + ". Adım: " + recipeDescriptionArray[i] + "</span></h5>");
+
+                    }
+
+                    $("#tarifKaydet").prop("disabled", false);
+                    $("#tempListMessage").css("display", "none");
+
                 }
-
-                $("#tarifKaydet").prop("disabled", false);
-                $("#tempListMessage").css("display", "none");
+                else {
+                    SetProcessMessage("#processMessage", "note note-danger", "Bu adım tarife eklenecekler listesinde zaten mevcut.");
+                }                
 
             }
             else {
@@ -365,14 +374,14 @@
                         $("#message").html("");
                         $("#message").removeAttr("style");
                         $("#message").removeClass("note note-danger");
-                        $("#message").text("İşlem başarılı.");
+                        $("#message").append("İşlem başarılı.");
                         $("#message").addClass("note note-success");
                     }
                     else {
                         $("#message").html("");
                         $("#message").removeAttr("style");
                         $("#message").removeClass("note note-success");
-                        $("#message").text("İşlem başarısız.");
+                        $("#message").append("İşlem başarısız.");
                         $("#message").addClass("note note-danger");
                     }
                 }
@@ -381,7 +390,7 @@
 
         }
 
-        function RemoveFromExistRecipeList(param) { $(param).remove(); }
+        function RemoveFromExistRecipeList(param) { $(param).fadeOut(2000); (param).remove(); }
 
         $.ExistItem = {
 
@@ -402,7 +411,7 @@
                         success: function (data) {
                             if (data != false) {
                                 SetProcessMessage("#message", "note note-success", "Tariften bir adım çıkardınız.")
-                                RemoveFromExistRecipeList("existRow" + selectedID);
+                                RemoveFromExistRecipeList("#existRow" + selectedID);
                             }
                             else {
                                 SetProcessMessage("#message","note note-danger", "Tariften adım çıkarma işlemi başarısız.")
