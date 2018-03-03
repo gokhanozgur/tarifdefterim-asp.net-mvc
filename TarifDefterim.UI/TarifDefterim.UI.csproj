@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\KindDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\MealDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\RecipeDTO.cs" />
     <Compile Include="Areas\Admin\Models\VM\AppUserRoleAndStatus.cs" />
     <Compile Include="Areas\Admin\Models\VM\LoginVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\StatusVM.cs" />

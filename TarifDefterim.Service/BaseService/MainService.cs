@@ -45,6 +45,7 @@ namespace TarifDefterim.Service.BaseService
         public void Add(List<T> items)
         {
             dbContext.Set<T>().AddRange(items);
+            Save();
         }
 
         public bool Any(Expression<Func<T, bool>> exp)
@@ -86,6 +87,7 @@ namespace TarifDefterim.Service.BaseService
         public void Remove(Guid id)
         {
             T item = GetByID(id);
+            item.Status = Status.Deleted;
             Update(item);
         }
 

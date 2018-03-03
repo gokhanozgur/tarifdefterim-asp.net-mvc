@@ -10,7 +10,7 @@ namespace TarifDefterim.Service.Option
 {
     public class RecipeService:MainService<Recipe>
     {
-
+           
         public bool IsRecipAlreadyExist(Guid id)
         {
             return Any(x => x.MealID == id);
@@ -22,6 +22,32 @@ namespace TarifDefterim.Service.Option
             List<Recipe> recipe = GetByExp(x => x.MealID == id && x.Status != Core.Enum.Status.Deleted);
             return recipe;
 
+        }
+
+        public bool AddRecipeFromList(List<Recipe> mealList)
+        {
+            try
+            {
+                Add(mealList);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveRecipeFromSelectedItem(Guid id)
+        {
+            try
+            {
+                Remove(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TarifDefterim.Core.Entity;
 using TarifDefterim.Core.Enum;
 using TarifDefterim.Map.Option;
@@ -97,7 +98,8 @@ namespace TarifDefterim.DAL.Context
             string identity = WindowsIdentity.GetCurrent().Name;
             string computerName = Environment.MachineName;
             DateTime dateTime = DateTime.Now;
-            string getIp = RemoteIP.IpAddress;
+            string getIp = RemoteIP.IpAddress;            
+            
 
             foreach (var item in modifiedEntries)
             {
@@ -115,7 +117,7 @@ namespace TarifDefterim.DAL.Context
                     }
                     else if (item.State == EntityState.Modified)
                     {
-                        entity.Status = Status.Updated;
+                        //entity.Status = Status.Updated;
                         entity.ModifiedUserName = identity;
                         entity.ModifiedComputerName = computerName;
                         entity.ModifiedDate = dateTime;
