@@ -44,7 +44,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
                 if (CheckMealRecipe(mealID))
                 {
-                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID); // Dikkat                  
+                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID).OrderBy(x => x.Alignment).ToList(); // Dikkat                  
 
 
                     List<RecipeDTO> recipeDtoList = recipeList.Select(x => new RecipeDTO() {

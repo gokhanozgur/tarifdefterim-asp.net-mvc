@@ -26,7 +26,8 @@ namespace TarifDefterim.UI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TarifDefterim.UI.Controllers" }
             );
 
             // Hata kontrolü rotası
@@ -35,7 +36,7 @@ namespace TarifDefterim.UI
               name: "Error",
               url: "Error/{code}",
               defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
-            );           
+            );       
 
 
         }

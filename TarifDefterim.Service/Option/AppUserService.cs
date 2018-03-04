@@ -15,7 +15,12 @@ namespace TarifDefterim.Service.Option
         public AppUser CheckCredentials(string user, string password)
         {
             return GetFirstOrDefault(x => (x.UserName == user || x.Email == user) && (x.Password == password && x.Status != Status.Deleted));
-        }      
+        }
+
+        public bool CheckCredentialsFromWebSerice(string user, string password)
+        {
+            return Any(x => (x.UserName == user || x.Email == user) && (x.Password == password && x.Status != Status.Deleted));
+        }
 
         public bool IsUserAlreadyTaken(string user)
         {
