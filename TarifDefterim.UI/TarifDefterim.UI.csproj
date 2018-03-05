@@ -218,6 +218,7 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +264,7 @@
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Error\Page403.cshtml" />
     <Content Include="Views\Error\Page503.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,6 +289,10 @@
     <ProjectReference Include="..\TarifDefterim.DAL\TarifDefterim.DAL.csproj">
       <Project>{6896b001-221b-401f-ae8a-23cb057819b2}</Project>
       <Name>TarifDefterim.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TarifDefterim.Map\TarifDefterim.Map.csproj">
+      <Project>{a96090fe-1f90-4f79-bd40-f78e35f5f20e}</Project>
+      <Name>TarifDefterim.Map</Name>
     </ProjectReference>
     <ProjectReference Include="..\TarifDefterim.Model\TarifDefterim.Model.csproj">
       <Project>{57b9f5da-6a8f-4082-8ae7-0e3d3f38a1d6}</Project>

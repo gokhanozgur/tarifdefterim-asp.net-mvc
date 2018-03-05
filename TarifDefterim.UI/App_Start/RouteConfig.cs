@@ -13,6 +13,14 @@ namespace TarifDefterim.UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Default
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );
 
             // Username kontrolü rotası
 
@@ -20,14 +28,7 @@ namespace TarifDefterim.UI
               name: "CheckUserName",
               url: "{controller}/{action}/{id}",
               defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
-            );
-
-
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            );            
 
             // Hata kontrolü rotası
 
