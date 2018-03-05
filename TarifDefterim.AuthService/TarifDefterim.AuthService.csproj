@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -131,6 +137,10 @@
     <ProjectReference Include="..\TarifDefterim.Service\TarifDefterim.Service.csproj">
       <Project>{29a97385-6d00-428b-8365-60f9e855068f}</Project>
       <Name>TarifDefterim.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TarifDefterim.Utility\TarifDefterim.Utility.csproj">
+      <Project>{dc7dfb5b-919b-4e42-9f62-51b5703acff5}</Project>
+      <Name>TarifDefterim.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

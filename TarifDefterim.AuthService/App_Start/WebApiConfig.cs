@@ -11,6 +11,9 @@ namespace TarifDefterim.AuthService
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+
+            // NuGet Manager`dan Microsoft.AspNet.Cors kurulumu yaptım.
+
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 
@@ -19,7 +22,7 @@ namespace TarifDefterim.AuthService
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

@@ -7,6 +7,7 @@ using System.Web.Http;
 using TarifDefterim.AuthService.Models;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
+using TarifDefterim.Utility;
 
 namespace TarifDefterim.AuthService.Controllers
 {
@@ -25,6 +26,9 @@ namespace TarifDefterim.AuthService.Controllers
         public HttpResponseMessage Login(Credentials model)
         {
             var url = "";
+
+            model.Password = Cryptography.ToMD5(model.Password);
+
             if (model.User == null || model.Password == null)
             {
                 url = "http://localhost:57210/Home/login";
@@ -32,12 +36,12 @@ namespace TarifDefterim.AuthService.Controllers
             }
             if (_appUserService.CheckCredentialsFromWebSerice(model.User, model.Password))
             {
-                AppUser p = new AppUser();
-                p = _appUserService.FindByUserName(model.User);
+                AppUser u = new AppUser();
+                u = _appUserService.FindByUserName(model.User);
 
-                if (p.Role == Role.Admin || p.Role == Role.Member)
+                if (u.Role == Role.Admin || u.Role == Role.Member)
                 {
-                    url = "http://localhost:57210/Home/Index/" + p.ID;
+                    url = "http://localhost:57210/Home/Index/" + u.ID;
                     return Request.CreateResponse(HttpStatusCode.OK, new { Success = true, RedirectUrl = url });
                 }
                 else
