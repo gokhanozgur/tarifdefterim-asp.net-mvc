@@ -17,12 +17,7 @@ namespace TarifDefterim.UI.Controllers
         {
             _appUserService = new AppUserService();
         }
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         public ActionResult Index(Guid? id)
         {
 
@@ -53,6 +48,12 @@ namespace TarifDefterim.UI.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        public RedirectResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/Home/Index");
         }
         
     }
