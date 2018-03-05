@@ -61,25 +61,21 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="row bs-reset">
             <div class="col-md-6 bs-reset mt-login-5-bsfix">
                 <div class="login-bg" style="background-image:url(/Areas/Admin/Content/images/login/bg1.jpg)">
-                    <!--<img class="login-logo" src="~/Areas/Admin/Content/images/login/logo.png" />-->
                 </div>
             </div>
             <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
                 <div class="login-content">
                     <h1><b>tarifdefterim</b>| CMS</h1>
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                    
+                    <form name="loginform" method="post" id="loginform" class="login-form">
 
-
-                    @using (@Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "loginform", @class = "login-form" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        if (@ViewBag.Message != null)
+                        @if (ViewBag.Message != null)
                         {
-                            <div class="alert alert-danger">
-                                <button class="close" data-close="alert"></button>
-                                <span> @ViewBag.Message </span>
-                            </div>
+                        <div class="alert alert-danger">
+                            <button class="close" data-close="alert"></button>
+                            <span> @ViewBag.Message </span>
+                        </div>
                         }
 
                         <div class="row">
@@ -93,11 +89,11 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="row">
                             <div class="col-sm-4">
                                 <!--<div class="rem-password">
-                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
-                                        <input type="checkbox" name="RememberMe" value="1" /> Beni hatırla
-                                        <span></span>
-                                    </label>
-                                </div>-->
+                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="RememberMe" value="1" /> Beni hatırla
+                        <span></span>
+                    </label>
+                </div>-->
                             </div>
                             <div class="col-sm-8 text-right">
                                 <div class="forgot-password">
@@ -106,23 +102,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <button class="btn green" type="submit">Giriş</button>
                             </div>
                         </div>
-                    }
-
-                    <form action="javascript:;" class="login-form" method="post"></form>
-                    <!-- BEGIN FORGOT PASSWORD FORM -->
-                    <form class="forget-form" action="javascript:;" method="post">
-                        <h3 class="font-green">Forgot Password ?</h3>
-                        <p> Enter your e-mail address below to reset your password. </p>
-                        <div class="form-group">
-                            <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" />
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
-                            <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
-                        </div>
                     </form>
-                    <!-- END FORGOT PASSWORD FORM -->
-                </div>
+                        <form action="javascript:;" class="login-form" method="post"></form>
+                        <!-- BEGIN FORGOT PASSWORD FORM -->
+                        <form class="forget-form" action="javascript:;" method="post">
+                            <h3 class="font-green">Forgot Password ?</h3>
+                            <p> Enter your e-mail address below to reset your password. </p>
+                            <div class="form-group">
+                                <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" />
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                                <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                            </div>
+                        </form>
+                        <!-- END FORGOT PASSWORD FORM -->
+</div>
                 <div class="login-footer">
                     <div class="row bs-reset">
                         <div class="col-xs-5 bs-reset">
@@ -183,13 +178,22 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
-            $(document).ready(function()
-            {
-                $('#clickmewow').click(function()
-                {
-                    $('#radio1003').attr('checked', 'checked');
-                });
+        $("#loginform").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "http://localhost:59286/api/Auth/Login",
+                type: "POST",
+                data: $("#loginform").serialize(),
+                success: function (response) {
+                    if (response.Success) {
+                        window.location.href = response.RedirectUrl;
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
             })
+        });
     </script>
 </body>
 </html>
