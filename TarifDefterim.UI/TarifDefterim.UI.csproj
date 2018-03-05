@@ -218,7 +218,6 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,8 +263,6 @@
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Error\Page403.cshtml" />
     <Content Include="Views\Error\Page503.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,10 +280,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TarifDefterim.AuthService\TarifDefterim.AuthService.csproj">
-      <Project>{1f7394d8-b297-4fb4-ace2-6d4284ff67ce}</Project>
-      <Name>TarifDefterim.AuthService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
       <Project>{46d6217c-a286-41c3-b850-3e822f55c95a}</Project>
       <Name>TarifDefterim.Core</Name>

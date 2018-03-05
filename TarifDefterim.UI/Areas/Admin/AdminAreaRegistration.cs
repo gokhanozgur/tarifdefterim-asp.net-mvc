@@ -17,8 +17,7 @@ namespace TarifDefterim.UI.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new[] { "TarifDefterim.UI.Areas.Admin.Controllers" }
+                new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }
