@@ -39,7 +39,7 @@ namespace TarifDefterim.AuthService.Controllers
                 AppUser u = new AppUser();
                 u = _appUserService.FindByUserName(model.User);
 
-                if (u.Role == Role.Admin || u.Role == Role.Member)
+                if (u.Role == Role.Admin || u.Role == Role.Cook)
                 {
                     url = "http://localhost:57210/Home/Index/" + u.ID;
                     return Request.CreateResponse(HttpStatusCode.OK, new { Success = true, RedirectUrl = url });
