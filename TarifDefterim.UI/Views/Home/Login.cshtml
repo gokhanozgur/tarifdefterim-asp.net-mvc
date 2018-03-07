@@ -27,7 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>tarifdefterim | CMS</title>
+    <title>tarifdefterim</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="yeme,içme,tarif" name="description" />
@@ -65,7 +65,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
                 <div class="login-content">
-                    <h1><b>tarifdefterim</b>| CMS</h1>
+                    <h1><b>tarifdefterim</b></h1>
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
                     
                     <form name="loginform" id="loginform" class="login-form">
@@ -97,9 +97,12 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-sm-8 text-right">
                                 <div class="forgot-password">
-                                    <a href="javascript:;" id="forget-password" class="forget-password">Şifreni mi unuttun?</a>
+                                    <a href="javascript:;" id="forget-password" class="forget-password">Şifrenizi mi unuttunuz?</a>
                                 </div>
-                                <button class="btn green" type="submit">Giriş</button>
+
+                                <input type="submit" name="submit" value="Giriş" class="btn green" />
+
+
                             </div>
                         </div>
                     </form>
@@ -117,7 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </form>
                         <!-- END FORGOT PASSWORD FORM -->
-</div>
+            </div>
                 <div class="login-footer">
                     <div class="row bs-reset">
                         <div class="col-xs-5 bs-reset">
@@ -179,13 +182,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
         $("#loginform").submit(function (e) {
+            console.log("Post işlemine başlıyorum.");
             e.preventDefault();
             $.ajax({
                 url: "http://localhost:59286/api/Auth/Login",
                 type: "POST",
                 data: $("#loginform").serialize(),
                 success: function (response) {
+                    console.log("Cevabı aldım kontrol ediyorum.");
                     if (response.Success) {
+                        console.log("Cevap olumlu, yönlendiriyorum.");
                         window.location.href = response.RedirectUrl;
                     }
                 },

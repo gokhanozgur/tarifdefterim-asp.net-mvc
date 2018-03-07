@@ -33,6 +33,8 @@ namespace TarifDefterim.UI.Controllers
                 FormsAuthentication.SetAuthCookie(user.UserName, true);
 
                 if (user.Role == Role.Admin) return Redirect("/Admin/Home/Index");
+                if (user.Role == Role.Member) return View();
+
 
             }
 

@@ -11,7 +11,12 @@
     <title></title>
 </head>
 <body>
-    <div> Kullanıcı arayüzü.
+    <div>
+        Kullanıcı arayüzü.    
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="/Home/Logout">Çıkış</a>
+        }
     </div>
 </body>
 </html>

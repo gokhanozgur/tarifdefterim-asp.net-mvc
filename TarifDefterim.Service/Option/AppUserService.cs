@@ -32,6 +32,11 @@ namespace TarifDefterim.Service.Option
             return GetFirstOrDefault(x => x.UserName == userName);
         }
 
+        public AppUser FindByUserNameOrEmail(string user)
+        {
+            return GetFirstOrDefault(x => (x.UserName == user || x.Email == user) && x.Status != Status.Deleted);
+        }
+
         public AppUser FindByEmail(string email)
         {
             return GetFirstOrDefault(x => x.Email == email);
