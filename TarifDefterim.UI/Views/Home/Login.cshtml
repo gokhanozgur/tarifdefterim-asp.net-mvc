@@ -68,7 +68,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <h1><b>tarifdefterim</b></h1>
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
                     
-                    <form id="loginform" onsubmit="return Control(this)"  class="login-form" name="loginform" method="post">
+                    <form id="loginform"  class="login-form" name="loginform" method="post">
 
                         <div id ="messageText"class="alert alert-danger" style="display:none">
                             <button class="close" data-close="alert"></button>
@@ -77,10 +77,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <div class="row">
                             <div class="col-xs-6">
-                                <input id="User" type="text" autocomplete="off" placeholder="Kullanıcı adı / e-mail" name="User" value="" class="form-control form-control-solid placeholder-no-fix form-group" />
+                                <input id="User" type="text" autocomplete="off" placeholder="Kullanıcı adı / e-mail" name="User" value="" class="form-control form-control-solid placeholder-no-fix form-group" required/>
                             </div>
                             <div class="col-xs-6">
-                                <input id="Password" type="password" autocomplete="off" placeholder="Şifre" name="Password" value=""  class="form-control form-control-solid placeholder-no-fix form-group"/>
+                                <input id="Password" type="password" autocomplete="off" placeholder="Şifre" name="Password" value=""  class="form-control form-control-solid placeholder-no-fix form-group" required/>
                             </div>
                         </div>
 
@@ -166,6 +166,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/Areas/Admin/Content/js/additional-methods.min.js"></script>
     <script src="~/Areas/Admin/Content/js/select2.full.min.js"></script>
     <script src="~/Areas/Admin/Content/js/jquery.backstretch.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="~/Areas/Admin/Content/js/app.min.js"></script>
@@ -184,52 +185,76 @@ License: You must have a valid license purchased only from themeforest(the above
         });
         
 
-        $(document).ajaxComplete(function () {
-            $("#wait").css("display", "none");
-            $("#loginbutton").removeAttr("style");
-            $("#forget-password").removeAttr("style");
-        });
+        
 
-        function Control(data) {
+        //function Control(data) {
 
-            console.log("Selam");
+        //    console.log("Selam");
 
-            if (data.User.value == "" || data.Password.value == "") {
+        //    if (data.User.value == " " || data.Password.value == " ") {
 
-                console.log("Göndermiyorum.");
-                $("#messageText").removeAttr("style");
-                $("#message").html("");
-                $("#message").append("Giriş bilgilerini doldurunuz.");
+        //        console.log("Göndermiyorum.");
+        //        $("#messageText").removeAttr("style");
+        //        $("#message").html("");
+        //        $("#message").append("Giriş bilgilerini doldurunuz.");
 
-                return false;
+        //        return false;
 
-            }
+        //    }
 
-            return true;
+        //    return true;
 
-        }
+        //}
 
         $("#loginform").submit(function (e) {    
             e.preventDefault();
-            $.ajax({
-                url: "http://localhost:59286/api/Auth/Login",
-                type: "POST",
-                data: $("#loginform").serialize(),
-                success: function (response) {
-                    if (response.Success) {
-                        window.location.href = response.RedirectUrl;
+
+
+            var user = $("#User").val();
+            var pass = $("#Password").val();
+
+            if (user != "" || pass != "") {
+                $.ajax({
+                    url: "http://localhost:59286/api/Auth/Login",
+                    type: "POST",
+                    data: $("#loginform").serialize(),
+                    success: function (response) {
+                        if (response.Success) {
+                            window.location.href = response.RedirectUrl;
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        if (err.status == 400) {
+                            $("#messageText").removeAttr("style");
+                            $("#message").html("");
+                            $("#message").append("Girilen bilgilere ait kullanıcı bulunmamaktadır.");
+
+                            $(document).ajaxComplete(function () {
+                                $("#wait").css("display", "none");
+                                $("#loginbutton").removeAttr("style");
+                                $("#forget-password").removeAttr("style");
+                            });
+                        }
                     }
-                },
-                error: function (err) {
-                    console.log(err);
-                    if (err.status == 400) {
-                        $("#messageText").removeAttr("style");
-                        $("#message").html("");
-                        $("#message").append("Girilen bilgilere ait kullanıcı bulunmamaktadır.");
-                    }
-                }
-            })
+                })
+            }
+            else {
+                $("#messageText").removeAttr("style");
+                $("#message").html("");
+                $("#message").append("Giriş bilgilerini doldurunuz.");
+            }
         });
+
+        if ($('#loginform').length > 0) {
+
+            $('#loginform').validate({
+                messages: {
+                    User: "Ad Soyad alanı zorunludur.",
+                    Password: "Telefon alanı zorunludur.",
+                }
+            });
+        }
 
     </script>
 </body>

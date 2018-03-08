@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\bekleyiniz.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -277,7 +278,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
-    <Folder Include="Content\js\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
     <Folder Include="Models\" />
