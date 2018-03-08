@@ -68,43 +68,38 @@ License: You must have a valid license purchased only from themeforest(the above
                     <h1><b>tarifdefterim</b></h1>
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
                     
-                    <form name="loginform" id="loginform" class="login-form">
+                    <form id="loginform" onsubmit="return Control(this)"  class="login-form" name="loginform" method="post">
 
-                        @if (ViewBag.Message != null)
-                        {
-                        <div class="alert alert-danger">
+                        <div id ="messageText"class="alert alert-danger" style="display:none">
                             <button class="close" data-close="alert"></button>
-                            <span> @ViewBag.Message </span>
+                            <span id="message"></span>
                         </div>
-                        }
 
                         <div class="row">
                             <div class="col-xs-6">
-                                <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Kullanıcı adı / e-mail" name="User" required />
+                                <input id="User" type="text" autocomplete="off" placeholder="Kullanıcı adı / e-mail" name="User" value="" class="form-control form-control-solid placeholder-no-fix form-group" />
                             </div>
                             <div class="col-xs-6">
-                                <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Şifre" name="Password" required />
+                                <input id="Password" type="password" autocomplete="off" placeholder="Şifre" name="Password" value=""  class="form-control form-control-solid placeholder-no-fix form-group"/>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-sm-4">
-                                <!--<div class="rem-password">
-                    <label class="rememberme mt-checkbox mt-checkbox-outline">
-                        <input type="checkbox" name="RememberMe" value="1" /> Beni hatırla
-                        <span></span>
-                    </label>
-                </div>-->
                             </div>
                             <div class="col-sm-8 text-right">
                                 <div class="forgot-password">
                                     <a href="javascript:;" id="forget-password" class="forget-password">Şifrenizi mi unuttunuz?</a>
                                 </div>
 
-                                <input type="submit" name="submit" value="Giriş" class="btn green" />
+                                <input type="submit" name="submit" id="loginbutton" value="Giriş" class="btn green" />
 
-
+                                <div id="wait" style="display:none;">
+                                    <img src="~/Content/images/bekleyiniz.gif"/>
+                                </div>
                             </div>
                         </div>
+
                     </form>
                         <form action="javascript:;" class="login-form" method="post"></form>
                         <!-- BEGIN FORGOT PASSWORD FORM -->
@@ -181,25 +176,61 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
-        $("#loginform").submit(function (e) {
-            console.log("Post işlemine başlıyorum.");
+        
+        $(document).ajaxStart(function () {
+            $("#wait").css("display", "inline");
+            $("#loginbutton").css("display", "none");
+            $("#forget-password").css("display", "none");
+        });
+        
+
+        $(document).ajaxComplete(function () {
+            $("#wait").css("display", "none");
+            $("#loginbutton").removeAttr("style");
+            $("#forget-password").removeAttr("style");
+        });
+
+        function Control(data) {
+
+            console.log("Selam");
+
+            if (data.User.value == "" || data.Password.value == "") {
+
+                console.log("Göndermiyorum.");
+                $("#messageText").removeAttr("style");
+                $("#message").html("");
+                $("#message").append("Giriş bilgilerini doldurunuz.");
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+        $("#loginform").submit(function (e) {    
             e.preventDefault();
             $.ajax({
                 url: "http://localhost:59286/api/Auth/Login",
                 type: "POST",
                 data: $("#loginform").serialize(),
                 success: function (response) {
-                    console.log("Cevabı aldım kontrol ediyorum.");
                     if (response.Success) {
-                        console.log("Cevap olumlu, yönlendiriyorum.");
                         window.location.href = response.RedirectUrl;
                     }
                 },
                 error: function (err) {
                     console.log(err);
+                    if (err.status == 400) {
+                        $("#messageText").removeAttr("style");
+                        $("#message").html("");
+                        $("#message").append("Girilen bilgilere ait kullanıcı bulunmamaktadır.");
+                    }
                 }
             })
         });
+
     </script>
 </body>
 </html>

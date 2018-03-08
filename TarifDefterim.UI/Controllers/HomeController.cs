@@ -32,10 +32,15 @@ namespace TarifDefterim.UI.Controllers
                 AppUser user = _appUserService.GetByID((Guid)id);
                 FormsAuthentication.SetAuthCookie(user.UserName, true);
 
-                if (user.Role == Role.Admin) return Redirect("/Admin/Home/Index");
-                if (user.Role == Role.Member) return View();
+                if (user.Role == Role.Admin || user.Role == Role.Cook) return Redirect("/Admin/Home/Index");
+                else if (user.Role == Role.Member) return View();
+            }
+            else if(User.Identity.IsAuthenticated)
+            {
+                AppUser user = _appUserService.FindByUserName(User.Identity.Name);
 
-
+                if (user.Role == Role.Admin || user.Role == Role.Cook) return Redirect("/Admin/Home/Index");
+                else if (user.Role == Role.Member) return View();
             }
 
             return View();
