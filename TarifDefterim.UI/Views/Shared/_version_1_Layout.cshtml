@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="tr">
+ <!--<![endif]-->
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8" />
+    <title>tarifdefterim | CMS</title>
+    <meta content="yeme,içme,tarif" name="description" />
+    <meta content="Gökhan ÖZGÜR" name="author" />
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS
+    ================================================== -->
+    <link href="~/Content/css/version_1/style.css" rel="stylesheet" />
+    <link href="~/Content/css/version_1/colors/green.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Wrapper -->    
+    <div id="wrapper">
+
+        <!-- Header
+        ================================================== -->
+        <header id="header">
+            <!-- Container -->
+            <div class="container">
+                <!-- Logo / Mobile Menu -->
+                <div class="three columns">
+                    <div id="logo">
+                        <h1><a href="/">tarifdefterim</a></h1>
+                    </div>
+                </div>
+
+                <!-- Navigation
+                ================================================== -->
+                <div class="thirteen columns navigation">
+                    <nav id="navigation" class="menu nav-collapse">
+                        <ul>
+                            <li><a href="/" id="current">Anasayfa</a></li>
+                            <li><a href="/About/">Hakkında</a></li>
+                            <li><a href="/Recipe/RecipeList">Tarifler</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Recipe/AddRecipe">Tarif Ekle</a></li>
+                            }
+                            <li><a href="/Contact">İletişim</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Container / End -->
+        </header>
+
+        @RenderBody()
+
+        <div class="margin-top-5"></div>        
+
+    </div>
+    <!-- Wrapper / End -->
+    <!-- Footer
+    ================================================== -->
+    <div id="footer">
+        <!-- Container -->
+        <div class="container">
+            <div class="five columns">
+                <!-- Headline -->
+                <h3 class="headline footer">About</h3>
+                <span class="line"></span>
+                <div class="clearfix"></div>
+                <p>Cras at ultrices erat, sed vulputate eros. Nunc at augue gravida est fermentum vulputate. Pellentesque et ipsum in dui malesuada tempus.</p>
+            </div>
+            <div class="three columns">
+                <!-- Headline -->
+                <h3 class="headline footer">Archives</h3>
+                <span class="line"></span>
+                <div class="clearfix"></div>
+                <ul class="footer-links">
+                    <li><a href="#">June 2014</a></li>
+                    <li><a href="#">July 2014</a></li>
+                    <li><a href="#">August 2014</a></li>
+                    <li><a href="#">September 2014</a></li>
+                    <li><a href="#">November 2014</a></li>
+                </ul>
+            </div>
+            <div class="three columns">
+                <!-- Headline -->
+                <h3 class="headline footer">Recipes</h3>
+                <span class="line"></span>
+                <div class="clearfix"></div>
+                <ul class="footer-links">
+                    <li><a href="browse-recipes.html">Browse Recipes</a></li>
+                    <li><a href="recipe-page-1.html">Recipe Page</a></li>
+                    <li><a href="submit-recipe.html">Submit Recipe</a></li>
+                </ul>
+            </div>
+            <div class="five columns">
+                <!-- Headline -->
+                <h3 class="headline footer">Newsletter</h3>
+                <span class="line"></span>
+                <div class="clearfix"></div>
+                <p>Sign up to receive email updates on new product announcements, gift ideas, sales and more.</p>
+                <form action="#" method="get">
+                    <input class="newsletter" type="text" placeholder="mail@example.com" value="" />
+                    <button class="newsletter-btn" type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <!-- Container / End -->
+    </div>
+    <!-- Footer / End -->
+    <!-- Footer Bottom / Start -->
+    <div id="footer-bottom">
+        <!-- Container -->
+        <div class="container">
+            <div class="eight columns">© Copyright 2017 - @DateTime.Now.Year by <a href="#">Gökhan ÖZGÜR</a>. Tüm hakları saklıdır.</div>
+        </div>
+        <!-- Container / End -->
+    </div>
+    <!-- Footer Bottom / End -->
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="~/Content/js/version_1/jquery-1.11.0.min.js"></script>
+    <script src="~/Content/js/version_1/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.superfish.js"></script>
+    <script src="~/Content/js/version_1/jquery.royalslider.min.js"></script>
+    <script src="~/Content/js/version_1/responsive-nav.js"></script>
+    <script src="~/Content/js/version_1/hoverIntent.js"></script>
+    <script src="~/Content/js/version_1/isotope.pkgd.min.js"></script>
+    <script src="~/Content/js/version_1/chosen.jquery.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.tooltips.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.pricefilter.js"></script>
+    <script src="~/Content/js/version_1/custom.js"></script>
+
+</body>
+</html>

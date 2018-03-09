@@ -1,22 +1,139 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_version_1_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-        Kullanıcı arayüzü.    
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a href="/Home/Logout">Çıkış</a>
-        }
+<!-- Slider
+        ================================================== -->
+<div id="homeSlider" class="royalSlider rsDefaultInv">
+    <div class="rsContent">
+        <a class="rsImg" href="~/Content/images/version_1/sliderA_01.jpg"></a>
+        <i class="rsTmb">Mexican Grilled <br> Corn Recipe</i>
+        <!-- Slide Caption -->
+        <div class="SlideTitleContainer rsABlock">
+            <div class="CaptionAlignment">
+                <div class="rsSlideTitle tags">
+                    <ul>
+                        <li>Baking</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <h2 class="rsSlideTitle title"><a href="recipe-page-1.html">Mexican Grilled Corn Recipe</a></h2>
+                <div class="rsSlideTitle details">
+                    <ul>
+                        <li><i class="fa fa-cutlery"></i> 4 Servings</li>
+                        <li><i class="fa fa-clock-o"></i> 30 Min</li>
+                        <li><i class="fa fa-user"></i> by <a href="#">Sandra Fortin</a></li>
+                    </ul>
+                </div>
+                <a href="recipe-page-1.html" class="rsSlideTitle button">View Recipe</a>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+    <div class="rsContent">
+        <a class="rsImg" href="~/Content/images/version_1/sliderA_01.jpg"></a>
+        <i class="rsTmb">Mexican Grilled <br> Corn Recipe</i>
+        <!-- Slide Caption -->
+        <div class="SlideTitleContainer rsABlock">
+            <div class="CaptionAlignment">
+                <div class="rsSlideTitle tags">
+                    <ul>
+                        <li>Baking</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <h2 class="rsSlideTitle title"><a href="recipe-page-1.html">Mexican Grilled Corn Recipe</a></h2>
+                <div class="rsSlideTitle details">
+                    <ul>
+                        <li><i class="fa fa-cutlery"></i> 4 Servings</li>
+                        <li><i class="fa fa-clock-o"></i> 30 Min</li>
+                        <li><i class="fa fa-user"></i> by <a href="#">Sandra Fortin</a></li>
+                    </ul>
+                </div>
+                <a href="recipe-page-1.html" class="rsSlideTitle button">View Recipe</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Content
+================================================== -->
+<div class="container">
+    <!-- Masonry -->
+    <div class="twelve columns">
+        <!-- Headline -->
+        <h3 class="headline">Latest Recipes</h3>
+        <span class="line rb margin-bottom-35"></span>
+        <div class="clearfix"></div>
+        <!-- Isotope -->
+        <div class="isotope">
+            <!-- Recipe #1 -->
+            <div class="four recipe-box columns">
+                <!-- Thumbnail -->
+                <div class="thumbnail-holder">
+                    <a href="recipe-page-1.html">
+                        <img src="~/Content/images/version_1/recipeThumb-01.jpg" alt="" />
+                        <div class="hover-cover"></div>
+                        <div class="hover-icon">View Recipe</div>
+                    </a>
+                </div>
+                <!-- Content -->
+                <div class="recipe-box-content">
+                    <h3><a href="recipe-page-1.html">Mexican Grilled <br> Corn Recipe</a></h3>
+
+                    <div class="rating five-stars">
+                        <div class="star-rating"></div>
+                        <div class="star-bg"></div>
+                    </div>
+                    <div class="recipe-meta"><i class="fa fa-clock-o"></i> 30 min</div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- Recipe #2 -->
+            <div class="four recipe-box columns">
+                <!-- Thumbnail -->
+                <div class="thumbnail-holder">
+                    <a href="recipe-page-2.html">
+                        <img src="~/Content/images/version_1/recipeThumb-02.jpg" alt="" />
+                        <div class="hover-cover"></div>
+                        <div class="hover-icon">View Recipe</div>
+                    </a>
+                </div>
+
+                <!-- Content -->
+                <div class="recipe-box-content">
+                    <h3><a href="recipe-page-2.html">Choclate Cake With Green Tea Cream</a></h3>
+
+                    <div class="rating four-stars">
+                        <div class="star-rating"></div>
+                        <div class="star-bg"></div>
+                    </div>
+                    <div class="recipe-meta"><i class="fa fa-clock-o"></i> 1 hr 30 min</div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- Pagination -->
+        <div class="pagination-container masonry">
+            <nav class="pagination">
+                <ul>
+                    <li><a href="#" class="current-page">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                </ul>
+            </nav>
+            <nav class="pagination-next-prev">
+                <ul>
+                    <li><a href="#" class="prev"></a></li>
+                    <li><a href="#" class="next"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>   
+    
+    @Html.Partial("_version_1_Right_Column");
+
+</div>
+<!-- Container / End -->
