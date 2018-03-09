@@ -45,12 +45,30 @@
                         <ul>
                             <li><a href="/" id="current">Anasayfa</a></li>
                             <li><a href="/About/">Hakkında</a></li>
-                            <li><a href="/Recipe/RecipeList">Tarifler</a></li>
+                            <li>
+                                <a href="/Recipe/">Tarifler</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                <ul>
+                                    <li><a href="/Recipe/AddRecipe">Tarif Ekle</a></li>
+                                </ul>
+                                }
+                            </li>                           
+                            <li><a href="/Contact">İletişim</a></li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li><a href="/Recipe/AddRecipe">Tarif Ekle</a></li>
+                                <li>
+                                    <a href="/AppUser/Profile">@User.Identity.Name</a>
+                                    <ul>
+                                        <li><a href="/AppUser/Profile">Profilim</a></li>
+                                        <li><a href="/Home/Logout">Çıkış</a></li>
+                                    </ul>
+                                </li>
                             }
-                            <li><a href="/Contact">İletişim</a></li>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Home/Login">Üye Girişi</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>

@@ -1,61 +1,29 @@
 ﻿
 @{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_version_1_Layout.cshtml";
 }
 
-<!-- Slider
-        ================================================== -->
-<div id="homeSlider" class="royalSlider rsDefaultInv">
-    <div class="rsContent">
-        <a class="rsImg" href="~/Content/images/version_1/sliderA_01.jpg"></a>
-        <i class="rsTmb">Mexican Grilled <br> Corn Recipe</i>
-        <!-- Slide Caption -->
-        <div class="SlideTitleContainer rsABlock">
-            <div class="CaptionAlignment">
-                <div class="rsSlideTitle tags">
-                    <ul>
-                        <li>Baking</li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <h2 class="rsSlideTitle title"><a href="recipe-page-1.html">Mexican Grilled Corn Recipe</a></h2>
-                <div class="rsSlideTitle details">
-                    <ul>
-                        <li><i class="fa fa-cutlery"></i> 4 Servings</li>
-                        <li><i class="fa fa-clock-o"></i> 30 Min</li>
-                        <li><i class="fa fa-user"></i> by <a href="#">Sandra Fortin</a></li>
-                    </ul>
-                </div>
-                <a href="recipe-page-1.html" class="rsSlideTitle button">View Recipe</a>
-            </div>
+<!-- Titlebar
+================================================== -->
+<section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+        <div class="eight columns">
+            <h2>Yemek Tarifleri</h2>
+        </div>
+        <div class="eight columns">
+            <nav id="breadcrumbs">
+                <ul>
+                    <li>You are here:</li>
+                    <li><a href="#">Home</a></li>
+                    <li>Typography</li>
+                </ul>
+            </nav>
         </div>
     </div>
-    <div class="rsContent">
-        <a class="rsImg" href="~/Content/images/version_1/sliderA_01.jpg"></a>
-        <i class="rsTmb">Mexican Grilled <br> Corn Recipe</i>
-        <!-- Slide Caption -->
-        <div class="SlideTitleContainer rsABlock">
-            <div class="CaptionAlignment">
-                <div class="rsSlideTitle tags">
-                    <ul>
-                        <li>Baking</li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <h2 class="rsSlideTitle title"><a href="recipe-page-1.html">Mexican Grilled Corn Recipe</a></h2>
-                <div class="rsSlideTitle details">
-                    <ul>
-                        <li><i class="fa fa-cutlery"></i> 4 Servings</li>
-                        <li><i class="fa fa-clock-o"></i> 30 Min</li>
-                        <li><i class="fa fa-user"></i> by <a href="#">Sandra Fortin</a></li>
-                    </ul>
-                </div>
-                <a href="recipe-page-1.html" class="rsSlideTitle button">View Recipe</a>
-            </div>
-        </div>
-    </div>
-
-</div>
+    <!-- Container / End -->
+</section>
 
 <!-- Content
 ================================================== -->
@@ -131,8 +99,8 @@
                 </ul>
             </nav>
         </div>
-    </div>   
-    
+    </div>
+
     @Html.Partial("_version_1_Right_Column");
 
 </div>
