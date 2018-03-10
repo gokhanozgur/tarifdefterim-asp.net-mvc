@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Authorize;
 using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
+    [UserAuthorize(Role.Admin, Role.Cook)]
     public class MealController : Controller
     {
 

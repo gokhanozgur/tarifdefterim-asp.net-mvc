@@ -8,8 +8,8 @@ using TarifDefterim.UI.Authorize;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
-    //[Authorize]
-    [UserAuthorize(Role.Admin)]
+    [Authorize]
+    //[UserAuthorize(Role.Admin)]
     public class HomeController : Controller
     {
         public ActionResult Index()
