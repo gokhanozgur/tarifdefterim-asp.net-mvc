@@ -162,6 +162,16 @@
                             </div>
                         </div>
 
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="IsSliderActive">Slider Durumu</label>
+                            <div class="col-md-2">
+
+                                @Html.EnumDropDownListFor(x => x.IsSliderActive, new { @class = "form-control" })
+
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-actions">
                         <div class="row">

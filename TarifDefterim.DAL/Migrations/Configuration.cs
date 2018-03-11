@@ -19,12 +19,12 @@ namespace TarifDefterim.DAL.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-
-            // Tüm sayfalarda yetki ve hata bazýnda korumalar olduðu için ilk kullanýcýyý seed ederek sisteme dahil ediyorum.
+            // Sisteme tüm yetkiler ile eriþim yapabilecek bir kullanýcýyý database oluþturma iþleminde oluþturuyorum.
 
             context.AppUsers.AddOrUpdate(
 
-                x => x.ID, new Model.Option.AppUser() {
+                x => x.ID, new Model.Option.AppUser()
+                {
                     Name = "GÖKHAN",
                     LastName = "ÖZGÜR",
                     UserName = "gozgur",

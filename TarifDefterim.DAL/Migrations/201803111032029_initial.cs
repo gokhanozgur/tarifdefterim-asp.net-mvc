@@ -106,6 +106,7 @@ namespace TarifDefterim.DAL.Migrations
                         Person = c.Short(),
                         Tricks = c.String(maxLength: 120),
                         VideoURL = c.String(),
+                        IsSliderActive = c.Int(nullable: false),
                         AppUserID = c.Guid(nullable: false),
                         MasterID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),

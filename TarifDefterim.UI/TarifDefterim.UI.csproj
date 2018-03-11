@@ -375,6 +375,7 @@
     <Content Include="Views\Recipe\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Recipe\RecipeDetail.cshtml" />
+    <Content Include="Views\Shared\_version_1_Slider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

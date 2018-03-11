@@ -39,6 +39,8 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
 
         public string VideoURL { get; set; }
 
+        public Status IsSliderActive { get; set; }
+
         public Guid AppUserID { get; set; }
 
         public Status Status { get; set; }

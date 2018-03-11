@@ -30,6 +30,8 @@ namespace TarifDefterim.Model.Option
 
         public string VideoURL { get; set; }
 
+        public Status IsSliderActive { get; set; }
+
         public Guid AppUserID { get; set; }
 
         public virtual AppUser AppUser { get; set; }
