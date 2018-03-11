@@ -292,6 +292,9 @@
     <Content Include="Content\css\fonts\fontello0bee.eot" />
     <Content Include="Content\css\fonts\fontello0bee.ttf" />
     <Content Include="Content\css\fonts\fontello0bee.woff" />
+    <Content Include="Areas\Admin\Views\Ingredient\AddIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -305,11 +308,13 @@
     <Compile Include="Areas\Admin\Controllers\AssignedCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
     <Compile Include="Areas\Admin\Controllers\MealController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\IngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\KindDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\MealDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\RecipeDTO.cs" />

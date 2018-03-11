@@ -111,6 +111,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             model.Tricks = meal.Tricks;
             model.VideoURL = meal.VideoURL;
             model.Status = meal.Status;
+            model.IsSliderActive = meal.IsSliderActive;
 
             model.Categories = _categoryService.GetActive();
 
@@ -145,6 +146,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             update.AppUserID = data.AppUserID;
             update.Status = data.Status;
+            update.IsSliderActive = data.IsSliderActive;
 
 
             try
