@@ -42,9 +42,20 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddMeal(Meal data, string[] Categories)
         {
+            string slug = GenerateSlug.GenerateSlugURL(data.Name);
 
-            data.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+            bool IsExistSlugName = _mealService.IsExistSlugName(data.ID,slug);
 
+            if (!IsExistSlugName)
+            {
+                data.Slug = slug;
+            }
+            else
+            {
+                Random rnd = new Random();
+                data.Slug = slug + "-" + rnd.Next(1, 200);
+            }
+            
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
 
             data.AppUserID = user.ID;
