@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
@@ -31,7 +32,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddIngredient(Ingredient data)
         {
-
+            
             try
             {
                 _ıngredientService.Add(data);
@@ -54,14 +55,15 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult UpdateIngredient(Guid id)
         {
-            Ingredient update = _ıngredientService.GetByID(id);
+            Ingredient ingredient = _ıngredientService.GetByID(id);
 
             IngredientDTO model = new IngredientDTO();
 
-            model.ID = update.ID;
-            model.Description = update.Description;
-            model.IngredientName = update.IngredientName;
+            model.ID = ingredient.ID;
+            model.Description = ingredient.Description;
+            model.IngredientName = ingredient.IngredientName;
             model.Kinds = _kindService.GetActive();
+            model.Status = ingredient.Status;
 
             return View(model);
         }
@@ -69,7 +71,26 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateIngredient(Ingredient data)
         {
-            return View();
+
+            Ingredient update = _ıngredientService.GetByID(data.ID);
+
+            update.IngredientName = data.IngredientName;
+            update.Description = data.Description;
+            update.KindID = data.KindID;
+            update.Status = data.Status;
+
+            try
+            {
+                _ıngredientService.Update(update);
+                TempData["Basarili"] = "Malzeme bilgisi güncellendi.";
+                return RedirectToAction("IngredientList", "Ingredient");
+            }
+            catch (Exception ex)
+            {
+                TempData["Hata"] = "Malzeme bilgisi güncellenirken bir hata oluştu. " + ex.Message;
+                return RedirectToAction("UpdateIngredient", "Ingredient" , new { id = data.ID});
+            }
+            
         }
 
     }
