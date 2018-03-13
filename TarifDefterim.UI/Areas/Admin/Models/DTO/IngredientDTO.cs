@@ -12,6 +12,8 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
 
         public Guid ID { get; set; }
 
+        public Guid KindID { get; set; }
+
         public string IngredientName { get; set; }
 
         public string Description { get; set; }

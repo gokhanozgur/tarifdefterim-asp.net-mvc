@@ -50,6 +50,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         public ActionResult IngredientList()
         {
             List<Ingredient> model = _ıngredientService.GetAll();
+            
             return View(model);
         }
 
@@ -64,6 +65,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             model.IngredientName = ingredient.IngredientName;
             model.Kinds = _kindService.GetActive();
             model.Status = ingredient.Status;
+            model.KindID = ingredient.KindID;
+
 
             return View(model);
         }

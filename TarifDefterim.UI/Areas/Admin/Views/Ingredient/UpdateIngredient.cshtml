@@ -57,7 +57,7 @@
                         <div class="form-group form-md-line-input">
                             <label class="col-md-2 control-label" for="KindID">Gıda Türü<span class="required" aria-required="true">*</span></label>
                             <div class="col-md-2">
-                                @Html.DropDownList("KindID", Model.Kinds.Select(x => new SelectListItem { Value= x.ID.ToString(),Text = x.Name, Selected = x.ID == ???}),new { @class = "form-control" })
+                                @Html.DropDownList("KindID", Model.Kinds.Select(x => new SelectListItem { Value= x.ID.ToString(),Text = x.Name, Selected = x.ID == Model.KindID}),new { @class = "form-control" })
                                 <div class="form-control-focus"> </div>
                             </div>
                         </div>
