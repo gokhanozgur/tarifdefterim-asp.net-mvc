@@ -45,7 +45,8 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
 
         public Status Status { get; set; }
 
-        public UnitOf UnitOf { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
     }
 }

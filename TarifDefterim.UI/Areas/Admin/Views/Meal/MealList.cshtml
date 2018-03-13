@@ -5,7 +5,7 @@
 }
 
 
-@*@model List<TarifDefterim.UI.Areas.Admin.Models.DTO.MealDTO>*@
+@*@model IEnumerable<TarifDefterim.UI.Areas.Admin.Models.DTO.MealDTO>*@
 @model List<TarifDefterim.Model.Option.Meal>
 
 
@@ -71,7 +71,6 @@
                                 <th>Hazırlama Zamanı</th>
                                 <th>Pişirme Zamanı</th>
                                 <th>Kişi</th>
-                                <th>Ekleyen</th>
                                 <th>Durum</th>
                                 <th>Eklene Tarihi</th>
                                 <th>Güncelleme Tarihi</th>
@@ -86,7 +85,6 @@
                                 <th>Hazırlama Süre</th>
                                 <th>Pişirme Süre</th>
                                 <th>Kişi</th>
-                                <th>Ekleyen</th>
                                 <th>Durum</th>
                                 <th>Eklene Tarihi</th>
                                 <th>Güncelleme Tarihi</th>
@@ -103,7 +101,6 @@
                                     <td>@item.PreparationTime @item.PreparationTimeUnitOf</td>
                                     <td>@item.CookingTime @item.CookingTimeUnitOf</td>
                                     <td>@item.Person</td>
-                                    <td>@item.AppUser.UserName</td>
                                     <td>
                                         @if (item.Status == TarifDefterim.Core.Enum.Status.Active)
                                         {
@@ -216,6 +213,8 @@
                             <hr />
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
+                                Malzeme:
+                                @* Buraya malzemeleri çekmeliyim. *@
                                 Adet:
                                 <select class="form-control" id="QUa" name="Alignment" required>
                                     <option value="-1">Seçiniz</option>
@@ -225,7 +224,9 @@
                                     }
                                 </select>
                                 Birim:
-                                @*@Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })*@
+
+                                @Html.DropDownList("UnitOf",EnumHelper.GetSelectList(typeof(TarifDefterim.Core.Enum.UnitOf)), "Seçiniz", new { @class = "form-control" })
+                               
 
                                 <br />
                                 <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
