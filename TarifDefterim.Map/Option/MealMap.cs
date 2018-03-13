@@ -25,6 +25,7 @@ namespace TarifDefterim.Map.Option
             Property(x => x.CookingTimeUnitOf).IsOptional();
             Property(x => x.Person).IsOptional();
             Property(x => x.Tricks).HasMaxLength(120).IsOptional();
+            Property(x => x.IsSliderActive).IsOptional();
             Property(x => x.VideoURL).IsOptional();
 
             // Table Relations

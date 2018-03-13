@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Authorize;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
+    [UserAuthorize(Role.Admin,Role.Cook)]
     public class RecipeController : Controller
     {
 
@@ -44,7 +46,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
                 if (CheckMealRecipe(mealID))
                 {
-                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID); // Dikkat                  
+                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID).OrderBy(x => x.Alignment).ToList(); // Dikkat                  
 
 
                     List<RecipeDTO> recipeDtoList = recipeList.Select(x => new RecipeDTO() {

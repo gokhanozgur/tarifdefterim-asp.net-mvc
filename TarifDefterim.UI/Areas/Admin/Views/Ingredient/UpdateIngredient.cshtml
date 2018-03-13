@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "UpdateIngredient";
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+@model TarifDefterim.UI.Areas.Admin.Models.DTO.IngredientDTO
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    Yeni Malzeme Türü Ekleme Formu
+    <small>Malzeme Türleri</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Bu sayfada sisteme malzeme türü güncellenmektedir. </p>
+</div>
+
+@Html.Partial("_messages")
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-haze">
+                    <i class="icon-plus font-green-haze"></i>
+                    <span class="caption-subject bold uppercase"> Malzeme Türü Güncelleme Formu</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="/Admin/Ingredient/UpdateIngredient" method="post" role="form" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-body">
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="IngredientName">Malzeme Adı<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="IngredientName" class="form-control" id="IngredientName" placeholder="Tür giriniz"  value="@Model.IngredientName" required />
+                                <div class="form-control-focus"> </div>
+                            </div>
+                            <span id="message" style="display:none"></span>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="Description">Açıklama</label>
+                            <div class="col-md-4">
+                                <input type="text" name="Description" class="form-control" id="Description" placeholder="Açıklama giriniz" value="@Model.Description" required />
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="KindID">Gıda Türü<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-2">
+                                @Html.DropDownList("KindID", Model.Kinds.Select(x => new SelectListItem { Value= x.ID.ToString(),Text = x.Name, Selected = x.ID == Model.KindID}),new { @class = "form-control" })
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="Status">Durum</label>
+                            <div class="col-md-2">
+
+                                @Html.EnumDropDownListFor(x => x.Status, new { @class = "form-control" })
+
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="hidden" name="ID" value="@Model.ID" />
+                                <a href="/Admin/Ingredient/IngredientList" class="btn blue btn-outline">Geri</a>
+                                <button type="submit" class="btn green" id="kaydet">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+

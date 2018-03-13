@@ -11,9 +11,8 @@ using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
-    [Authorize]
-    [UserAuthorize(Role.Admin)]
 
+    [UserAuthorize(Role.Admin)]
     public class AppUserController : Controller
     {
         AppUserService _appUserService;

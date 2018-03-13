@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Authorize;
 using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
+    [UserAuthorize(Role.Admin, Role.Cook)]
     public class MealController : Controller
     {
 
@@ -40,9 +42,20 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddMeal(Meal data, string[] Categories)
         {
+            string slug = GenerateSlug.GenerateSlugURL(data.Name);
 
-            data.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+            bool IsExistSlugName = _mealService.IsExistSlugName(data.ID,slug);
 
+            if (!IsExistSlugName)
+            {
+                data.Slug = slug;
+            }
+            else
+            {
+                Random rnd = new Random();
+                data.Slug = slug + "-" + rnd.Next(1, 200);
+            }
+            
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
 
             data.AppUserID = user.ID;
@@ -109,6 +122,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             model.Tricks = meal.Tricks;
             model.VideoURL = meal.VideoURL;
             model.Status = meal.Status;
+            model.IsSliderActive = meal.IsSliderActive;
 
             model.Categories = _categoryService.GetActive();
 
@@ -143,6 +157,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             update.AppUserID = data.AppUserID;
             update.Status = data.Status;
+            update.IsSliderActive = data.IsSliderActive;
 
 
             try

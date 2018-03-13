@@ -10,8 +10,6 @@ using TarifDefterim.UI.Authorize;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
-
-    [Authorize]
     [UserAuthorize(Role.Admin)]
     public class CategoryController : Controller
     {

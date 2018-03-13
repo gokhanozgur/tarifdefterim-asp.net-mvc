@@ -10,10 +10,10 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
     public class MealDTO
     {
 
-        /*public MealDTO()
+        public MealDTO()
         {
             Categories = new List<Category>();
-        }    */    
+        }   
 
         public List<Category> Categories { get; set; }
 
@@ -39,9 +39,14 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
 
         public string VideoURL { get; set; }
 
+        public Status IsSliderActive { get; set; }
+
         public Guid AppUserID { get; set; }
 
         public Status Status { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
     }
 }

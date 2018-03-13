@@ -31,7 +31,7 @@ namespace TarifDefterim.UI.Authorize
             if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 var url = new UrlHelper(context.RequestContext);
-                var logonUrl = url.Action("Login", "Account", new { Area = "Admin" });
+                var logonUrl = url.Action("Login", "Home", new { Area = "" });
                 context.Result = new RedirectResult(logonUrl);
 
                 return;

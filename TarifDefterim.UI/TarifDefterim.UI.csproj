@@ -54,6 +54,17 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.4\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -63,6 +74,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.4\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -153,7 +170,104 @@
     <Content Include="Areas\Admin\Content\js\table-datatables-buttons.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\fonts\fontawesome-webfont78ce.svg" />
+    <Content Include="Content\css\fonts\fontello0bee.svg" />
+    <Content Include="Content\css\version_1\base.css" />
+    <Content Include="Content\css\version_1\blank.html" />
+    <Content Include="Content\css\version_1\colors\green.css" />
+    <Content Include="Content\css\version_1\font-awesome.css" />
+    <Content Include="Content\css\version_1\grab.html" />
+    <Content Include="Content\css\version_1\grabbing.html" />
+    <Content Include="Content\css\version_1\responsive.css" />
+    <Content Include="Content\css\version_1\style.css" />
+    <Content Include="Content\images\bekleyiniz.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\version_1\author-photo.png" />
+    <Content Include="Content\images\version_1\bg\bedge_grunge.png" />
+    <Content Include="Content\images\version_1\bg\brushed_alu.png" />
+    <Content Include="Content\images\version_1\bg\crisp_paper_ruffles.png" />
+    <Content Include="Content\images\version_1\bg\diamond_upholstery.png" />
+    <Content Include="Content\images\version_1\bg\light_toast.png" />
+    <Content Include="Content\images\version_1\bg\navy_blue.png" />
+    <Content Include="Content\images\version_1\bg\noise_pattern_with_crosslines.png" />
+    <Content Include="Content\images\version_1\bg\purty_wood.png" />
+    <Content Include="Content\images\version_1\bg\retina_wood.png" />
+    <Content Include="Content\images\version_1\bg\shattered.png" />
+    <Content Include="Content\images\version_1\bg\squared_metal.png" />
+    <Content Include="Content\images\version_1\bg\stardust.png" />
+    <Content Include="Content\images\version_1\bg\subtle_stripes.png" />
+    <Content Include="Content\images\version_1\bg\textured_stripes.png" />
+    <Content Include="Content\images\version_1\bg\tileable_wood_texture.png" />
+    <Content Include="Content\images\version_1\bg\vichy.png" />
+    <Content Include="Content\images\version_1\contact.jpg" />
+    <Content Include="Content\images\version_1\famfamfam.png" />
+    <Content Include="Content\images\version_1\featuredRecipe-01.jpg" />
+    <Content Include="Content\images\version_1\featuredRecipe-02.jpg" />
+    <Content Include="Content\images\version_1\featuredRecipe-03.jpg" />
+    <Content Include="Content\images\version_1\logo.png" />
+    <Content Include="Content\images\version_1\logo2.png" />
+    <Content Include="Content\images\version_1\product_01.jpg" />
+    <Content Include="Content\images\version_1\recipeBackground-02.jpg" />
+    <Content Include="Content\images\version_1\recipeBackground.jpg" />
+    <Content Include="Content\images\version_1\recipePhoto-01.jpg" />
+    <Content Include="Content\images\version_1\recipePhoto-02.jpg" />
+    <Content Include="Content\images\version_1\recipePhoto-03.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-01.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-01a.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-01b.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-02.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-02b.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-03.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-03a.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-03b.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-04.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-04b.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-05.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-05b.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-06.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-07.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-07a.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-08.jpg" />
+    <Content Include="Content\images\version_1\recipeThumb-09.jpg" />
+    <Content Include="Content\images\version_1\shop_item_01.jpg" />
+    <Content Include="Content\images\version_1\shop_item_02.jpg" />
+    <Content Include="Content\images\version_1\shop_item_02a.jpg" />
+    <Content Include="Content\images\version_1\shop_item_03.jpg" />
+    <Content Include="Content\images\version_1\shop_item_04.jpg" />
+    <Content Include="Content\images\version_1\shop_item_05.jpg" />
+    <Content Include="Content\images\version_1\shop_item_06.jpg" />
+    <Content Include="Content\images\version_1\sliderA_01.jpg" />
+    <Content Include="Content\images\version_1\sliderA_02.jpg" />
+    <Content Include="Content\images\version_1\sliderA_03.jpg" />
+    <Content Include="Content\images\version_1\sliderA_04.jpg" />
+    <Content Include="Content\images\version_1\sliderA_05.jpg" />
+    <Content Include="Content\images\version_1\sliderB_01.jpg" />
+    <Content Include="Content\images\version_1\sliderB_02.jpg" />
+    <Content Include="Content\images\version_1\sliderB_03.jpg" />
+    <Content Include="Content\images\version_1\sliderB_04.jpg" />
+    <Content Include="Content\images\version_1\sliderB_05.jpg" />
+    <Content Include="Content\images\version_1\sliderB_06.jpg" />
+    <Content Include="Content\images\version_1\sliderB_07.jpg" />
+    <Content Include="Content\images\version_1\switcher.png" />
+    <Content Include="Content\images\version_1\typographyImage-01.jpg" />
+    <Content Include="Content\images\version_1\typographyImage-02.jpg" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\version_1\chosen.jquery.min.js" />
+    <Content Include="Content\js\version_1\custom.js" />
+    <Content Include="Content\js\version_1\hoverIntent.js" />
+    <Content Include="Content\js\version_1\isotope.pkgd.min.js" />
+    <Content Include="Content\js\version_1\jquery-1.11.0.min.js" />
+    <Content Include="Content\js\version_1\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Content\js\version_1\jquery-ui.min.js" />
+    <Content Include="Content\js\version_1\jquery.magnific-popup.min.js" />
+    <Content Include="Content\js\version_1\jquery.pricefilter.js" />
+    <Content Include="Content\js\version_1\jquery.royalslider.min.js" />
+    <Content Include="Content\js\version_1\jquery.sceditor.bbcode.min.js" />
+    <Content Include="Content\js\version_1\jquery.sceditor.js" />
+    <Content Include="Content\js\version_1\jquery.superfish.js" />
+    <Content Include="Content\js\version_1\jquery.tooltips.min.js" />
+    <Content Include="Content\js\version_1\responsive-nav.js" />
+    <Content Include="Content\js\version_1\switcher.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -171,6 +285,16 @@
     <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Areas\Admin\Views\Meal\UpdateMeal.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SampleModalContentPage.cshtml" />
+    <Content Include="Content\css\fonts\fontawesome-webfont78ce.eot" />
+    <Content Include="Content\css\fonts\fontawesome-webfont78ce.ttf" />
+    <Content Include="Content\css\fonts\fontawesome-webfont78ce.woff" />
+    <Content Include="Content\css\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Content\css\fonts\fontello0bee.eot" />
+    <Content Include="Content\css\fonts\fontello0bee.ttf" />
+    <Content Include="Content\css\fonts\fontello0bee.woff" />
+    <Content Include="Areas\Admin\Views\Ingredient\AddIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -180,16 +304,17 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AssignedCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
     <Compile Include="Areas\Admin\Controllers\MealController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\IngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\KindDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\MealDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\RecipeDTO.cs" />
@@ -200,7 +325,10 @@
     <Compile Include="Areas\Admin\Models\VM\UnitOfVM.cs" />
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,12 +368,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_version_1_Layout.cshtml" />
     <Content Include="Views\Error\PageError.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Error\Page403.cshtml" />
     <Content Include="Views\Error\Page503.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_version_1_Right_Column.cshtml" />
+    <Content Include="Views\Recipe\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Recipe\RecipeDetail.cshtml" />
+    <Content Include="Views\Shared\_version_1_Slider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -257,11 +392,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
-    <Folder Include="Content\js\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
@@ -271,6 +404,10 @@
     <ProjectReference Include="..\TarifDefterim.DAL\TarifDefterim.DAL.csproj">
       <Project>{6896b001-221b-401f-ae8a-23cb057819b2}</Project>
       <Name>TarifDefterim.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TarifDefterim.Map\TarifDefterim.Map.csproj">
+      <Project>{a96090fe-1f90-4f79-bd40-f78e35f5f20e}</Project>
+      <Name>TarifDefterim.Map</Name>
     </ProjectReference>
     <ProjectReference Include="..\TarifDefterim.Model\TarifDefterim.Model.csproj">
       <Project>{57b9f5da-6a8f-4082-8ae7-0e3d3f38a1d6}</Project>

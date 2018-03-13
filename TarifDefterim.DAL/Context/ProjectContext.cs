@@ -47,6 +47,7 @@ namespace TarifDefterim.DAL.Context
             //modelBuilder.Configurations.Add(new SubCategoryMap());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            Database.SetInitializer<ProjectContext>(null); //The model backing the <Database> context has changed since the database was created hatasını gidermek için kullandım.
 
             base.OnModelCreating(modelBuilder);
         }
