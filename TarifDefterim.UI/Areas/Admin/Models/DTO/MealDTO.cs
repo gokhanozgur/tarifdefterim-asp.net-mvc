@@ -10,10 +10,10 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
     public class MealDTO
     {
 
-        /*public MealDTO()
+        public MealDTO()
         {
             Categories = new List<Category>();
-        }    */    
+        }   
 
         public List<Category> Categories { get; set; }
 
@@ -44,6 +44,8 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
         public Guid AppUserID { get; set; }
 
         public Status Status { get; set; }
+
+        public UnitOf UnitOf { get; set; }
 
     }
 }

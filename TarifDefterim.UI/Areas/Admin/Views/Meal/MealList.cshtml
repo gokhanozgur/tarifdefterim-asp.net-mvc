@@ -5,6 +5,7 @@
 }
 
 
+@*@model List<TarifDefterim.UI.Areas.Admin.Models.DTO.MealDTO>*@
 @model List<TarifDefterim.Model.Option.Meal>
 
 
@@ -216,7 +217,7 @@
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
                                 Adet:
-                                <select class="form-control" id="Alignment" name="Alignment" required>
+                                <select class="form-control" id="QUa" name="Alignment" required>
                                     <option value="-1">Seçiniz</option>
                                     @for (int i = 1; i <= 50; i++)
                                     {
@@ -224,13 +225,8 @@
                                     }
                                 </select>
                                 Birim:
-                                <select class="form-control" id="UnitOf" name="UnitOf" required>
-                                    <option value="-1">Seçiniz</option>
-                                            @foreach (var item in Enum.GetNames(typeof(TarifDefterim.Core.Enum.UnitOf)))
-                                            {
-                                                <option value="@item">@item</option>
-                                            }
-                                </select>
+                                @*@Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })*@
+
                                 <br />
                                 <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
                             </p>
