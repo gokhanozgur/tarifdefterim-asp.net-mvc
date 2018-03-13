@@ -67,7 +67,6 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             model.Status = ingredient.Status;
             model.KindID = ingredient.KindID;
 
-
             return View(model);
         }
 
