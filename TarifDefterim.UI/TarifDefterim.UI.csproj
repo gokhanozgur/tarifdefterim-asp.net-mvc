@@ -314,6 +314,7 @@
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\FoodIngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\IngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\KindDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\MealDTO.cs" />

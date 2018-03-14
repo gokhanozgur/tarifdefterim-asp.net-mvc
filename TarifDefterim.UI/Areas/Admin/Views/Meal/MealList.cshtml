@@ -219,7 +219,7 @@
                                 Malzemeler:
                                 @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}), new { @class = "form-control" })
                                 Adet:
-                                <select class="form-control" id="QUa" name="Alignment" required>
+                                <select class="form-control" id="Quantity" name="Quantity" required>
                                     <option value="-1">Seçiniz</option>
                                     @for (int i = 1; i <= 50; i++)
                                     {
@@ -275,7 +275,67 @@
 
         var recipeDescriptionArray = [];
         var recipeStepArray = [];
-        
+
+        var ingredientArray = [];
+        var ingredientQuantityArray = [];
+        var ingredientQuentityArray = [];
+
+        function CheckIngredient(val) {
+            mealID = val;
+            console.log(mealID);
+
+            //var test = $("#modal2").find("#dynamicRecipeContent");
+
+            //$(test).html("Deneme");
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                url: "@Url.Action("GetIngredients", "Ingredient")/" + mealID,
+                success: function (data) {
+
+                    var count = Object.keys(data).length;
+
+                    console.log(count);
+
+                    var message = $("#modal2").find("#message");
+
+                    if (count == 0 || data == "Empty") {
+                        console.log("Birşeyler bulamadım.");
+                        $("#dynamicRecipeContent").html("");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $("#existListMessage").removeAttr("style");
+                        $(message).removeClass("note note-info");
+                        $(message).text("Seçilen yemeğin bir malzemesi bulunmamaktadır. Malzeme ekleyiniz.");
+                        $(message).addClass("note note-danger");
+                    }
+                    else {
+                        console.log("Birşeyler buldum.");
+                        $("#dynamicRecipeContent").html("");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).text("Yemeğin malzemesi mevcut. Dilerseniz malzemeleri düzenleyebilirsiniz.");
+                        $(message).addClass("note note-info");
+                        $("#existListMessage").css("display","none");
+
+
+                        $.each(data, function (key, item) {
+
+                            $("#dynamicRecipeContent").append(`<h5 id="existRow${item.ID}"><a href='javascript:;'  onclick='$.ExistItem.DeleteRecipe("${item.ID}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'> ${item.Quantity}. Adım: ${item.UnitOf} </span></h5>`);
+
+                        });
+
+
+                    }
+                }
+
+            })
+
+        }
+
 
         function CheckRecipe(val) {
 
@@ -338,7 +398,7 @@
             SetProcessMessage("#processMessage", null, null);
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
-            
+
             if (description != "" && alignment != "-1") {
 
                 if (jQuery.inArray(alignment, recipeStepArray) == -1) {
@@ -360,7 +420,7 @@
                 }
                 else {
                     SetProcessMessage("#processMessage", "note note-danger", "Bu adım tarife eklenecekler listesinde zaten mevcut.");
-                }                
+                }
 
             }
             else {
@@ -465,7 +525,7 @@
                 if (result == false) {
                     return false;
                 }
-                else {                    
+                else {
                     console.log(selectedID);
 
                     $.ajax({
