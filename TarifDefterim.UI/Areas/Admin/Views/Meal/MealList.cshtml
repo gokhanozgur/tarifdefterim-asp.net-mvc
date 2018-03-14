@@ -5,8 +5,8 @@
 }
 
 
-@*@model List<TarifDefterim.UI.Areas.Admin.Models.DTO.MealDTO>*@
-@model List<TarifDefterim.Model.Option.Meal>
+@model  TarifDefterim.UI.Areas.Admin.Models.VM.MealListVM
+@*@model List<TarifDefterim.Model.Option.Meal>*@
 
 
 @section style{
@@ -94,7 +94,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Meals)
                             {
                                 <tr>
                                     <td>@item.ID</td>
@@ -216,6 +216,8 @@
                             <hr />
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
+                                Malzeme:
+                                @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}), new { @class = "form-control" })
                                 Adet:
                                 <select class="form-control" id="QUa" name="Alignment" required>
                                     <option value="-1">Seçiniz</option>
@@ -225,7 +227,7 @@
                                     }
                                 </select>
                                 Birim:
-                                @*@Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })*@
+                                @Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })
 
                                 <br />
                                 <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Areas.Admin.Models.VM;
 using TarifDefterim.UI.Authorize;
 using TarifDefterim.Utility;
 
@@ -19,6 +20,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         AppUserService _appUserService;
         CategoryService _categoryService;
         AssignedCategoryService _assignedCategory;
+        IngredientService _ingredientService;
 
 
         public MealController()
@@ -27,6 +29,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             _appUserService = new AppUserService();
             _categoryService = new CategoryService();
             _assignedCategory = new AssignedCategoryService();
+            _ingredientService = new IngredientService();
         }
         
         public ActionResult AddMeal()
@@ -97,8 +100,9 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult MealList()
         {
-
-            List<Meal> model = _mealService.GetAll();
+            MealListVM model = new MealListVM();
+            model.Meals = _mealService.GetActive();
+            model.Ingredients = _ingredientService.GetActive();
 
             return View(model);
 

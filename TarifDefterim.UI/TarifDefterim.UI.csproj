@@ -320,6 +320,7 @@
     <Compile Include="Areas\Admin\Models\DTO\RecipeDTO.cs" />
     <Compile Include="Areas\Admin\Models\VM\AppUserRoleAndStatus.cs" />
     <Compile Include="Areas\Admin\Models\VM\LoginVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\MealListVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\StatusVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\TimeVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\UnitOfVM.cs" />
