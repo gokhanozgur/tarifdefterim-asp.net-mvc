@@ -23,4 +23,4 @@ Projede startup ayarýnda deðiþiklik yapýldýðý için code first console komutlarýn
             );
 
 2- add-migration initial -StartUpProjectName "TarifDefterim.UI" -Verbose
-3- update-database
+3- update-database -StartUpProjectName "TarifDefterim.UI"
