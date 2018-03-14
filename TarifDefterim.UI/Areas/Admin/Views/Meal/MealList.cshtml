@@ -122,7 +122,7 @@
                                     <td>@item.ModifiedDate</td>
                                     <td>
                                         <a href="#modal2" onclick="CheckIngredient('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify">Malzeme Düzenle</a>
-                                        <a href="#modal" onclick="CheckRecipe('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify">Tarif Düzenle</a>
+                                        <a href="#modal" onclick="CheckRecipe('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify" >Tarif Düzenle</a>
                                         <a href="/Admin/Meal/UpdateMeal/@item.ID" class="btn btn-sm green btn-outline">Güncelle</a>
                                     </td>
                                 </tr>
@@ -205,19 +205,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p>
-                                <span id="message" style="display:none"></span>
+                                <span id="ingredientMessage" style="display:none"></span>
                             </p>
                             <h4>Mevcut Malzemeler</h4>
                             <hr />
                             <p>
-                                <span id="existListMessage">Henüz malzemeler ile ilgili bir veri bulunmamaktadır.</span>
+                                <span id="exisIngredienttListMessage">Henüz malzemeler ile ilgili bir veri bulunmamaktadır.</span>
                             </p>
-                            <div id="dynamicRecipeContent"></div>
+                            <div id="dynamicIngredientContent"></div>
                             <hr />
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
                                 Malzemeler:
-                                @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}), new { @class = "form-control" })
+                                @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}),"Seçiniz", new { @class = "form-control" })
                                 Adet:
                                 <select class="form-control" id="Quantity" name="Quantity" required>
                                     <option value="-1">Seçiniz</option>
@@ -230,24 +230,24 @@
                                 @Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })
 
                                 <br />
-                                <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
+                                <button type="button" class="btn yellow btn-outline" onclick="PutIngredientList()">Listeye Ekle</button>
                             </p>
                             <p>
-                                <span id="processMessage" style="display:none"></span>
+                                <span id="ingredientProcessMessage" style="display:none"></span>
                             </p>
                             <h4>Eklenmesini İstediğiniz Malzemeler</h4>
                             <hr />
                             <p>
-                                <span id="tempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
+                                <span id="ingredientTempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
                             </p>
-                            <div id="tempList"></div>
+                            <div id="ingredientTempList"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
-                <button type="button" onclick="SendIngredient()" class="btn green btn-outline" id="tarifKaydet" disabled>Yeni Malzemeleri Kaydet</button>
+                <button type="button" onclick="SendIngredient()" class="btn green btn-outline" id="malzemeKaydet" disabled>Yeni Malzemeleri Kaydet</button>
             </div>
         </div>
     </div>
@@ -278,7 +278,10 @@
 
         var ingredientArray = [];
         var ingredientQuantityArray = [];
-        var ingredientQuentityArray = [];
+        var ingredientUnitOfArray = [];
+
+        var ingredientNameArray = [];
+        var ingredientUnitOfNameArray = [];
 
         function CheckIngredient(val) {
             mealID = val;
@@ -334,6 +337,91 @@
 
             })
 
+        }
+
+        function getModalElement(modalName, elementName) {
+
+            var result = $(modalName).find(elementName);
+            return result;
+
+        }
+
+
+        function PutIngredientList() {
+
+            SetProcessMessage("#processMessage", null, null);
+            var IngredientID = $("#IngredientID").val();
+            var Quantity = $("#Quantity").val();
+            var UnitOf = $("#UnitOf").val();
+            var UnitOfName = $("#UnitOf option:selected").text();
+            var IngredientName = $("#IngredientID option:selected").text();
+
+            console.log(IngredientID);
+
+
+            if (IngredientID == "" || Quantity == "-1" || UnitOf == "0") {
+
+                SetProcessMessage("#ingredientProcessMessage", "note note-danger", "Malzemelere eklenecek bilgileri eksiksiz belirtiniz.");
+
+            }
+            else {
+
+                if (jQuery.inArray(IngredientID, ingredientArray) == -1) {
+
+                    ingredientArray.push(IngredientID);
+                    ingredientQuantityArray.push(Quantity);
+                    ingredientUnitOfArray.push(UnitOf);
+                    ingredientUnitOfNameArray.push(UnitOfName);
+                    ingredientNameArray.push(IngredientName);
+
+
+                    for (var i = 0; i < ingredientArray.length; i++) {
+
+                        $("#ingredientTempList").append(`<h5 id='ingredientTempRow${ingredientArray[i]}'><a href='javascript:;' id='ingredientTempRow${ingredientArray[i]}' onclick='RemoveItemFromIngredientTempList("ingredientTempRow${ingredientArray[i]}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-warning'>${ingredientQuantityArray[i]} ${ingredientUnitOfNameArray[i]} ${ingredientNameArray[i]}</span></h5>`);
+                    }
+
+                    $("#malzemeKaydet").prop("disabled", false);
+                    $("#ingredientTempListMessage").css("display", "none");
+
+                }
+                else {
+                    SetProcessMessage("#ingredientProcessMessage", "note note-danger", "Bu malzeme eklenecekler listesinde zaten mevcut.");
+                }
+
+            }
+
+        }
+
+        function RemoveItemFromIngredientTempList(param) {
+
+            console.log("Girdi --------- " + param);
+
+            var tempRow = $(param).attr('id');
+
+            tempRowNumber = tempRow.replace("ingredientTempRow", "");
+
+            var index = ingredientArray.indexOf(tempRowNumber);
+
+            ingredientArray.splice(index, 1);
+
+            ingredientNameArray.splice(index, 1);
+
+            ingredientQuantityArray.splice(index, 1);
+
+            ingredientUnitOfArray.splice(index, 1);
+
+            ingredientUnitOfNameArray.splice(index, 1);
+
+            console.log(recipeDescriptionArray);
+
+            var count = ingredientArray.length;
+
+            if (count <= 0) {
+                $("#ingredienttempListMessage").removeAttr("style");
+                $("#tarifKaydet").prop("disabled", true);
+            }
+
+            $(param).remove();
         }
 
 
@@ -399,7 +487,12 @@
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
 
-            if (description != "" && alignment != "-1") {
+            if (description == "" || alignment == "-1") {
+                
+                SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
+
+            }
+            else {
 
                 if (jQuery.inArray(alignment, recipeStepArray) == -1) {
 
@@ -421,12 +514,6 @@
                 else {
                     SetProcessMessage("#processMessage", "note note-danger", "Bu adım tarife eklenecekler listesinde zaten mevcut.");
                 }
-
-            }
-            else {
-
-                SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
-
             }
 
         }
