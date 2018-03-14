@@ -216,7 +216,7 @@
                             <hr />
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
-                                Malzeme Seçiniz:
+                                Malzemeler:
                                 @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}), new { @class = "form-control" })
                                 Adet:
                                 <select class="form-control" id="QUa" name="Alignment" required>
