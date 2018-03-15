@@ -374,6 +374,7 @@
                     ingredientUnitOfNameArray.push(UnitOfName);
                     ingredientNameArray.push(IngredientName);
 
+                    $("#ingredientTempList").html("");
 
                     for (var i = 0; i < ingredientArray.length; i++) {
 
@@ -396,9 +397,16 @@
 
             console.log("Girdi --------- " + param);
 
-            var tempRow = $(param).attr('id');
+            var element = getModalElement("#modal2", "#"+param);
+
+
+            var tempRow = $(element).attr('id');
+
+            console.log(tempRow);
 
             tempRowNumber = tempRow.replace("ingredientTempRow", "");
+
+            console.log("replace edilmiş :" + tempRowNumber);
 
             var index = ingredientArray.indexOf(tempRowNumber);
 
@@ -412,16 +420,16 @@
 
             ingredientUnitOfNameArray.splice(index, 1);
 
-            console.log(recipeDescriptionArray);
+            console.log(ingredientArray);
 
             var count = ingredientArray.length;
 
             if (count <= 0) {
-                $("#ingredienttempListMessage").removeAttr("style");
-                $("#tarifKaydet").prop("disabled", true);
+                $("#ingredientTempListMessage").removeAttr("style");
+                $("#malzemeKaydet").prop("disabled", true);
             }
 
-            $(param).remove();
+            $(element).remove();
         }
 
 
@@ -549,6 +557,7 @@
             var tempRow = $(param).attr('id');
 
             tempRowNumber = tempRow.replace("tempRow", "");
+
 
             var index = recipeStepArray.indexOf(tempRowNumber);
 
