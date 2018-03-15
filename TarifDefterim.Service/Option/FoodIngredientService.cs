@@ -24,5 +24,18 @@ namespace TarifDefterim.Service.Option
 
         }
 
+        public bool AddFoodIngredientFromList(List<FoodIngredient> foodIngredientList)
+        {
+            try
+            {
+                Add(foodIngredientList);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

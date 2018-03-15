@@ -143,6 +143,47 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         }
 
+        public bool AddIngredientFromList(string id, string[] Quantity, string[] UnitOf, string[] IngredientID)
+        {
+
+            if (id == null || Quantity.Count() <= 0 || UnitOf.Count() <= 0 || IngredientID.Count() <= 0)
+            {
+                return false;
+            }
+            
+            Guid mealID = new Guid(id);
+
+            List<FoodIngredient> foodIngredientList = new List<FoodIngredient>();
+
+            FoodIngredient foodIngredient;
+
+            for (int i = 0; i < IngredientID.Count(); i++)
+            {
+                Guid ingredientID = new Guid(IngredientID[i]);
+
+                foodIngredient = new FoodIngredient();
+                foodIngredient.IngredientID = ingredientID;
+                foodIngredient.MealID = mealID;
+                foodIngredient.Quantity = Int16.Parse(Quantity[i]);
+                foodIngredient.UnitOf = (TarifDefterim.Core.Enum.UnitOf)Enum.Parse(typeof(UnitOf),UnitOf[i]);
+
+                foodIngredientList.Add(foodIngredient);
+
+            }
+
+            try
+            {
+                _foodIngredient.AddFoodIngredientFromList(foodIngredientList);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+        }
+
 
     }
 }

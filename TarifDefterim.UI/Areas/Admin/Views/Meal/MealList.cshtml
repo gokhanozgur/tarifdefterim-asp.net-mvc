@@ -433,6 +433,41 @@
         }
 
 
+        function SendIngredient() {
+
+            console.log(mealID + " bilgisini malzemelere göndermeye çalışıyorum.");
+            console.log(ingredientArray);
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { ID: mealID, Quantity: ingredientQuantityArray, UnitOf: ingredientUnitOfArray, IngredientID: ingredientArray },
+                url: "@Url.Action("AddIngredientFromList", "Ingredient")",
+                success: function (data) {
+                    if (data) {
+                        var message = $("#modal2").find("#message");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).append("İşlem başarılı.");
+                        $(message).addClass("note note-success");
+                    }
+                    else {
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-success");
+                        $(message).append("İşlem başarısız.");
+                        $(message).addClass("note note-danger");
+                    }
+                }
+
+            })
+
+        }
+
+
+
         function CheckRecipe(val) {
 
             mealID = val;
@@ -496,7 +531,7 @@
             var alignment = $("#Alignment").val();
 
             if (description == "" || alignment == "-1") {
-                
+
                 SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
 
             }

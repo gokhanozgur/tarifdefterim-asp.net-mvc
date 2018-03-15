@@ -101,6 +101,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             try
             {
                 _recipeService.AddRecipeFromList(recipeList);
+                //_recipeService.Add(recipeList);
                 return true;
             }
             catch (Exception ex)
