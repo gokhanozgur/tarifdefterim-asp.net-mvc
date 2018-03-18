@@ -140,7 +140,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateMeal(MealDTO data)
+        public ActionResult UpdateMeal(MealDTO data, string[] Categories)
         {
 
             Meal update = _mealService.GetByID(data.ID);
@@ -155,7 +155,20 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             update.Tricks = data.Tricks;
             update.VideoURL = data.VideoURL;
 
-            update.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+            //update.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+
+            string slug = GenerateSlug.GenerateSlugURL(data.Name);
+
+            bool IsExistSlugName = _mealService.IsExistSlugName(data.ID, slug);
+
+            if (!IsExistSlugName)
+            {
+                update.Slug = slug;
+            }
+            else
+            {
+                update.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+            }
 
 
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
@@ -171,6 +184,22 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             {
 
                 _mealService.Update(update);
+
+                foreach (var categoryItem in Categories)
+                {
+                    Guid cGuid = new Guid(categoryItem);
+
+                    Category CatchedCategory = _categoryService.GetByID(cGuid);
+
+                    if (!_assignedCategory.IsAssignedCategoryAlreadyExist(data.ID, CatchedCategory.ID))
+                    {
+                        _assignedCategory.AddAssignedCategoryFromMealController(data.ID, CatchedCategory.ID);
+
+                    }
+
+                }
+
+
                 TempData["Basarili"] = "Temel yemek bilgisi sistede başarıyla güncellendi.";
                 return RedirectToAction("MealList", "Meal");
 

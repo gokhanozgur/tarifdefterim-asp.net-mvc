@@ -58,6 +58,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -268,6 +274,7 @@
     <Content Include="Content\js\version_1\jquery.tooltips.min.js" />
     <Content Include="Content\js\version_1\responsive-nav.js" />
     <Content Include="Content\js\version_1\switcher.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -332,6 +339,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -385,6 +393,8 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Recipe\RecipeDetail.cshtml" />
     <Content Include="Views\Shared\_version_1_Slider.cshtml" />
+    <Content Include="Views\Shared\_version_1_MealList.cshtml" />
+    <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -400,6 +410,7 @@
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">

@@ -13,7 +13,10 @@
                 <div class="CaptionAlignment">
                     <div class="rsSlideTitle tags">
                         <ul>
-                            <li>Kategori yada Malzeme İçerik</li>
+                            @foreach (var c in item.AssignedCategories)
+                            {
+                                <li>@c.Category.CategoryName</li>
+                            }
                         </ul>
                         <div class="clearfix"></div>
                     </div>
