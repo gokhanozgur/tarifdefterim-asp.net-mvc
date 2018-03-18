@@ -106,7 +106,7 @@ namespace TarifDefterim.DAL.Migrations
                         Person = c.Short(),
                         Tricks = c.String(maxLength: 120),
                         VideoURL = c.String(),
-                        IsSliderActive = c.Int(nullable: false),
+                        IsSliderActive = c.Int(),
                         AppUserID = c.Guid(nullable: false),
                         MasterID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
@@ -328,7 +328,8 @@ namespace TarifDefterim.DAL.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Ingredients", t => t.IngredientID)
-                .ForeignKey("dbo.Meals", t => t.IngredientID)
+                .ForeignKey("dbo.Meals", t => t.MealID)
+                .Index(t => t.MealID)
                 .Index(t => t.IngredientID);
             
             CreateTable(
@@ -456,7 +457,7 @@ namespace TarifDefterim.DAL.Migrations
             DropForeignKey("dbo.RecipeLikes", "RecipeID", "dbo.Recipes");
             DropForeignKey("dbo.Recipes", "MealID", "dbo.Meals");
             DropForeignKey("dbo.MealImages", "MealID", "dbo.Meals");
-            DropForeignKey("dbo.FoodIngredients", "IngredientID", "dbo.Meals");
+            DropForeignKey("dbo.FoodIngredients", "MealID", "dbo.Meals");
             DropForeignKey("dbo.FoodIngredients", "IngredientID", "dbo.Ingredients");
             DropForeignKey("dbo.Ingredients", "KindID", "dbo.Kinds");
             DropForeignKey("dbo.FavoriMeals", "MealID", "dbo.Meals");
@@ -475,6 +476,7 @@ namespace TarifDefterim.DAL.Migrations
             DropIndex("dbo.MealImages", new[] { "MealID" });
             DropIndex("dbo.Ingredients", new[] { "KindID" });
             DropIndex("dbo.FoodIngredients", new[] { "IngredientID" });
+            DropIndex("dbo.FoodIngredients", new[] { "MealID" });
             DropIndex("dbo.FavoriMeals", new[] { "AppUserID" });
             DropIndex("dbo.FavoriMeals", new[] { "MealID" });
             DropIndex("dbo.FavoriteDinnerTables", new[] { "MealID" });

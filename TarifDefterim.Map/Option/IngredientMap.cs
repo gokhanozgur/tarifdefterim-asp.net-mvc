@@ -24,7 +24,9 @@ namespace TarifDefterim.Map.Option
             // FoodIngredient relation
 
             HasMany(x => x.FoodIngredients)
-                .WithMany(x => x.Ingredients);
+                .WithRequired(x => x.Ingredient)
+                .HasForeignKey(x => x.IngredientID)
+                .WillCascadeOnDelete(false);
 
             // Benefit table relation
 

@@ -14,12 +14,10 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
     {
         IngredientService _ingredientService;
         KindService _kindService;
-        FoodIngredientService _foodIngredient;
         public IngredientController()
         {
             _ingredientService = new IngredientService();
             _kindService = new KindService();
-            _foodIngredient = new FoodIngredientService();
 
         }
 
@@ -96,92 +94,6 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
                 return RedirectToAction("UpdateIngredient", "Ingredient" , new { id = data.ID});
             }
             
-        }
-
-
-        public bool CheckIngredient(Guid id)
-        {
-
-            bool isExist = _foodIngredient.IsIngredientAlreadyExist(id);
-            return isExist;
-
-        }
-
-
-        public JsonResult GetIngredients(string id)
-        {
-
-            if (id != null)
-            {
-                Guid mealID = new Guid(id);
-
-                if (CheckIngredient(mealID))
-                {
-                    List<FoodIngredient> recipeList = _foodIngredient.GetRecipeInfo(mealID); // Dikkat                  
-
-
-                    List<FoodIngredientDTO> ingredientDtoList = recipeList.Select(x => new FoodIngredientDTO()
-                    {
-
-                        ID = x.ID,
-                        Quantity = x.Quantity,
-                        UnitOf = x.UnitOf
-
-                    }).ToList();
-
-                    return Json(ingredientDtoList, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json("Empty", JsonRequestBehavior.AllowGet);
-                }
-            }
-            else
-            {
-                return Json("Empty", JsonRequestBehavior.AllowGet);
-            }
-
-        }
-
-        public bool AddIngredientFromList(string id, string[] Quantity, string[] UnitOf, string[] IngredientID)
-        {
-
-            if (id == null || Quantity.Count() <= 0 || UnitOf.Count() <= 0 || IngredientID.Count() <= 0)
-            {
-                return false;
-            }
-            
-            Guid mealID = new Guid(id);
-
-            List<FoodIngredient> foodIngredientList = new List<FoodIngredient>();
-
-            FoodIngredient foodIngredient;
-
-            for (int i = 0; i < IngredientID.Count(); i++)
-            {
-                Guid ingredientID = new Guid(IngredientID[i]);
-
-                foodIngredient = new FoodIngredient();
-                foodIngredient.IngredientID = ingredientID;
-                foodIngredient.MealID = mealID;
-                foodIngredient.Quantity = Int16.Parse(Quantity[i]);
-                foodIngredient.UnitOf = (TarifDefterim.Core.Enum.UnitOf)Enum.Parse(typeof(UnitOf),UnitOf[i]);
-
-                foodIngredientList.Add(foodIngredient);
-
-            }
-
-            try
-            {
-                _foodIngredient.AddFoodIngredientFromList(foodIngredientList);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-
         }
 
 

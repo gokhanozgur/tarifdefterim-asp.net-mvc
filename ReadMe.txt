@@ -1,4 +1,4 @@
-Projede startup ayarýnda deðiþiklik yapýldýðý için code first console komutlarýnda aþaðýdaki komutlar uygulanýr.
+Projede startup ayarýnda deðiþiklik yapýldýðý için console komutlarýnda aþaðýdaki komutlar uygulanýr.
 
 1- Enable-Migrations -ProjectName "TarifDefterim.DAL" -StartUpProjectName "TarifDefterim.UI" -Verbose
 	1.1 Tüm sayfalarda yetki ve hata bazýnda korumalar olduðu için ilk kullanýcýyý açýlan konfigürasyon sýnýfýnda AutomaticMigrationsEnabled = true; yapýlýr ve  ilk kullanýcýyý aþaðýdaki kod ile seed ediyorum.

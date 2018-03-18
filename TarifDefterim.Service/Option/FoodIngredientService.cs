@@ -36,6 +36,19 @@ namespace TarifDefterim.Service.Option
                 return false;
             }
         }
+        public bool RemoveIngredientFromSelectedItem(Guid id)
+        {
+            try
+            {
+                Remove(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
 
     }
 }

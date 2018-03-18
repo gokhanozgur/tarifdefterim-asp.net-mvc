@@ -61,7 +61,7 @@ namespace TarifDefterim.Map.Option
             HasMany(x => x.FoodIngredients)
                 .WithRequired(x => x.Meal)
                 //.HasForeignKey(x => x.MealID)
-                .HasForeignKey(x => x.IngredientID)
+                .HasForeignKey(x => x.MealID)
                 .WillCascadeOnDelete(false);
 
             // Recipe table relation

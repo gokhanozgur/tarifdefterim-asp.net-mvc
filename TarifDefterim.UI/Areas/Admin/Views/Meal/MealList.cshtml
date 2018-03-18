@@ -295,7 +295,7 @@
 
                 type: "POST",
                 dataType: "Json",
-                url: "@Url.Action("GetIngredients", "Ingredient")/" + mealID,
+                url: "@Url.Action("GetIngredients", "FoodIngredient")/" + mealID,
                 success: function (data) {
 
                     var count = Object.keys(data).length;
@@ -306,28 +306,28 @@
 
                     if (count == 0 || data == "Empty") {
                         console.log("Birşeyler bulamadım.");
-                        $("#dynamicRecipeContent").html("");
+                        $("#dynamicIngredientContent").html("");
                         $(message).html("");
                         $(message).removeAttr("style");
-                        $("#existListMessage").removeAttr("style");
+                        $("#exisIngredienttListMessage").removeAttr("style");
                         $(message).removeClass("note note-info");
                         $(message).text("Seçilen yemeğin bir malzemesi bulunmamaktadır. Malzeme ekleyiniz.");
                         $(message).addClass("note note-danger");
                     }
                     else {
                         console.log("Birşeyler buldum.");
-                        $("#dynamicRecipeContent").html("");
+                        $("#dynamicIngredientContent").html("");
                         $(message).html("");
                         $(message).removeAttr("style");
                         $(message).removeClass("note note-danger");
                         $(message).text("Yemeğin malzemesi mevcut. Dilerseniz malzemeleri düzenleyebilirsiniz.");
                         $(message).addClass("note note-info");
-                        $("#existListMessage").css("display","none");
+                        $("#exisIngredienttListMessage").css("display","none");
 
 
                         $.each(data, function (key, item) {
 
-                            $("#dynamicRecipeContent").append(`<h5 id="existRow${item.ID}"><a href='javascript:;'  onclick='$.ExistItem.DeleteRecipe("${item.ID}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'> ${item.Quantity}. Adım: ${item.UnitOf} </span></h5>`);
+                            $("#dynamicIngredientContent").append(`<h5 id="existIngredientRow${item.ID}"><a href='javascript:;'  onclick='$.ExistItem.DeleteIngredient("${item.ID}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'> ${item.Quantity} ${item.UnitOf} ${item.IngredientName} </span></h5>`);
 
                         });
 
@@ -443,21 +443,22 @@
                 type: "POST",
                 dataType: "Json",
                 data: { ID: mealID, Quantity: ingredientQuantityArray, UnitOf: ingredientUnitOfArray, IngredientID: ingredientArray },
-                url: "@Url.Action("AddIngredientFromList", "Ingredient")",
+                url: "@Url.Action("AddIngredientFromList", "FoodIngredient")",
                 success: function (data) {
-                    if (data) {
-                        var message = $("#modal2").find("#message");
+                    if (data.length > 0) {
+                        var message = $("#modal2").find("#ingredientProcessMessage");
                         $(message).html("");
                         $(message).removeAttr("style");
                         $(message).removeClass("note note-danger");
-                        $(message).append("İşlem başarılı.");
+                        $(message).append(data);
                         $(message).addClass("note note-success");
+                        ingredientArray.remove();
                     }
                     else {
                         $(message).html("");
                         $(message).removeAttr("style");
                         $(message).removeClass("note note-success");
-                        $(message).append("İşlem başarısız.");
+                        $(message).append(data);
                         $(message).addClass("note note-danger");
                     }
                 }
@@ -647,6 +648,8 @@
 
         function RemoveFromExistRecipeList(param) { $(param).fadeOut(2000); (param).remove(); }
 
+        function RemoveFromExistIngredientList(param) { $(param).fadeOut(2000); (param).remove(); }
+
         $.ExistItem = {
 
             DeleteRecipe: function RemoveItemFromDatabase(selectedID) {
@@ -670,6 +673,33 @@
                             }
                             else {
                                 SetProcessMessage("#message","note note-danger", "Tariften adım çıkarma işlemi başarısız.")
+                            }
+                        }
+                    })
+                }
+
+            },
+            DeleteIngredient: function RemoveItemFromDatabase(selectedID) {
+
+                result = confirm("Bu işlemi yapmak istediğinizden emin misiniz?");
+
+                if (result == false) {
+                    return false;
+                }
+                else {
+                    console.log(selectedID);
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "Json",
+                        url: "@Url.Action("RemoveIngredient", "FoodIngredient")/" + selectedID,
+                        success: function (data) {
+                            if (data != false) {
+                                SetProcessMessage("#ingredientMessage", "note note-success", "Bir malzeme çıkardınız.")
+                                RemoveFromExistIngredientList("#existIngredientRow" + selectedID);
+                            }
+                            else {
+                                SetProcessMessage("#ingredientMessage","note note-danger", "Malzeme çıkarma işlemi başarısız.")
                             }
                         }
                     })

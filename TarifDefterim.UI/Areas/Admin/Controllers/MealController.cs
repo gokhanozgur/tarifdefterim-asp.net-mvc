@@ -55,8 +55,11 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             }
             else
             {
-                Random rnd = new Random();
-                data.Slug = slug + "-" + rnd.Next(1, 200);
+                //Random rnd = new Random();
+                //data.Slug = slug + "-" + rnd.Next(1, 200);
+
+                data.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+
             }
             
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
