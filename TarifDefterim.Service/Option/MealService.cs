@@ -30,5 +30,10 @@ namespace TarifDefterim.Service.Option
 
         }
 
+        public int GetTotalMeal()
+        {
+            return GetActive().Count();
+        }
+
     }
 }

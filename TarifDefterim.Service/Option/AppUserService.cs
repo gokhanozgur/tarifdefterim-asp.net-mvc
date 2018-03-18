@@ -42,5 +42,10 @@ namespace TarifDefterim.Service.Option
             return GetFirstOrDefault(x => x.Email == email);
         }
 
+        public int GetTotalAppUser()
+        {
+            return GetActive().Count;
+        }
+
     }
 }

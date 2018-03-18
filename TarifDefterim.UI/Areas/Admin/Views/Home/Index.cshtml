@@ -4,6 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
 }
 
+@model TarifDefterim.UI.Areas.Admin.Models.VM.DashboardVM
 
 <!-- BEGIN PAGE HEADER-->
 <!-- BEGIN PAGE TITLE-->
@@ -25,7 +26,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="1349">1349</span>
+                    <span data-counter="counterup" data-value="@Model.TotalUser">@Model.TotalUser</span>
                 </div>
                 <div class="desc"> Toplam Kullanıcı </div>
             </div>
@@ -38,7 +39,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="12">12</span>
+                    <span data-counter="counterup" data-value="@Model.TotalMeal">@Model.TotalMeal</span>
                 </div>
                 <div class="desc"> Toplam Tarif </div>
             </div>
@@ -51,22 +52,9 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="20">20</span>
+                    <span data-counter="counterup" data-value="@Model.TotalCategory">@Model.TotalCategory</span>
                 </div>
                 <div class="desc"> Toplam Kategori </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-            <div class="visual">
-                <i class="fa fa-commenting"></i>
-            </div>
-            <div class="details">
-                <div class="number">                    
-                    <span data-counter="counterup" data-value="89">89</span>
-                </div>
-                <div class="desc"> Toplam Yorum </div>
             </div>
         </a>
     </div>
