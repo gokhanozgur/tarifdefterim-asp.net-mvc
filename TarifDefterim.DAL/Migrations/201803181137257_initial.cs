@@ -106,7 +106,7 @@ namespace TarifDefterim.DAL.Migrations
                         Person = c.Short(),
                         Tricks = c.String(maxLength: 120),
                         VideoURL = c.String(),
-                        IsSliderActive = c.Int(nullable: false),
+                        IsSliderActive = c.Int(),
                         AppUserID = c.Guid(nullable: false),
                         MasterID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
@@ -327,7 +327,6 @@ namespace TarifDefterim.DAL.Migrations
                         Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Ingredients", t => t.IngredientID)
                 .ForeignKey("dbo.Meals", t => t.IngredientID)
                 .Index(t => t.IngredientID);
             
@@ -441,6 +440,19 @@ namespace TarifDefterim.DAL.Migrations
                 .Index(t => t.DinnerTable_ID)
                 .Index(t => t.Meal_ID);
             
+            CreateTable(
+                "dbo.FoodIngredientIngredient",
+                c => new
+                    {
+                        FoodIngredient_ID = c.Guid(nullable: false),
+                        Ingredient_ID = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.FoodIngredient_ID, t.Ingredient_ID })
+                .ForeignKey("dbo.FoodIngredients", t => t.FoodIngredient_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Ingredients", t => t.Ingredient_ID, cascadeDelete: true)
+                .Index(t => t.FoodIngredient_ID)
+                .Index(t => t.Ingredient_ID);
+            
         }
         
         public override void Down()
@@ -457,7 +469,8 @@ namespace TarifDefterim.DAL.Migrations
             DropForeignKey("dbo.Recipes", "MealID", "dbo.Meals");
             DropForeignKey("dbo.MealImages", "MealID", "dbo.Meals");
             DropForeignKey("dbo.FoodIngredients", "IngredientID", "dbo.Meals");
-            DropForeignKey("dbo.FoodIngredients", "IngredientID", "dbo.Ingredients");
+            DropForeignKey("dbo.FoodIngredientIngredient", "Ingredient_ID", "dbo.Ingredients");
+            DropForeignKey("dbo.FoodIngredientIngredient", "FoodIngredient_ID", "dbo.FoodIngredients");
             DropForeignKey("dbo.Ingredients", "KindID", "dbo.Kinds");
             DropForeignKey("dbo.FavoriMeals", "MealID", "dbo.Meals");
             DropForeignKey("dbo.FavoriteDinnerTables", "MealID", "dbo.Meals");
@@ -468,6 +481,8 @@ namespace TarifDefterim.DAL.Migrations
             DropForeignKey("dbo.DinnerTableImages", "DinnerTableID", "dbo.DinnerTables");
             DropForeignKey("dbo.AssignedCategories", "MealID", "dbo.Meals");
             DropForeignKey("dbo.AssignedCategories", "CategoryID", "dbo.Categories");
+            DropIndex("dbo.FoodIngredientIngredient", new[] { "Ingredient_ID" });
+            DropIndex("dbo.FoodIngredientIngredient", new[] { "FoodIngredient_ID" });
             DropIndex("dbo.DinnerTableMeal", new[] { "Meal_ID" });
             DropIndex("dbo.DinnerTableMeal", new[] { "DinnerTable_ID" });
             DropIndex("dbo.RecipeLikes", new[] { "RecipeID" });
@@ -490,6 +505,7 @@ namespace TarifDefterim.DAL.Migrations
             DropIndex("dbo.Recipes", new[] { "MealID" });
             DropIndex("dbo.Comments", new[] { "AppUserID" });
             DropIndex("dbo.Comments", new[] { "RecipeID" });
+            DropTable("dbo.FoodIngredientIngredient");
             DropTable("dbo.DinnerTableMeal");
             DropTable("dbo.RecipeLikes");
             DropTable("dbo.MealImages");
