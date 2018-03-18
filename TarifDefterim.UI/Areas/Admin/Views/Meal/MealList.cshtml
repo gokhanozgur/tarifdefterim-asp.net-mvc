@@ -452,7 +452,8 @@
                         $(message).removeClass("note note-danger");
                         $(message).append(data);
                         $(message).addClass("note note-success");
-                        ingredientArray.remove();
+                        ingredientArray.length = 0;
+                        console.log(ingredientArray);
                     }
                     else {
                         $(message).html("");
@@ -626,19 +627,20 @@
                 data: { ID: mealID, Description: recipeDescriptionArray, Alignment: recipeStepArray},
                 url: "@Url.Action("AddRecipeFromList", "Recipe")",
                 success: function (data) {
-                    if (data) {
-                        $("#message").html("");
-                        $("#message").removeAttr("style");
-                        $("#message").removeClass("note note-danger");
-                        $("#message").append("İşlem başarılı.");
-                        $("#message").addClass("note note-success");
+                    if (data.length > 0) {
+                        var message = $("#modal").find("#processMessage");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).append(data);
+                        $(message).addClass("note note-success");
                     }
                     else {
-                        $("#message").html("");
-                        $("#message").removeAttr("style");
-                        $("#message").removeClass("note note-success");
-                        $("#message").append("İşlem başarısız.");
-                        $("#message").addClass("note note-danger");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-success");
+                        $(message).append(data);
+                        $(message).addClass("note note-danger");
                     }
                 }
 

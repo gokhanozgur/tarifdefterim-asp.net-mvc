@@ -72,12 +72,12 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
 
-        public bool AddRecipeFromList(string id, string[] Description, string[] Alignment)
+        public JsonResult AddRecipeFromList(string id, string[] Description, string[] Alignment)
         {
 
             if (id == null || Description.Count() <= 0 || Alignment.Count() <= 0)
             {
-                return false;
+                return Json("İşlem başarısız.", JsonRequestBehavior.AllowGet);
             }
 
             Guid mealID = new Guid(id);
@@ -102,11 +102,11 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             {
                 _recipeService.AddRecipeFromList(recipeList);
                 //_recipeService.Add(recipeList);
-                return true;
+                return Json("İşlem başarılı.", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return false;
+                return Json("İşlem başarısız.", JsonRequestBehavior.AllowGet);
             }            
 
         }
