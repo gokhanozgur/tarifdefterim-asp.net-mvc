@@ -118,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\basic.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap-datepicker3.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap-switch.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
@@ -126,6 +127,7 @@
     <Content Include="Areas\Admin\Content\css\darkblue.min.css" />
     <Content Include="Areas\Admin\Content\css\datatables.bootstrap.css" />
     <Content Include="Areas\Admin\Content\css\datatables.min.css" />
+    <Content Include="Areas\Admin\Content\css\dropzone.min.css" />
     <Content Include="Areas\Admin\Content\css\font-awesome.css" />
     <Content Include="Areas\Admin\Content\css\font-awesome.min.css" />
     <Content Include="Areas\Admin\Content\css\fonts\fontawesome-webfont.svg" />
@@ -144,6 +146,8 @@
     <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
     <Content Include="Areas\Admin\Content\images\login\logo.png" />
     <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
+    <Content Include="Areas\Admin\Content\js\dropzone.min.js" />
+    <Content Include="Areas\Admin\Content\js\form-dropzone.min.js" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc_disabled.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_both.png" />
@@ -302,6 +306,7 @@
     <Content Include="Areas\Admin\Views\Ingredient\AddIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

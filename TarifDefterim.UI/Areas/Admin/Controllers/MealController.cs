@@ -21,7 +21,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         CategoryService _categoryService;
         AssignedCategoryService _assignedCategory;
         IngredientService _ingredientService;
-
+        MealImageService _mealImageService;
 
         public MealController()
         {
@@ -30,6 +30,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             _categoryService = new CategoryService();
             _assignedCategory = new AssignedCategoryService();
             _ingredientService = new IngredientService();
+            _mealImageService = new MealImageService();
         }
         
         public ActionResult AddMeal()
@@ -211,6 +212,22 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             }
 
 
+        }
+
+        public ActionResult MealImages(string id)
+        {
+            Guid mealID = new Guid(id);
+
+            List<MealImage> mealImageList = _mealImageService.GetByExp(x => x.MealID == mealID && x.Status == Core.Enum.Status.Active);
+
+            return View(mealImageList);
+        }
+
+        [HttpPost]
+
+        public ActionResult MealImages(MealImage data , HttpPostedFileBase Image)
+        {
+            return RedirectToAction("MealImages","Meal", new { id = data.ID });
         }
 
     }

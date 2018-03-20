@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "MealImages";
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+@model IEnumerable<TarifDefterim.Model.Option.MealImage>
+
+@section style{
+
+<link href="~/Areas/Admin/Content/css/dropzone.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/css/basic.min.css" rel="stylesheet" />
+
+}
+
+
+@section style2{
+
+
+
+}
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    Yemek Resimleri
+    <small>Yemekler</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Bu sayfada seçilen yemeğe ait resim bilgilerini düzenleyebilirsiniz. </p>
+</div>
+
+@Html.Partial("_messages")
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="../assets/global/plugins/dropzone/upload.php" class="dropzone dropzone-file-area" id="my-dropzone" style="width: 500px; margin-top: 50px;">
+            <h3 class="sbold">Drop files here or click to upload</h3>
+            <p> This is just a demo dropzone. Selected files are not actually uploaded. </p>
+        </form>
+    </div>
+</div>
+
+<h1 class="page-title">
+    Mevcut Yemek Resimleri
+</h1>
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-body">
+                <div class="mt-element-overlay">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mt-overlay-1">
+                                <img src="~/Content/images/version_1/recipeThumb-01.jpg" />
+                                <div class="mt-overlay">
+                                    <ul class="mt-info">
+                                        <li>
+                                            <a class="btn default btn-outline" href="javascript:;">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn default btn-outline" href="javascript:;">
+                                                <i class="icon-link"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+<script src="~/Areas/Admin/Content/js/dropzone.min.js"></script>
+
+}
+
+@section scripts2{
+
+<script src="~/Areas/Admin/Content/js/form-dropzone.min.js"></script>
+
+}
+
