@@ -216,6 +216,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult MealImages(string id)
         {
+            // Bu kısımlar test edilecek.
+
             Guid mealID = new Guid(id);
 
             List<MealImage> mealImageList = _mealImageService.GetByExp(x => x.MealID == mealID && x.Status == Core.Enum.Status.Active);
