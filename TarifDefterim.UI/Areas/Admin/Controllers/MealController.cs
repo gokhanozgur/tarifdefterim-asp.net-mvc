@@ -224,6 +224,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             model.MealID = mealID;
 
+            model.MealImages = _mealImageService.GetActive();
+
             return View(model);
         }
 
@@ -231,7 +233,54 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult MealImages(MealImage data , HttpPostedFileBase Image)
         {
-            return RedirectToAction("MealImages","Meal", new { id = data.MealID });
+
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalMealImagePath, Image, 2);
+
+            data.ImageURL = UploadedImagePaths[0];
+
+            if (data.ImageURL == "0" || data.ImageURL == "1" || data.ImageURL == "2")
+            {
+                data.ImageURL = ImageUploader.DefaultMealImagePath;
+                data.XSmallMealImage = ImageUploader.DefaultXSmallMealImagePath;
+                data.CruptedMealImage = ImageUploader.DefaultCruptedMealImagePath;
+            }
+            else
+            {
+                data.XSmallMealImage = UploadedImagePaths[1];
+                data.CruptedMealImage = UploadedImagePaths[2];
+            }
+
+            try
+            {
+                _mealImageService.Add(data);
+                TempData["Basarili"] = "Resim sisteme eklendi.";
+                return RedirectToAction("MealImages", "Meal", new { id = data.MealID });
+            }
+            catch (Exception ex)
+            {
+                TempData["Hata"] = "Resim sisteme eklenemedi.";
+                return RedirectToAction("MealImages", "Meal", new { id = data.MealID });
+            }
+            
+        }
+
+
+        public JsonResult RemoveMealImage(string id)
+        {
+            Guid mealID = new Guid(id);
+
+            try
+            {
+                _mealImageService.Remove(mealID);
+                return Json(true,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
     }

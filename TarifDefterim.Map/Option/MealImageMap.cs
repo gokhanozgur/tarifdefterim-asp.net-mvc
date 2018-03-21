@@ -16,7 +16,7 @@ namespace TarifDefterim.Map.Option
             // Table property settings
 
             ToTable("dbo.MealImages");
-            Property(x => x.ImageURL).HasMaxLength(50);
+            Property(x => x.ImageURL).HasMaxLength(250);
 
 
             // Table relations

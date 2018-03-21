@@ -60,28 +60,30 @@
     Mevcut Yemek Resimleri
 </h1>
 
+<p>
+    <span id="message" style="display:none"></span>
+</p>
+
 <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-        <div class="portlet light portlet-fit bordered">
-            <div class="portlet-body">
-                <div class="mt-element-overlay">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mt-overlay-1">
-                                <img src="~/Content/images/version_1/recipeThumb-01.jpg" />
-                                <div class="mt-overlay">
-                                    <ul class="mt-info">
-                                        <li>
-                                            <a class="btn default btn-outline" href="javascript:;">
-                                                <i class="icon-magnifier"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn default btn-outline" href="javascript:;">
-                                                <i class="icon-link"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+    @foreach (var item in Model.MealImages)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" id="@item.ID">
+            <div class="portlet light portlet-fit bordered">
+                <div class="portlet-body">
+                    <div class="mt-element-overlay">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mt-overlay-1">
+                                    <img src="@item.CruptedMealImage" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn green btn-outline" href="javascript:;" onclick="deleteMealImage('@item.ID')">
+                                                    <i class="icon-close"></i> Sil
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +91,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 
 @section scripts{
@@ -104,3 +106,81 @@
 
 }
 
+@section scripts3{
+
+    <script>
+
+        function RemoveFromExistMealImageList(param) {
+
+            var result = getElement(param);
+
+            console.log(result);
+
+            $(result).fadeOut(2000); (param).remove();
+        }
+
+        function getElement(elementName) {
+
+            var result = find(elementName);
+            return result;
+
+        }
+
+        function SetProcessMessage(elementID, className, message) {
+
+
+            $(elementID).html("");
+            $(elementID).removeAttr("style");
+
+            var lastClassName = $(elementID).attr("class");
+
+            if (lastClassName == "note note-danger") {
+                $(elementID).removeClass("note note-danger");
+            }
+            else {
+                $(elementID).removeClass("note note-success");
+            }
+
+            if (className != null || message != null) {
+                $(elementID).addClass(className);
+                $(elementID).append(message);
+            }
+            else {
+                $(elementID).css("display", "none");
+            }
+
+        }
+
+        function deleteMealImage(val) {
+
+            console.log(val);
+
+            result = confirm("Bu işlemi yapmak istediğinizden emin misiniz?");
+
+                if (result == false) {
+                    return false;
+                }
+                else {
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "Json",
+                        url: "@Url.Action("RemoveMealImage", "Meal")/" + val,
+                        success: function (data) {
+                            if (data != false) {
+                                SetProcessMessage("#message", "note note-success", "Resimlerden birini sildiniz.")
+                                RemoveFromExistMealImageList(val);
+                            }
+                            else {
+                                SetProcessMessage("#message","note note-danger", "Resim silme işlemi başarısız.")
+                            }
+                        }
+                    })
+                }
+
+
+        }
+
+    </script>
+
+}

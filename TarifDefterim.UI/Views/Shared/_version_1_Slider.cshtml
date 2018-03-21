@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TarifDefterim.Model.Option.Meal>
+﻿@model IEnumerable<TarifDefterim.UI.Models.VM.MealVM>
 
 <!-- Slider
         ================================================== -->
@@ -6,7 +6,7 @@
     @foreach (var item in Model)
     {
         <div class="rsContent">
-            <a class="rsImg" href="~/Content/images/version_1/sliderA_01.jpg"></a>
+            <a class="rsImg" href="@item.RandomImagePath"></a>
             <i class="rsTmb">@item.Name</i>
             <!-- Slide Caption -->
             <div class="SlideTitleContainer rsABlock">
@@ -26,7 +26,7 @@
                             <li><i class="fa fa-cutlery"></i> @item.Person kişilik</li>
                             <li><i class="fa fa-clock-o"></i> Hazırlanış @item.PreparationTime @item.PreparationTimeUnitOf</li>
                             <li><i class="fa fa-clock-o"></i> Pişirme @item.CookingTime @item.CookingTimeUnitOf</li>
-                            <li><i class="fa fa-user"></i><a href="#"> @item.AppUser.Name @item.AppUser.LastName</a> tarifi</li>
+                            <li><i class="fa fa-user"></i><a href="#"> @item.FullName</a> TARİFİ</li>
                         </ul>
                     </div>
                     <a href="/Recipe/RecipeDetail/@item.Slug" class="rsSlideTitle button">Tarifi Göster</a>

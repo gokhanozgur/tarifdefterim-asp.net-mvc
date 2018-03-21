@@ -47,5 +47,12 @@ namespace TarifDefterim.Service.Option
             return GetActive().Count;
         }
 
+        public string TakeMealCreatetorFullName(string username)
+        {
+
+            return GetByExp(x => x.UserName == username).Select(x => new {  FullName = x.Name+" "+ x.LastName }).ToString();
+
+        }
+
     }
 }
