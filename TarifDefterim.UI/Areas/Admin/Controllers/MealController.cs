@@ -220,16 +220,18 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             Guid mealID = new Guid(id);
 
-            List<MealImage> mealImageList = _mealImageService.GetByExp(x => x.MealID == mealID && x.Status == Core.Enum.Status.Active);
+            MealImageVM model = new MealImageVM();
 
-            return View(mealImageList);
+            model.MealID = mealID;
+
+            return View(model);
         }
 
         [HttpPost]
 
         public ActionResult MealImages(MealImage data , HttpPostedFileBase Image)
         {
-            return RedirectToAction("MealImages","Meal", new { id = data.ID });
+            return RedirectToAction("MealImages","Meal", new { id = data.MealID });
         }
 
     }

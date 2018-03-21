@@ -335,6 +335,7 @@
     <Compile Include="Areas\Admin\Models\VM\AppUserRoleAndStatus.cs" />
     <Compile Include="Areas\Admin\Models\VM\DashboardVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\LoginVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\MealImageVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\MealListVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\StatusVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\TimeVM.cs" />

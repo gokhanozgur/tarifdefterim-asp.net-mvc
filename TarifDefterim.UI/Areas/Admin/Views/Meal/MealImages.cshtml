@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
 }
 
-@model IEnumerable<TarifDefterim.Model.Option.MealImage>
+@model TarifDefterim.UI.Areas.Admin.Models.VM.MealImageVM
 
 @section style{
 
@@ -36,9 +36,22 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form action="../assets/global/plugins/dropzone/upload.php" class="dropzone dropzone-file-area" id="my-dropzone" style="width: 500px; margin-top: 50px;">
-            <h3 class="sbold">Drop files here or click to upload</h3>
-            <p> This is just a demo dropzone. Selected files are not actually uploaded. </p>
+        <form action="/Admin//Meal/MealImages" method="post" role="form" class="form-horizontal" enctype="multipart/form-data">
+            <div class="form-group form-md-line-input">
+                <label class="col-md-2 control-label" for="Image">Yemek Resmi</label>
+                <div class="col-md-2">
+                    <input type="file" name="Image" class="form-control" id="Image" placeholder="Resim seçiniz..." />
+                    <div class="form-control-focus"> </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn green" id="kaydet" >Kaydet</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="MealID" value="@Model.MealID" />            
         </form>
     </div>
 </div>
