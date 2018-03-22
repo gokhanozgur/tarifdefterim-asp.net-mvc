@@ -1,6 +1,6 @@
 ﻿@using PagedList;
 @using PagedList.Mvc
-@model IPagedList<TarifDefterim.Model.Option.Meal>
+@model IPagedList<TarifDefterim.UI.Models.VM.MealVM>
 
 <!-- Isotope -->
 <div class="isotope">
@@ -11,7 +11,7 @@
             <!-- Thumbnail -->
             <div class="thumbnail-holder">
                 <a href="/Recipe/RecipeDetail/@item.Slug">
-                    <img src="~/Content/images/version_1/recipeThumb-01.jpg" alt="" />
+                    <img src="@item.RandomImagePath" alt="" />
                     <div class="hover-cover"></div>
                     <div class="hover-icon">Tarifi Göster</div>
                 </a>

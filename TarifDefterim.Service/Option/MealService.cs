@@ -35,5 +35,12 @@ namespace TarifDefterim.Service.Option
             return GetActive().Count();
         }
 
+        public Meal GetMealDetail(string slug)
+        {
+            Meal meal = GetFirstOrDefault(x => x.Slug == slug);
+
+            return meal;
+        }
+
     }
 }

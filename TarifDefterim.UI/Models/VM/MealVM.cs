@@ -40,5 +40,9 @@ namespace TarifDefterim.UI.Models.VM
 
         public List<AssignedCategory> AssignedCategories { get; set; }
 
+        public List<FoodIngredient> FoodIngredients { get; set; }
+
+        public List<Recipe> Recipes { get; set; }
+
     }
 }
