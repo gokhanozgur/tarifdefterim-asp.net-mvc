@@ -8,6 +8,7 @@ using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Models.VM;
+using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Controllers
 {
@@ -51,9 +52,22 @@ namespace TarifDefterim.UI.Controllers
                 model.Person = item.Person;
                 model.Tricks = item.Tricks;
                 model.VideoURL = item.VideoURL;
-                model.FullName = _appUserService.TakeMealCreatetorFullName(item.AppUser.UserName);
+
+                AppUser user = _appUserService.TakeMealCreatetorFullName(item.AppUser.UserName);
+
+                model.FullName = user.Name + " " + user.LastName;
                 model.AssignedCategories = _assignedCategoryService.GetByExp(x => x.MealID == model.ID && x.Status == Status.Active);
-                model.RandomImagePath = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                MealImage mImage = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                if (mImage == null)
+                {
+                    model.RandomImagePath = ImageUploader.DefaultMealImagePath;
+                }
+                else
+                {
+                    model.RandomImagePath = mImage.ImageURL;
+                }
 
                 modelList.Add(model);
             }
@@ -84,7 +98,17 @@ namespace TarifDefterim.UI.Controllers
                 model.Person = item.Person;
                 model.Tricks = item.Tricks;
                 model.VideoURL = item.VideoURL;
-                model.RandomImagePath = _mealImage.TakeFirstMealImagePath(model.ID);
+
+                MealImage mImage = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                if (mImage == null)
+                {
+                    model.RandomImagePath = ImageUploader.DefaultMealImagePath;
+                }
+                else
+                {
+                    model.RandomImagePath = mImage.ImageURL;
+                }
 
                 modelList.Add(model);
             }
