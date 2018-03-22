@@ -384,7 +384,9 @@ namespace TarifDefterim.DAL.Migrations
                 c => new
                     {
                         ID = c.Guid(nullable: false, identity: true),
-                        ImageURL = c.String(maxLength: 50),
+                        ImageURL = c.String(maxLength: 250),
+                        XSmallMealImage = c.String(),
+                        CruptedMealImage = c.String(),
                         MealID = c.Guid(nullable: false),
                         MasterID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),

@@ -15,6 +15,8 @@ namespace TarifDefterim.Service.BaseService
     public class MainService<T> : ICoreService<T> where T : CoreEntity
     {
 
+        // Singleton pattern
+
         private static ProjectContext _dbContext;
 
         public ProjectContext dbContext

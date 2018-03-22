@@ -19,6 +19,7 @@ namespace TarifDefterim.DAL.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
+
             context.AppUsers.AddOrUpdate(
 
                 x => x.ID, new Model.Option.AppUser()

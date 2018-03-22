@@ -106,7 +106,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         {
             MealListVM model = new MealListVM();
             model.Meals = _mealService.GetActive();
-            model.Ingredients = _ingredientService.GetActive();
+            model.Ingredients = _ingredientService.GetAll();
 
             return View(model);
 

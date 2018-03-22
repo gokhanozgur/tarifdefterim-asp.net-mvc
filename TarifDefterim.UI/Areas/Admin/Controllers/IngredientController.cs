@@ -7,6 +7,7 @@ using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Areas.Admin.Models.VM;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
@@ -50,8 +51,13 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult IngredientList()
         {
-            List<Ingredient> model = _ingredientService.GetAll();
-            
+
+            IngredientVM model = new IngredientVM();
+
+            model.Ingredients = _ingredientService.GetAll();
+
+            //List<Ingredient> model = _ingredientService.GetAll();
+
             return View(model);
         }
 

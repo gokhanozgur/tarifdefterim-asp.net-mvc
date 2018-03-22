@@ -113,7 +113,7 @@ namespace TarifDefterim.UI.Controllers
                 modelList.Add(model);
             }
 
-            return PartialView("_version_1_MealList", modelList.ToPagedList(page,5));
+            return PartialView("_version_1_MealList", modelList.ToPagedList(page,6));
 
         }
     }
