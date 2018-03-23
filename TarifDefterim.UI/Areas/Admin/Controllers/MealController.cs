@@ -224,7 +224,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             model.MealID = mealID;
 
-            model.MealImages = _mealImageService.GetActive();
+            model.MealImages = _mealImageService.GetByExp(x => x.MealID == mealID);
 
             return View(model);
         }
