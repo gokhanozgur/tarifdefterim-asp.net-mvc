@@ -10,7 +10,7 @@ namespace TarifDefterim.UI.Areas.Admin.Models.VM
     public class IngredientVM
     {
 
-        public Guid ID { get; set; }        
+        public Guid ID { get; set; }
 
         public string IngredientName { get; set; }
 
