@@ -1,0 +1,39 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model IPagedList<TarifDefterim.UI.Models.VM.MealVM>
+
+<!-- Isotope -->
+<div class="isotope">
+
+    @foreach (var item in Model)
+    {
+        <div class="four recipe-box columns">
+            <!-- Thumbnail -->
+            <div class="thumbnail-holder">
+                <a href="/Recipe/RecipeDetail/@item.Slug">
+                    <img src="@item.RandomImagePath" alt="" />
+                    <div class="hover-cover"></div>
+                    <div class="hover-icon">Tarifi</div>
+                </a>
+            </div>
+            <!-- Content -->
+            <div class="recipe-box-content">
+                <h3><a href="/Recipe/RecipeDetail/@item.Slug">@item.Name</a></h3>
+                <div class="recipe-meta"><i class="fa fa-clock-o"></i> Hazırlanış @item.PreparationTime @item.PreparationTimeUnitOf</div>
+                <div class="recipe-meta"><i class="fa fa-clock-o"></i> Pişirme @item.CookingTime @item.CookingTimeUnitOf</div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="clearfix"></div>
+<!-- Pagination -->
+<div class="pagination-container masonry">
+    <nav class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }), PagedListRenderOptions.PageNumbersOnly)
+
+    </nav>
+</div>
+    

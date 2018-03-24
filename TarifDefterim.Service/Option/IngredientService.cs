@@ -10,8 +10,6 @@ namespace TarifDefterim.Service.Option
 {
     public class IngredientService:MainService<Ingredient>
     {
-
-
-
+        
     }
 }

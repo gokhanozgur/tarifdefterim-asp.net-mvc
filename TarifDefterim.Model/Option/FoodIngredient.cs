@@ -19,7 +19,7 @@ namespace TarifDefterim.Model.Option
 
         public virtual Meal Meal { get; set; }
 
-        public virtual List<Ingredient> Ingredients { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
 
     }
 }

@@ -42,5 +42,17 @@ namespace TarifDefterim.Service.Option
             return GetFirstOrDefault(x => x.Email == email);
         }
 
+        public int GetTotalAppUser()
+        {
+            return GetActive().Count;
+        }
+
+        public AppUser TakeMealCreatetorFullName(string username)
+        {
+
+            return GetFirstOrDefault(x => x.UserName == username);
+
+        }
+
     }
 }

@@ -5,8 +5,8 @@
 }
 
 
-@*@model IEnumerable<TarifDefterim.UI.Areas.Admin.Models.DTO.MealDTO>*@
-@model List<TarifDefterim.Model.Option.Meal>
+@model  TarifDefterim.UI.Areas.Admin.Models.VM.MealListVM
+@*@model List<TarifDefterim.Model.Option.Meal>*@
 
 
 @section style{
@@ -71,6 +71,7 @@
                                 <th>Hazırlama Zamanı</th>
                                 <th>Pişirme Zamanı</th>
                                 <th>Kişi</th>
+                                <th>Ekleyen</th>
                                 <th>Durum</th>
                                 <th>Eklene Tarihi</th>
                                 <th>Güncelleme Tarihi</th>
@@ -85,6 +86,7 @@
                                 <th>Hazırlama Süre</th>
                                 <th>Pişirme Süre</th>
                                 <th>Kişi</th>
+                                <th>Ekleyen</th>
                                 <th>Durum</th>
                                 <th>Eklene Tarihi</th>
                                 <th>Güncelleme Tarihi</th>
@@ -92,7 +94,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Meals)
                             {
                                 <tr>
                                     <td>@item.ID</td>
@@ -101,6 +103,7 @@
                                     <td>@item.PreparationTime @item.PreparationTimeUnitOf</td>
                                     <td>@item.CookingTime @item.CookingTimeUnitOf</td>
                                     <td>@item.Person</td>
+                                    <td>@item.AppUser.UserName</td>
                                     <td>
                                         @if (item.Status == TarifDefterim.Core.Enum.Status.Active)
                                         {
@@ -119,8 +122,9 @@
                                     <td>@item.ModifiedDate</td>
                                     <td>
                                         <a href="#modal2" onclick="CheckIngredient('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify">Malzeme Düzenle</a>
-                                        <a href="#modal" onclick="CheckRecipe('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify">Tarif Düzenle</a>
-                                        <a href="/Admin/Meal/UpdateMeal/@item.ID" class="btn btn-sm green btn-outline">Güncelle</a>
+                                        <a href="#modal" onclick="CheckRecipe('@item.ID')" data-toggle="modal" class="btn btn-sm blue btn-outline" id="Modify" >Tarif Düzenle</a>
+                                        <a href="/Admin/Meal/MealImages/@item.ID" class="btn btn-sm blue btn-outline">Resim Düzenle</a>
+                                        <a href="/Admin/Meal/UpdateMeal/@item.ID" class="btn btn-sm green btn-outline">Güncelle</a>                                        
                                     </td>
                                 </tr>
                             }
@@ -202,21 +206,21 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p>
-                                <span id="message" style="display:none"></span>
+                                <span id="ingredientMessage" style="display:none"></span>
                             </p>
                             <h4>Mevcut Malzemeler</h4>
                             <hr />
                             <p>
-                                <span id="existListMessage">Henüz malzemeler ile ilgili bir veri bulunmamaktadır.</span>
+                                <span id="exisIngredienttListMessage">Henüz malzemeler ile ilgili bir veri bulunmamaktadır.</span>
                             </p>
-                            <div id="dynamicRecipeContent"></div>
+                            <div id="dynamicIngredientContent"></div>
                             <hr />
                             <h4>Malzeme Eklem İşlemleri</h4>
                             <p id="row">
-                                Malzeme:
-                                @* Buraya malzemeleri çekmeliyim. *@
+                                Malzemeler:
+                                @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}),"Seçiniz", new { @class = "form-control" })
                                 Adet:
-                                <select class="form-control" id="QUa" name="Alignment" required>
+                                <select class="form-control" id="Quantity" name="Quantity" required>
                                     <option value="-1">Seçiniz</option>
                                     @for (int i = 1; i <= 50; i++)
                                     {
@@ -224,29 +228,27 @@
                                     }
                                 </select>
                                 Birim:
-
-                                @Html.DropDownList("UnitOf",EnumHelper.GetSelectList(typeof(TarifDefterim.Core.Enum.UnitOf)), "Seçiniz", new { @class = "form-control" })
-                               
+                                @Html.EnumDropDownListFor(x => x.UnitOf, new { @class = "form-control" })
 
                                 <br />
-                                <button type="button" class="btn yellow btn-outline" onclick="PutList()">Listeye Ekle</button>
+                                <button type="button" class="btn yellow btn-outline" onclick="PutIngredientList()">Listeye Ekle</button>
                             </p>
                             <p>
-                                <span id="processMessage" style="display:none"></span>
+                                <span id="ingredientProcessMessage" style="display:none"></span>
                             </p>
                             <h4>Eklenmesini İstediğiniz Malzemeler</h4>
                             <hr />
                             <p>
-                                <span id="tempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
+                                <span id="ingredientTempListMessage">Henüz eklenecek bir veri belirtmediniz.</span>
                             </p>
-                            <div id="tempList"></div>
+                            <div id="ingredientTempList"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" data-dismiss="modal" class="btn blue btn-outline">Kapat</a>
-                <button type="button" onclick="SendIngredient()" class="btn green btn-outline" id="tarifKaydet" disabled>Yeni Malzemeleri Kaydet</button>
+                <button type="button" onclick="SendIngredient()" class="btn green btn-outline" id="malzemeKaydet" disabled>Yeni Malzemeleri Kaydet</button>
             </div>
         </div>
     </div>
@@ -274,7 +276,200 @@
 
         var recipeDescriptionArray = [];
         var recipeStepArray = [];
-        
+
+        var ingredientArray = [];
+        var ingredientQuantityArray = [];
+        var ingredientUnitOfArray = [];
+
+        var ingredientNameArray = [];
+        var ingredientUnitOfNameArray = [];
+
+        function CheckIngredient(val) {
+            mealID = val;
+            console.log(mealID);
+
+            //var test = $("#modal2").find("#dynamicRecipeContent");
+
+            //$(test).html("Deneme");
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                url: "@Url.Action("GetIngredients", "FoodIngredient")/" + mealID,
+                success: function (data) {
+
+                    var count = Object.keys(data).length;
+
+                    console.log(count);
+
+                    var message = $("#modal2").find("#message");
+
+                    if (count == 0 || data == "Empty") {
+                        console.log("Birşeyler bulamadım.");
+                        $("#dynamicIngredientContent").html("");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $("#exisIngredienttListMessage").removeAttr("style");
+                        $(message).removeClass("note note-info");
+                        $(message).text("Seçilen yemeğin bir malzemesi bulunmamaktadır. Malzeme ekleyiniz.");
+                        $(message).addClass("note note-danger");
+                    }
+                    else {
+                        console.log("Birşeyler buldum.");
+                        $("#dynamicIngredientContent").html("");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).text("Yemeğin malzemesi mevcut. Dilerseniz malzemeleri düzenleyebilirsiniz.");
+                        $(message).addClass("note note-info");
+                        $("#exisIngredienttListMessage").css("display","none");
+
+
+                        $.each(data, function (key, item) {
+
+                            $("#dynamicIngredientContent").append(`<h5 id="existIngredientRow${item.ID}"><a href='javascript:;'  onclick='$.ExistItem.DeleteIngredient("${item.ID}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-success'> ${item.Quantity} ${item.UnitOf} ${item.IngredientName} </span></h5>`);
+
+                        });
+
+
+                    }
+                }
+
+            })
+
+        }
+
+        function getModalElement(modalName, elementName) {
+
+            var result = $(modalName).find(elementName);
+            return result;
+
+        }
+
+
+        function PutIngredientList() {
+
+            SetProcessMessage("#processMessage", null, null);
+            var IngredientID = $("#IngredientID").val();
+            var Quantity = $("#Quantity").val();
+            var UnitOf = $("#UnitOf").val();
+            var UnitOfName = $("#UnitOf option:selected").text();
+            var IngredientName = $("#IngredientID option:selected").text();
+
+            console.log(IngredientID);
+
+
+            if (IngredientID == "" || Quantity == "-1" || UnitOf == "0") {
+
+                SetProcessMessage("#ingredientProcessMessage", "note note-danger", "Malzemelere eklenecek bilgileri eksiksiz belirtiniz.");
+
+            }
+            else {
+
+                if (jQuery.inArray(IngredientID, ingredientArray) == -1) {
+
+                    ingredientArray.push(IngredientID);
+                    ingredientQuantityArray.push(Quantity);
+                    ingredientUnitOfArray.push(UnitOf);
+                    ingredientUnitOfNameArray.push(UnitOfName);
+                    ingredientNameArray.push(IngredientName);
+
+                    $("#ingredientTempList").html("");
+
+                    for (var i = 0; i < ingredientArray.length; i++) {
+
+                        $("#ingredientTempList").append(`<h5 id='ingredientTempRow${ingredientArray[i]}'><a href='javascript:;' id='ingredientTempRow${ingredientArray[i]}' onclick='RemoveItemFromIngredientTempList("ingredientTempRow${ingredientArray[i]}")' class='btn btn-xs red'><i class='fa fa-times'></i> </a> <span class='label label-warning'>${ingredientQuantityArray[i]} ${ingredientUnitOfNameArray[i]} ${ingredientNameArray[i]}</span></h5>`);
+                    }
+
+                    $("#malzemeKaydet").prop("disabled", false);
+                    $("#ingredientTempListMessage").css("display", "none");
+
+                }
+                else {
+                    SetProcessMessage("#ingredientProcessMessage", "note note-danger", "Bu malzeme eklenecekler listesinde zaten mevcut.");
+                }
+
+            }
+
+        }
+
+        function RemoveItemFromIngredientTempList(param) {
+
+            console.log("Girdi --------- " + param);
+
+            var element = getModalElement("#modal2", "#"+param);
+
+
+            var tempRow = $(element).attr('id');
+
+            console.log(tempRow);
+
+            tempRowNumber = tempRow.replace("ingredientTempRow", "");
+
+            console.log("replace edilmiş :" + tempRowNumber);
+
+            var index = ingredientArray.indexOf(tempRowNumber);
+
+            ingredientArray.splice(index, 1);
+
+            ingredientNameArray.splice(index, 1);
+
+            ingredientQuantityArray.splice(index, 1);
+
+            ingredientUnitOfArray.splice(index, 1);
+
+            ingredientUnitOfNameArray.splice(index, 1);
+
+            console.log(ingredientArray);
+
+            var count = ingredientArray.length;
+
+            if (count <= 0) {
+                $("#ingredientTempListMessage").removeAttr("style");
+                $("#malzemeKaydet").prop("disabled", true);
+            }
+
+            $(element).remove();
+        }
+
+
+        function SendIngredient() {
+
+            console.log(mealID + " bilgisini malzemelere göndermeye çalışıyorum.");
+            console.log(ingredientArray);
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { ID: mealID, Quantity: ingredientQuantityArray, UnitOf: ingredientUnitOfArray, IngredientID: ingredientArray },
+                url: "@Url.Action("AddIngredientFromList", "FoodIngredient")",
+                success: function (data) {
+                    if (data.length > 0) {
+                        var message = $("#modal2").find("#ingredientProcessMessage");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).append(data);
+                        $(message).addClass("note note-success");
+                        ingredientArray.length = 0;
+                        console.log(ingredientArray);
+                    }
+                    else {
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-success");
+                        $(message).append(data);
+                        $(message).addClass("note note-danger");
+                    }
+                }
+
+            })
+
+        }
+
+
 
         function CheckRecipe(val) {
 
@@ -337,8 +532,13 @@
             SetProcessMessage("#processMessage", null, null);
             var description = $("#Description").val();
             var alignment = $("#Alignment").val();
-            
-            if (description != "" && alignment != "-1") {
+
+            if (description == "" || alignment == "-1") {
+
+                SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
+
+            }
+            else {
 
                 if (jQuery.inArray(alignment, recipeStepArray) == -1) {
 
@@ -359,13 +559,7 @@
                 }
                 else {
                     SetProcessMessage("#processMessage", "note note-danger", "Bu adım tarife eklenecekler listesinde zaten mevcut.");
-                }                
-
-            }
-            else {
-
-                SetProcessMessage("#processMessage", "note note-danger", "Tarife eklenecek bilgileri eksiksiz belirtiniz.");
-
+                }
             }
 
         }
@@ -402,6 +596,7 @@
 
             tempRowNumber = tempRow.replace("tempRow", "");
 
+
             var index = recipeStepArray.indexOf(tempRowNumber);
 
             recipeDescriptionArray.splice(index, 1);
@@ -433,19 +628,20 @@
                 data: { ID: mealID, Description: recipeDescriptionArray, Alignment: recipeStepArray},
                 url: "@Url.Action("AddRecipeFromList", "Recipe")",
                 success: function (data) {
-                    if (data) {
-                        $("#message").html("");
-                        $("#message").removeAttr("style");
-                        $("#message").removeClass("note note-danger");
-                        $("#message").append("İşlem başarılı.");
-                        $("#message").addClass("note note-success");
+                    if (data.length > 0) {
+                        var message = $("#modal").find("#processMessage");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-danger");
+                        $(message).append(data);
+                        $(message).addClass("note note-success");
                     }
                     else {
-                        $("#message").html("");
-                        $("#message").removeAttr("style");
-                        $("#message").removeClass("note note-success");
-                        $("#message").append("İşlem başarısız.");
-                        $("#message").addClass("note note-danger");
+                        $(message).html("");
+                        $(message).removeAttr("style");
+                        $(message).removeClass("note note-success");
+                        $(message).append(data);
+                        $(message).addClass("note note-danger");
                     }
                 }
 
@@ -454,6 +650,8 @@
         }
 
         function RemoveFromExistRecipeList(param) { $(param).fadeOut(2000); (param).remove(); }
+
+        function RemoveFromExistIngredientList(param) { $(param).fadeOut(2000); (param).remove(); }
 
         $.ExistItem = {
 
@@ -464,7 +662,7 @@
                 if (result == false) {
                     return false;
                 }
-                else {                    
+                else {
                     console.log(selectedID);
 
                     $.ajax({
@@ -478,6 +676,33 @@
                             }
                             else {
                                 SetProcessMessage("#message","note note-danger", "Tariften adım çıkarma işlemi başarısız.")
+                            }
+                        }
+                    })
+                }
+
+            },
+            DeleteIngredient: function RemoveItemFromDatabase(selectedID) {
+
+                result = confirm("Bu işlemi yapmak istediğinizden emin misiniz?");
+
+                if (result == false) {
+                    return false;
+                }
+                else {
+                    console.log(selectedID);
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "Json",
+                        url: "@Url.Action("RemoveIngredient", "FoodIngredient")/" + selectedID,
+                        success: function (data) {
+                            if (data != false) {
+                                SetProcessMessage("#ingredientMessage", "note note-success", "Bir malzeme çıkardınız.")
+                                RemoveFromExistIngredientList("#existIngredientRow" + selectedID);
+                            }
+                            else {
+                                SetProcessMessage("#ingredientMessage","note note-danger", "Malzeme çıkarma işlemi başarısız.")
                             }
                         }
                     })

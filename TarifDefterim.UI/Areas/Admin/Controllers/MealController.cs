@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Areas.Admin.Models.VM;
 using TarifDefterim.UI.Authorize;
 using TarifDefterim.Utility;
 
@@ -19,7 +20,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         AppUserService _appUserService;
         CategoryService _categoryService;
         AssignedCategoryService _assignedCategory;
-
+        IngredientService _ingredientService;
+        MealImageService _mealImageService;
 
         public MealController()
         {
@@ -27,6 +29,8 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             _appUserService = new AppUserService();
             _categoryService = new CategoryService();
             _assignedCategory = new AssignedCategoryService();
+            _ingredientService = new IngredientService();
+            _mealImageService = new MealImageService();
         }
         
         public ActionResult AddMeal()
@@ -52,8 +56,11 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             }
             else
             {
-                Random rnd = new Random();
-                data.Slug = slug + "-" + rnd.Next(1, 200);
+                //Random rnd = new Random();
+                //data.Slug = slug + "-" + rnd.Next(1, 200);
+
+                data.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+
             }
             
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
@@ -97,8 +104,9 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult MealList()
         {
-
-            List<Meal> model = _mealService.GetAll();
+            MealListVM model = new MealListVM();
+            model.Meals = _mealService.GetActive();
+            model.Ingredients = _ingredientService.GetAll();
 
             return View(model);
 
@@ -133,7 +141,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateMeal(MealDTO data)
+        public ActionResult UpdateMeal(MealDTO data, string[] Categories)
         {
 
             Meal update = _mealService.GetByID(data.ID);
@@ -148,7 +156,20 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             update.Tricks = data.Tricks;
             update.VideoURL = data.VideoURL;
 
-            update.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+            //update.Slug = GenerateSlug.GenerateSlugURL(data.Name);
+
+            string slug = GenerateSlug.GenerateSlugURL(data.Name);
+
+            bool IsExistSlugName = _mealService.IsExistSlugName(data.ID, slug);
+
+            if (!IsExistSlugName)
+            {
+                update.Slug = slug;
+            }
+            else
+            {
+                update.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+            }
 
 
             AppUser user = _appUserService.FindByUserName(User.Identity.Name);
@@ -164,6 +185,22 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             {
 
                 _mealService.Update(update);
+
+                foreach (var categoryItem in Categories)
+                {
+                    Guid cGuid = new Guid(categoryItem);
+
+                    Category CatchedCategory = _categoryService.GetByID(cGuid);
+
+                    if (!_assignedCategory.IsAssignedCategoryAlreadyExist(data.ID, CatchedCategory.ID))
+                    {
+                        _assignedCategory.AddAssignedCategoryFromMealController(data.ID, CatchedCategory.ID);
+
+                    }
+
+                }
+
+
                 TempData["Basarili"] = "Temel yemek bilgisi sistede başarıyla güncellendi.";
                 return RedirectToAction("MealList", "Meal");
 
@@ -174,6 +211,75 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
                 return RedirectToAction("UpdateMeal", "Meal", new { id = data.ID});
             }
 
+
+        }
+
+        public ActionResult MealImages(string id)
+        {
+            // Bu kısımlar test edilecek.
+
+            Guid mealID = new Guid(id);
+
+            MealImageVM model = new MealImageVM();
+
+            model.MealID = mealID;
+
+            model.MealImages = _mealImageService.GetByExp(x => x.MealID == mealID);
+
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult MealImages(MealImage data , HttpPostedFileBase Image)
+        {
+
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalMealImagePath, Image, 2);
+
+            data.ImageURL = UploadedImagePaths[0];
+
+            if (data.ImageURL == "0" || data.ImageURL == "1" || data.ImageURL == "2")
+            {
+                data.ImageURL = ImageUploader.DefaultMealImagePath;
+                data.XSmallMealImage = ImageUploader.DefaultXSmallMealImagePath;
+                data.CruptedMealImage = ImageUploader.DefaultCruptedMealImagePath;
+            }
+            else
+            {
+                data.XSmallMealImage = UploadedImagePaths[1];
+                data.CruptedMealImage = UploadedImagePaths[2];
+            }
+
+            try
+            {
+                _mealImageService.Add(data);
+                TempData["Basarili"] = "Resim sisteme eklendi.";
+                return RedirectToAction("MealImages", "Meal", new { id = data.MealID });
+            }
+            catch (Exception ex)
+            {
+                TempData["Hata"] = "Resim sisteme eklenemedi.";
+                return RedirectToAction("MealImages", "Meal", new { id = data.MealID });
+            }
+            
+        }
+
+
+        public JsonResult RemoveMealImage(string id)
+        {
+            Guid mealID = new Guid(id);
+
+            try
+            {
+                _mealImageService.Remove(mealID);
+                return Json(true,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
 
         }
 

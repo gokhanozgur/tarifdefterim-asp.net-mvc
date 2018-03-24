@@ -12,15 +12,6 @@
         <div class="eight columns">
             <h2>Yemek Tarifleri</h2>
         </div>
-        <div class="eight columns">
-            <nav id="breadcrumbs">
-                <ul>
-                    <li>You are here:</li>
-                    <li><a href="#">Home</a></li>
-                    <li>Typography</li>
-                </ul>
-            </nav>
-        </div>
     </div>
     <!-- Container / End -->
 </section>
@@ -31,74 +22,12 @@
     <!-- Masonry -->
     <div class="twelve columns">
         <!-- Headline -->
-        <h3 class="headline">Latest Recipes</h3>
+        <h3 class="headline">Son Eklenen Tarifleri</h3>
         <span class="line rb margin-bottom-35"></span>
         <div class="clearfix"></div>
-        <!-- Isotope -->
-        <div class="isotope">
-            <!-- Recipe #1 -->
-            <div class="four recipe-box columns">
-                <!-- Thumbnail -->
-                <div class="thumbnail-holder">
-                    <a href="/Recipe/RecipeDetail">
-                        <img src="~/Content/images/version_1/recipeThumb-01.jpg" alt="" />
-                        <div class="hover-cover"></div>
-                        <div class="hover-icon">View Recipe</div>
-                    </a>
-                </div>
-                <!-- Content -->
-                <div class="recipe-box-content">
-                    <h3><a href="/Recipe/RecipeDetail">Mexican Grilled <br> Corn Recipe</a></h3>
-
-                    <div class="rating five-stars">
-                        <div class="star-rating"></div>
-                        <div class="star-bg"></div>
-                    </div>
-                    <div class="recipe-meta"><i class="fa fa-clock-o"></i> 30 min</div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <!-- Recipe #2 -->
-            <div class="four recipe-box columns">
-                <!-- Thumbnail -->
-                <div class="thumbnail-holder">
-                    <a href="recipe-page-2.html">
-                        <img src="~/Content/images/version_1/recipeThumb-02.jpg" alt="" />
-                        <div class="hover-cover"></div>
-                        <div class="hover-icon">View Recipe</div>
-                    </a>
-                </div>
-
-                <!-- Content -->
-                <div class="recipe-box-content">
-                    <h3><a href="recipe-page-2.html">Choclate Cake With Green Tea Cream</a></h3>
-
-                    <div class="rating four-stars">
-                        <div class="star-rating"></div>
-                        <div class="star-bg"></div>
-                    </div>
-                    <div class="recipe-meta"><i class="fa fa-clock-o"></i> 1 hr 30 min</div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <!-- Pagination -->
-        <div class="pagination-container masonry">
-            <nav class="pagination">
-                <ul>
-                    <li><a href="#" class="current-page">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                </ul>
-            </nav>
-            <nav class="pagination-next-prev">
-                <ul>
-                    <li><a href="#" class="prev"></a></li>
-                    <li><a href="#" class="next"></a></li>
-                </ul>
-            </nav>
-        </div>
+        @{
+            Html.RenderAction("GetMealContent", "Recipe", new { area = "" });
+        }  
     </div>
 
     @Html.Partial("_version_1_Right_Column");

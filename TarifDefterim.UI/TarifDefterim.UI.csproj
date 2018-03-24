@@ -58,6 +58,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -112,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\basic.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap-datepicker3.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap-switch.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
@@ -120,6 +127,7 @@
     <Content Include="Areas\Admin\Content\css\darkblue.min.css" />
     <Content Include="Areas\Admin\Content\css\datatables.bootstrap.css" />
     <Content Include="Areas\Admin\Content\css\datatables.min.css" />
+    <Content Include="Areas\Admin\Content\css\dropzone.min.css" />
     <Content Include="Areas\Admin\Content\css\font-awesome.css" />
     <Content Include="Areas\Admin\Content\css\font-awesome.min.css" />
     <Content Include="Areas\Admin\Content\css\fonts\fontawesome-webfont.svg" />
@@ -138,6 +146,8 @@
     <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
     <Content Include="Areas\Admin\Content\images\login\logo.png" />
     <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
+    <Content Include="Areas\Admin\Content\js\dropzone.min.js" />
+    <Content Include="Areas\Admin\Content\js\form-dropzone.min.js" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_asc_disabled.png" />
     <Content Include="Areas\Admin\Content\plugins\datatables\images\sort_both.png" />
@@ -268,6 +278,7 @@
     <Content Include="Content\js\version_1\jquery.tooltips.min.js" />
     <Content Include="Content\js\version_1\responsive-nav.js" />
     <Content Include="Content\js\version_1\switcher.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -295,6 +306,7 @@
     <Content Include="Areas\Admin\Views\Ingredient\AddIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -307,6 +319,7 @@
     <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AssignedCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FoodIngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
@@ -314,12 +327,17 @@
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\FoodIngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\IngredientDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\KindDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\MealDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\RecipeDTO.cs" />
     <Compile Include="Areas\Admin\Models\VM\AppUserRoleAndStatus.cs" />
+    <Compile Include="Areas\Admin\Models\VM\DashboardVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\IngredientVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\LoginVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\MealImageVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\MealListVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\StatusVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\TimeVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\UnitOfVM.cs" />
@@ -328,10 +346,12 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\VM\MealVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +401,8 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Recipe\RecipeDetail.cshtml" />
     <Content Include="Views\Shared\_version_1_Slider.cshtml" />
+    <Content Include="Views\Shared\_version_1_MealList.cshtml" />
+    <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -391,10 +413,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
+    <Folder Include="Areas\Admin\Views\FoodIngredient\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">

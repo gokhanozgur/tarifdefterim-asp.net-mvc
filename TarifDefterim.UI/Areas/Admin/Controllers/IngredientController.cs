@@ -7,17 +7,19 @@ using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Areas.Admin.Models.VM;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
     public class IngredientController : Controller
     {
-        IngredientService _ıngredientService;
+        IngredientService _ingredientService;
         KindService _kindService;
         public IngredientController()
         {
-            _ıngredientService = new IngredientService();
+            _ingredientService = new IngredientService();
             _kindService = new KindService();
+
         }
 
         public ActionResult AddIngredient()
@@ -35,7 +37,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             
             try
             {
-                _ıngredientService.Add(data);
+                _ingredientService.Add(data);
                 TempData["Basarili"] = "Malzeme bilgisi sisteme eklendi.";
                 return RedirectToAction("IngredientList", "Ingredient");
             }
@@ -49,14 +51,19 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult IngredientList()
         {
-            List<Ingredient> model = _ıngredientService.GetAll();
-            
+
+            IngredientVM model = new IngredientVM();
+
+            model.Ingredients = _ingredientService.GetAll();
+
+            //List<Ingredient> model = _ingredientService.GetAll();
+
             return View(model);
         }
 
         public ActionResult UpdateIngredient(Guid id)
         {
-            Ingredient ingredient = _ıngredientService.GetByID(id);
+            Ingredient ingredient = _ingredientService.GetByID(id);
 
             IngredientDTO model = new IngredientDTO();
 
@@ -74,7 +81,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         public ActionResult UpdateIngredient(Ingredient data)
         {
 
-            Ingredient update = _ıngredientService.GetByID(data.ID);
+            Ingredient update = _ingredientService.GetByID(data.ID);
 
             update.IngredientName = data.IngredientName;
             update.Description = data.Description;
@@ -83,7 +90,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             try
             {
-                _ıngredientService.Update(update);
+                _ingredientService.Update(update);
                 TempData["Basarili"] = "Malzeme bilgisi güncellendi.";
                 return RedirectToAction("IngredientList", "Ingredient");
             }
@@ -94,6 +101,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             }
             
         }
+
 
     }
 }

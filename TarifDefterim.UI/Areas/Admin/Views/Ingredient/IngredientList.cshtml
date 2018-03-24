@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
 }
 
-@model List<TarifDefterim.Model.Option.Ingredient>
+@model TarifDefterim.UI.Areas.Admin.Models.VM.IngredientVM
 
 @section style{
 
@@ -85,7 +85,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Ingredients)
                         {
                             <tr>
                                 <td>@item.ID</td>

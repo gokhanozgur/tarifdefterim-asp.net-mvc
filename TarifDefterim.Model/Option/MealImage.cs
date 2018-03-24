@@ -10,6 +10,8 @@ namespace TarifDefterim.Model.Option
     public class MealImage:CoreEntity
     {
         public string ImageURL { get; set; }
+        public string XSmallMealImage { get; set; }
+        public string CruptedMealImage { get; set; }
 
         public Guid MealID { get; set; }
 

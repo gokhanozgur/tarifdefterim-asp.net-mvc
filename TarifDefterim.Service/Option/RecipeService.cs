@@ -50,5 +50,9 @@ namespace TarifDefterim.Service.Option
             }
         }
 
+        public int GetTotalRecipe()
+        {
+            return GetActive().Count();
+        }
     }
 }

@@ -13,12 +13,9 @@ namespace TarifDefterim.UI.Controllers
     {
 
         AppUserService _appUserService;
-        MealService _mealService;
-
         public HomeController()
         {
             _appUserService = new AppUserService();
-            _mealService = new MealService();
         }
 
         public ActionResult Login()
@@ -35,7 +32,11 @@ namespace TarifDefterim.UI.Controllers
                 FormsAuthentication.SetAuthCookie(user.UserName, true);
 
                 if (user.Role == Role.Admin || user.Role == Role.Cook) return Redirect("/Admin/Home/Index");
-                else if (user.Role == Role.Member) return View();
+                else if (user.Role == Role.Member)
+                {
+
+                    return View();
+                }
             }
             else if(User.Identity.IsAuthenticated)
             {
@@ -52,13 +53,6 @@ namespace TarifDefterim.UI.Controllers
         {
             FormsAuthentication.SignOut();
             return Redirect("/Home/Index");
-        }
-
-        //Bu metot PartialView'i yönlendirmek için kullanılıyor. ChildActionOnly bu action'ın sadece bu durumlarda çağırılabileceğini belirtir.Opsiyoneldir... 
-        [ChildActionOnly]
-        public ActionResult GetSliderContent()
-        {
-            return PartialView("_version_1_Slider", _mealService.GetSliderMeals());
         }
 
     }
