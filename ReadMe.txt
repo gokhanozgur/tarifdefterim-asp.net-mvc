@@ -24,3 +24,5 @@ Projede startup ayarýnda deðiþiklik yapýldýðý için console komutlarýnda aþaðýdak
 
 2- add-migration initial -StartUpProjectName "TarifDefterim.UI" -Verbose
 3- update-database -StartUpProjectName "TarifDefterim.UI"
+
+// Üye kullanýcýya yemek ekleme sayfasý yapmalýyým.
