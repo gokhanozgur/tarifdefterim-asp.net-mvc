@@ -257,41 +257,26 @@
             <div class="clearfix"></div>
             <br>
 
-            <!-- Add Comment
-            ================================================== -->
-            <h3 class="headline">Add Review</h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <!-- Add Comment
+                ================================================== -->
+                <h3 class="headline">Sende Yorum Ekle</h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
 
             <!-- Add Comment Form -->
-            <form id="add-review" class="add-comment">
-                <fieldset>
-                    <div>
-                        <label>Name:</label>
-                        <input type="text" value="" />
-                    </div>
-
-                    <div>
-                        <label>Email: <span>*</span></label>
-                        <input type="text" value="" />
-                    </div>
-                    <div>
-                        <label>Rating:</label>
-                        <span class="rate">
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                        </span>
-                    </div>
+                <form method="post" id="add-review" class="add-comment">
+                    <fieldset>
+                        <input type="hidden" name="Slug" value="@Model.Slug" id="Slug"/>
+                        <div>
+                            <label>Yorumla: <span>*</span></label>
+                            <textarea cols="40" rows="3" name="Comment" id="Comment"></textarea>
+                        </div>
+                    </fieldset>
+                    <a href="javascript:;" onclick="AddComment()" class="button medium color">Yorumla!</a>
                     <div class="clearfix"></div>
-                    <div>
-                        <label>Comment: <span>*</span></label>
-                        <textarea cols="40" rows="3"></textarea>
-                    </div>
-                </fieldset>
-                <a href="#" class="button medium color">Add Review</a>
-                <div class="clearfix"></div>
-            </form>
+                </form>
+            }
+
         </div>
     </div>
 
@@ -301,3 +286,38 @@
 
 </div>
 <!-- Container / End -->
+
+@section script{
+    
+    <script>
+
+        function AddComment() {
+
+            var slug = $("#Slug").val();
+            var comment = $("#Comment").val();
+
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { Slug = slug, UserComment= comment },
+                url: "@Url.Action("AddComment","Comment")";
+                success: function (data) {
+
+                    if (data == true) {
+                        alert("Başarılı.");
+                    }
+                    if (data == true) {
+                        alert("Bir hata meydana geldi.");
+                    }
+
+                }
+
+            });
+
+        }
+
+    </script>
+    
+}

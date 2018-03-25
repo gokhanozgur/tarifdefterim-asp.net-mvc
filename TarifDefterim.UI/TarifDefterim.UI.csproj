@@ -319,6 +319,7 @@
     <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AssignedCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodIngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
@@ -403,6 +404,7 @@
     <Content Include="Views\Shared\_version_1_Slider.cshtml" />
     <Content Include="Views\Shared\_version_1_MealList.cshtml" />
     <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
+    <Content Include="Views\Recipe\AddRecipe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -413,6 +415,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
+    <Folder Include="Areas\Admin\Views\Comment\" />
     <Folder Include="Areas\Admin\Views\FoodIngredient\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />

@@ -19,7 +19,7 @@ namespace TarifDefterim.Model.Option
 
         public virtual List<RecipeLike> RecipeLikes { get; set; }
 
-        public virtual List<Comment> Comments { get; set; }
+        //public virtual List<Comment> Comments { get; set; }
 
 
     }

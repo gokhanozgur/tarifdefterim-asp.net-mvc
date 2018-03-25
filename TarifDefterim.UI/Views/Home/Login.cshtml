@@ -227,6 +227,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             $("#messageText").removeAttr("style");
                             $("#message").html("");
                             $("#message").append("Girilen bilgilere ait kullanıcı bulunmamaktadır.");
+                            $("#User").val("");
+                            $("#Password").val("");
+                            $("#User").focus();
 
                             $(document).ajaxComplete(function () {
                                 $("#wait").css("display", "none");

@@ -45,7 +45,7 @@ namespace TarifDefterim.DAL.Migrations
                     {
                         ID = c.Guid(nullable: false, identity: true),
                         UserComment = c.String(nullable: false, maxLength: 250),
-                        RecipeID = c.Guid(nullable: false),
+                        MealID = c.Guid(nullable: false),
                         AppUserID = c.Guid(nullable: false),
                         MasterID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
@@ -61,35 +61,10 @@ namespace TarifDefterim.DAL.Migrations
                         Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Recipes", t => t.RecipeID)
-                .ForeignKey("dbo.AppUsers", t => t.AppUserID)
-                .Index(t => t.RecipeID)
-                .Index(t => t.AppUserID);
-            
-            CreateTable(
-                "dbo.Recipes",
-                c => new
-                    {
-                        ID = c.Guid(nullable: false, identity: true),
-                        Description = c.String(maxLength: 250),
-                        Alignment = c.Short(nullable: false),
-                        MealID = c.Guid(nullable: false),
-                        MasterID = c.Guid(nullable: false),
-                        CreatedDate = c.DateTime(),
-                        CreatedComputerName = c.String(maxLength: 50),
-                        CreatedUserName = c.String(maxLength: 50),
-                        CreatedBy = c.Guid(),
-                        CreatedIP = c.String(),
-                        ModifiedDate = c.DateTime(),
-                        ModifiedComputerName = c.String(maxLength: 50),
-                        ModifiedIP = c.String(),
-                        ModifiedUserName = c.String(maxLength: 50),
-                        ModifiedBy = c.Guid(),
-                        Status = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Meals", t => t.MealID)
-                .Index(t => t.MealID);
+                .ForeignKey("dbo.AppUsers", t => t.AppUserID)
+                .Index(t => t.MealID)
+                .Index(t => t.AppUserID);
             
             CreateTable(
                 "dbo.Meals",
@@ -406,6 +381,31 @@ namespace TarifDefterim.DAL.Migrations
                 .Index(t => t.MealID);
             
             CreateTable(
+                "dbo.Recipes",
+                c => new
+                    {
+                        ID = c.Guid(nullable: false, identity: true),
+                        Description = c.String(maxLength: 250),
+                        Alignment = c.Short(nullable: false),
+                        MealID = c.Guid(nullable: false),
+                        MasterID = c.Guid(nullable: false),
+                        CreatedDate = c.DateTime(),
+                        CreatedComputerName = c.String(maxLength: 50),
+                        CreatedUserName = c.String(maxLength: 50),
+                        CreatedBy = c.Guid(),
+                        CreatedIP = c.String(),
+                        ModifiedDate = c.DateTime(),
+                        ModifiedComputerName = c.String(maxLength: 50),
+                        ModifiedIP = c.String(),
+                        ModifiedUserName = c.String(maxLength: 50),
+                        ModifiedBy = c.Guid(),
+                        Status = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Meals", t => t.MealID)
+                .Index(t => t.MealID);
+            
+            CreateTable(
                 "dbo.RecipeLikes",
                 c => new
                     {
@@ -455,9 +455,9 @@ namespace TarifDefterim.DAL.Migrations
             DropForeignKey("dbo.DinnerTables", "AppUserID", "dbo.AppUsers");
             DropForeignKey("dbo.DinnerTableLikes", "AppUserID", "dbo.AppUsers");
             DropForeignKey("dbo.Comments", "AppUserID", "dbo.AppUsers");
-            DropForeignKey("dbo.Comments", "RecipeID", "dbo.Recipes");
-            DropForeignKey("dbo.RecipeLikes", "RecipeID", "dbo.Recipes");
+            DropForeignKey("dbo.Comments", "MealID", "dbo.Meals");
             DropForeignKey("dbo.Recipes", "MealID", "dbo.Meals");
+            DropForeignKey("dbo.RecipeLikes", "RecipeID", "dbo.Recipes");
             DropForeignKey("dbo.MealImages", "MealID", "dbo.Meals");
             DropForeignKey("dbo.FoodIngredients", "MealID", "dbo.Meals");
             DropForeignKey("dbo.FoodIngredients", "IngredientID", "dbo.Ingredients");
@@ -475,6 +475,7 @@ namespace TarifDefterim.DAL.Migrations
             DropIndex("dbo.DinnerTableMeal", new[] { "DinnerTable_ID" });
             DropIndex("dbo.RecipeLikes", new[] { "RecipeID" });
             DropIndex("dbo.RecipeLikes", new[] { "AppUserID" });
+            DropIndex("dbo.Recipes", new[] { "MealID" });
             DropIndex("dbo.MealImages", new[] { "MealID" });
             DropIndex("dbo.Ingredients", new[] { "KindID" });
             DropIndex("dbo.FoodIngredients", new[] { "IngredientID" });
@@ -491,11 +492,11 @@ namespace TarifDefterim.DAL.Migrations
             DropIndex("dbo.AssignedCategories", new[] { "CategoryID" });
             DropIndex("dbo.AssignedCategories", new[] { "MealID" });
             DropIndex("dbo.Meals", new[] { "AppUserID" });
-            DropIndex("dbo.Recipes", new[] { "MealID" });
             DropIndex("dbo.Comments", new[] { "AppUserID" });
-            DropIndex("dbo.Comments", new[] { "RecipeID" });
+            DropIndex("dbo.Comments", new[] { "MealID" });
             DropTable("dbo.DinnerTableMeal");
             DropTable("dbo.RecipeLikes");
+            DropTable("dbo.Recipes");
             DropTable("dbo.MealImages");
             DropTable("dbo.Kinds");
             DropTable("dbo.Ingredients");
@@ -508,7 +509,6 @@ namespace TarifDefterim.DAL.Migrations
             DropTable("dbo.Categories");
             DropTable("dbo.AssignedCategories");
             DropTable("dbo.Meals");
-            DropTable("dbo.Recipes");
             DropTable("dbo.Comments");
             DropTable("dbo.AppUsers");
         }
