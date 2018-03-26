@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 
@@ -51,9 +52,14 @@ namespace TarifDefterim.UI.Controllers
 
             Meal meal = _mealService.GetMealDetail(slug);
 
-            Comment comment = _commentService.GetLastOrDefault(x => x.MealID == meal.ID);
+            Comment comment = _commentService.GetLastOrDefault(x => x.MealID == meal.ID && x.Status == Status.Active);
 
-            return Json(comment,JsonRequestBehavior.AllowGet);
+            return Json(new {
+                CruptedUserImage = comment.AppUser.CruptedUserImage,
+                UserName = comment.AppUser.UserName,
+                CreatedDate = comment.CreatedDate.ToString(),
+                UserComment = comment.UserComment
+            },JsonRequestBehavior.AllowGet);
         }
     }
 }

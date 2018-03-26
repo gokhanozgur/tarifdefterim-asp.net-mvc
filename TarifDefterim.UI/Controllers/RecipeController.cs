@@ -14,9 +14,7 @@ namespace TarifDefterim.UI.Controllers
 {
     public class RecipeController : Controller
     {
-
-        // Test
-
+        
         MealService _mealService;
         MealImageService _mealImage;
         FoodIngredientService _foodIngredient;
@@ -121,6 +119,8 @@ namespace TarifDefterim.UI.Controllers
 
                 modelList.Add(model);
             }
+
+            // ToPagetList kullanmak için NuGet Package Manager`dan PagetList referanslara eklenir.
 
             return PartialView("_version_1_RecipePage_MealList", modelList.ToPagedList(page, 6));
 

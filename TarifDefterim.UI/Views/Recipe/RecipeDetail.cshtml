@@ -188,7 +188,7 @@
 
             <!-- Comments
             ================================================== -->
-            <h3 class="headline">Reviews <span class="comments-amount">(4)</span></h3><span class="line"></span><div class="clearfix"></div>
+            <h3 class="headline">Yorumlar <span class="comments-amount"></span></h3><span class="line"></span><div class="clearfix"></div>
 
             <!-- Reviews -->
             <section class="comments" id="reviews">
@@ -279,8 +279,11 @@
                 data: { Slug: slug },
                 url: "@Url.Action("GetAddedComment","Comment")",
                 success: function (data) {
+                    console.log("içerde")
                     console.log(data);
-                    $("#reviews").append("<ul><li><div class='avatar'><img src='" + data.AppUser.CruptedUserImage + "' alt='' /></div><div class='comment-content'><div class='arrow-comment'></div><div class='comment-by'><strong>" + data.AppUser.UserName + "</strong><span class='date'>" + data.CreatedDate + "</span></div><p>" + data.UserComment + "</p></div></li></ul>").fadeIn(2000);
+                    
+                    $("#reviews").append("<ul><li><div class='avatar'><img src='" + data.CruptedUserImage + "' alt='' /></div><div class='comment-content'><div class='arrow-comment'></div><div class='comment-by'><strong>" + data.UserName + "</strong><span class='date'>" + data.CreatedDate + "</span></div><p>" + data.UserComment + "</p></div></li></ul>");
+                    $("#reviews").fadeIn(2000);
                 }
 
             });
