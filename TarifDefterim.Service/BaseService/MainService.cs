@@ -80,6 +80,13 @@ namespace TarifDefterim.Service.BaseService
             return dbContext.Set<T>().Where(exp).FirstOrDefault();
         }
 
+        public T GetLastOrDefault(Expression<Func<T,bool>> exp)
+        {
+            // LastOrDefault yapısını kullanmak için arada ToList() yapılması gerekir.
+
+            return dbContext.Set<T>().Where(exp).ToList().LastOrDefault();
+        }
+
         public T GetByID(Guid id)
         {
             return dbContext.Set<T>().Find(id);

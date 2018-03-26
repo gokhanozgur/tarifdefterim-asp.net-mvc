@@ -10,7 +10,6 @@ namespace TarifDefterim.Service.Option
 {
     public class CommentService:MainService<Comment>
     {
-
         
 
     }

@@ -21,6 +21,7 @@ namespace TarifDefterim.UI.Controllers
         MealImageService _mealImage;
         FoodIngredientService _foodIngredient;
         RecipeService _recipeService;
+        CommentService _commentService;
 
         public RecipeController()
         {
@@ -28,6 +29,7 @@ namespace TarifDefterim.UI.Controllers
             _mealImage = new MealImageService();
             _foodIngredient = new FoodIngredientService();
             _recipeService = new RecipeService();
+            _commentService = new CommentService();
         }
         
         public ActionResult Index()
@@ -69,13 +71,15 @@ namespace TarifDefterim.UI.Controllers
                 model.RandomImagePath = ImageUploader.DefaultMealImagePath;
             }
 
-            List<FoodIngredient> foodIngredientList = _foodIngredient.GetByExp(x => x.MealID == meal.ID && x.Status == Status.Active);            
+            //List<FoodIngredient> foodIngredientList = _foodIngredient.GetByExp(x => x.MealID == meal.ID && x.Status == Status.Active);            
 
-            model.FoodIngredients = foodIngredientList;
+            model.FoodIngredients = _foodIngredient.GetByExp(x => x.MealID == meal.ID && x.Status == Status.Active);
 
             List<Recipe> recipeList = _recipeService.GetByExp(x => x.MealID == meal.ID && x.Status == Status.Active).OrderBy(x => x.Alignment).ToList();
 
             model.Recipes = recipeList;
+
+            model.Comments = _commentService.GetByExp(x => x.MealID == meal.ID && x.Status == Status.Active);
 
             return View(model);
         }

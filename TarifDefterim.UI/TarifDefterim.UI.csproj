@@ -319,7 +319,6 @@
     <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AssignedCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CommentController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodIngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
@@ -345,6 +344,7 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
@@ -420,6 +420,7 @@
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>

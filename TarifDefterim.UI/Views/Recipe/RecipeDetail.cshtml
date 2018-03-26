@@ -192,67 +192,21 @@
 
             <!-- Reviews -->
             <section class="comments" id="reviews">
-                <ul>
-                    <li>
-                        <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-                        <div class="comment-content">
-                            <div class="arrow-comment"></div>
-                            <div class="comment-by">
-                                <strong>John Doe</strong><span class="date">7th, October 2014</span>
-                                <a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-                            </div>
-                            <p>Maecenas dignissim euismod nunc, in commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget just.</p>
-                            <div class="rating five-stars">
-                                <div class="star-rating"></div>
-                                <div class="star-bg"></div>
-                            </div>
-                        </div>
-                        <!-- Second Level -->
-                        <ul>
-                            <li>
-                                <div class="avatar"><img src="~/Content/images/version_1/author-photo.png" alt="" /></div>
-                                <div class="comment-content">
-                                    <div class="arrow-comment"></div>
-                                    <div class="comment-by">
-                                        <strong>Sandra Fortin</strong><span class="date">7th, October 2014</span>
-                                        <a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-                                    </div>
-                                    <p>Donec porttitor tortor sit amet tortor egestas, id suscipit magna cursus. Nam facilisis, mi vel elementum porttitor, sapien magna posuere lorem, sed consectetur.</p>
+                @foreach (var item in Model.Comments)
+                {
+                    <ul>
+                        <li>
+                            <div class="avatar"><img src="@item.AppUser.CruptedUserImage" alt="" /> </div>
+                            <div class="comment-content">
+                                <div class="arrow-comment"></div>
+                                <div class="comment-by">
+                                    <strong>@item.AppUser.UserName</strong><span class="date">@item.CreatedDate</span>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-                        <div class="comment-content">
-                            <div class="arrow-comment"></div>
-                            <div class="comment-by">
-                                <strong>Kathy Brown</strong><span class="date">12th, October 2014</span>
-                                <a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
+                                <p>@item.UserComment</p>
                             </div>
-                            <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-                            <div class="rating ive-stars">
-                                <div class="star-rating"></div>
-                                <div class="star-bg"></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-                        <div class="comment-content">
-                            <div class="arrow-comment"></div>
-                            <div class="comment-by">
-                                <strong>John Doe</strong><span class="date">15th, October 2014</span>
-                                <a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-                            </div>
-                            <p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-                            <div class="rating four-stars">
-                                <div class="star-rating"></div>
-                                <div class="star-bg"></div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                }
             </section>
             <div class="clearfix"></div>
             <br>
@@ -272,7 +226,7 @@
                             <textarea cols="40" rows="3" name="Comment" id="Comment"></textarea>
                         </div>
                     </fieldset>
-                    <a href="javascript:;" onclick="AddComment()" class="button medium color">Yorumla!</a>
+                    <a href="javascript:;" onclick="AddComment()" class="button medium color">Yorumla!</a><span id="message" style="display:none;"></span>
                     <div class="clearfix"></div>
                 </form>
             }
@@ -301,21 +255,35 @@
 
                 type: "POST",
                 dataType: "Json",
-                data: { Slug = slug, UserComment= comment },
-                url: "@Url.Action("AddComment","Comment")";
+                data: { Slug: slug, UserComment: comment },
+                url: "@Url.Action("AddComment","Comment")",
                 success: function (data) {
+                    $("#message").removeAttr("style");
+                    $("#message").append(data).fadeIn(2000);
+                    $("#message").fadeOut(5000);
+                    $("#Comment").val("");
 
-                    if (data == true) {
-                        alert("Başarılı.");
-                    }
-                    if (data == true) {
-                        alert("Bir hata meydana geldi.");
-                    }
+                    GetAddedComment(slug);
 
                 }
 
             });
 
+        }
+
+        function GetAddedComment(slug) {
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { Slug: slug },
+                url: "@Url.Action("GetAddedComment","Comment")",
+                success: function (data) {
+                    console.log(data);
+                    $("#reviews").append("<ul><li><div class='avatar'><img src='" + data.AppUser.CruptedUserImage + "' alt='' /></div><div class='comment-content'><div class='arrow-comment'></div><div class='comment-by'><strong>" + data.AppUser.UserName + "</strong><span class='date'>" + data.CreatedDate + "</span></div><p>" + data.UserComment + "</p></div></li></ul>").fadeIn(2000);
+                }
+
+            });
         }
 
     </script>

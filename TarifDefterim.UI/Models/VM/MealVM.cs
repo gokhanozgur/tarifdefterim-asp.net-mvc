@@ -44,5 +44,7 @@ namespace TarifDefterim.UI.Models.VM
 
         public List<Recipe> Recipes { get; set; }
 
+        public List<Comment> Comments { get; set; }
+
     }
 }
