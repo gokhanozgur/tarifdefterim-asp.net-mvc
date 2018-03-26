@@ -25,22 +25,24 @@
 
     <!-- Popular Recipes -->
     <div class="widget">
-        <h4 class="headline">Popular Recipes</h4>
+        <h4 class="headline">Popüler Tarifler</h4>
         <span class="line margin-bottom-30"></span>
         <div class="clearfix"></div>
 
-        <a href="recipe-page-1.html" class="featured-recipe">
-            <img src="~/Content/images/version_1/featuredRecipe-01.jpg" alt="">
-            <div class="featured-recipe-content">
-                <h4>Choclate Cake With Green Tea Cream</h4>
 
-                <div class="rating five-stars">
-                    <div class="star-rating"></div>
-                    <div class="star-bg"></div>
+        @model IEnumerable<TarifDefterim.UI.Models.VM.MealVM>
+
+        @foreach (var item in Model)
+        {
+            <a href="/Recipe/RecipeDetail/@item.Slug" class="featured-recipe">
+                <img src="@item.RandomImagePath" alt="">
+                <div class="featured-recipe-content">
+                    <h4>@item.Name</h4>
                 </div>
-            </div>
-            <div class="post-icon"></div>
-        </a>
+                <div class="post-icon"></div>
+            </a>
+        }
+
         <div class="clearfix"></div>
     </div>
 

@@ -236,8 +236,9 @@
 
     <!-- Sidebar
     ================================================== -->
-    @Html.Partial("_version_1_Right_Column");
-
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
 </div>
 <!-- Container / End -->
 

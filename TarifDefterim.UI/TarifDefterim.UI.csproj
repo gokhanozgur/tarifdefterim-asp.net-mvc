@@ -405,6 +405,7 @@
     <Content Include="Views\Shared\_version_1_MealList.cshtml" />
     <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
     <Content Include="Views\Recipe\AddRecipe.cshtml" />
+    <Content Include="Views\Shared\_version_1_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

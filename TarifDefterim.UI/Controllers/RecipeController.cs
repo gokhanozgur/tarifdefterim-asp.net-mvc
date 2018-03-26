@@ -129,7 +129,7 @@ namespace TarifDefterim.UI.Controllers
         public ActionResult AddRecipe()
         {
             return View();
-        }
+        }            
 
     }
 }

@@ -22,15 +22,16 @@
     <!-- Masonry -->
     <div class="twelve columns">
         <!-- Headline -->
-        <h3 class="headline">Son Eklenen Tarifleri</h3>
+        <h3 class="headline">Son Eklenen Tarifler</h3>
         <span class="line rb margin-bottom-35"></span>
         <div class="clearfix"></div>
         @{
             Html.RenderAction("GetMealContent", "Recipe", new { area = "" });
         }  
     </div>
-
-    @Html.Partial("_version_1_Right_Column");
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
 
 </div>
 <!-- Container / End -->

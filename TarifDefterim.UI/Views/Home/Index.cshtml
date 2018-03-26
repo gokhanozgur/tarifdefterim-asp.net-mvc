@@ -20,8 +20,9 @@
             Html.RenderAction("GetMealContent", "Meal", new { area = ""});
         }        
     </div>   
-    
-    @Html.Partial("_version_1_Right_Column");
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
 
 </div>
 <!-- Container / End -->
