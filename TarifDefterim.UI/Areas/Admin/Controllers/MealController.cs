@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TarifDefterim.Core.Enum;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
@@ -105,7 +106,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         public ActionResult MealList()
         {
             MealListVM model = new MealListVM();
-            model.Meals = _mealService.GetActive();
+            model.Meals = _mealService.GetAll();
             model.Ingredients = _ingredientService.GetAll();
 
             return View(model);
@@ -224,7 +225,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
             model.MealID = mealID;
 
-            model.MealImages = _mealImageService.GetByExp(x => x.MealID == mealID);
+            model.MealImages = _mealImageService.GetByExp(x => x.MealID == mealID && x.Status == Status.Active);
 
             return View(model);
         }

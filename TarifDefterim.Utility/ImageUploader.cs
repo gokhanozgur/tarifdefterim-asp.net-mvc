@@ -82,10 +82,20 @@ namespace TarifDefterim.Utility
                         
 
                         ImageResizer.ImageBuilder.Current.Build(OriginalImagePath + fileName, XSmallImagePath + fileName, ImageSetting);
+                        
 
-                        ImageSetting.Width = 150;
-                        ImageSetting.Height = 150;
-                        ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        if (saveAsParam == 1)
+                        {
+                            ImageSetting.Width = 150;
+                            ImageSetting.Height = 150;
+                            ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        }
+                        else
+                        {
+                            ImageSetting.Width = 213;
+                            ImageSetting.Height = 133;
+                            ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        }
 
                         ImageResizer.ImageBuilder.Current.Build(OriginalImagePath + fileName, CruptedImagePath + fileName, ImageSetting);
 

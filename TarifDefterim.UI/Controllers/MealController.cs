@@ -148,7 +148,7 @@ namespace TarifDefterim.UI.Controllers
                 }
                 else
                 {
-                    model.RandomImagePath = mImage.ImageURL;
+                    model.RandomImagePath = mImage.CruptedMealImage;
                 }
 
                 mealList.Add(model);
