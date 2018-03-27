@@ -15,6 +15,14 @@ namespace TarifDefterim.UI
 
             // Dikkat: Default rota her zaman aşağıda kalmalıdır.
 
+            // Hata kontrolü rotası
+
+            routes.MapRoute(
+              name: "Error",
+              url: "Error/{code}",
+              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
+            );
+
 
             // Slug kontrolü rotası
 
@@ -42,13 +50,7 @@ namespace TarifDefterim.UI
               defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
             );            
 
-            // Hata kontrolü rotası
-
-            routes.MapRoute(
-              name: "Error",
-              url: "Error/{code}",
-              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
-            );       
+                 
 
 
         }

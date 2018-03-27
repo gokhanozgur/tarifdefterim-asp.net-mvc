@@ -142,9 +142,6 @@
     <Content Include="Areas\Admin\Content\images\login\bg1.jpg" />
     <Content Include="Areas\Admin\Content\images\login\bg2.jpg" />
     <Content Include="Areas\Admin\Content\images\login\bg3.jpg" />
-    <Content Include="Areas\Admin\Content\images\login\bg4.jpg" />
-    <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
-    <Content Include="Areas\Admin\Content\images\login\logo.png" />
     <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
     <Content Include="Areas\Admin\Content\js\dropzone.min.js" />
     <Content Include="Areas\Admin\Content\js\form-dropzone.min.js" />
@@ -191,7 +188,6 @@
     <Content Include="Content\css\version_1\responsive.css" />
     <Content Include="Content\css\version_1\style.css" />
     <Content Include="Content\images\bekleyiniz.gif" />
-    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\version_1\author-photo.png" />
     <Content Include="Content\images\version_1\bg\bedge_grunge.png" />
     <Content Include="Content\images\version_1\bg\brushed_alu.png" />
@@ -307,6 +303,7 @@
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

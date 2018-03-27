@@ -39,7 +39,7 @@ namespace TarifDefterim.DAL.Migrations
             );
 
             context.AppUsers.AddOrUpdate(
-                
+
                 x => x.ID, new Model.Option.AppUser()
                 {
                     Name = "GÖKHAN",
