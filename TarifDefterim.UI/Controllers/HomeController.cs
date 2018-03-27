@@ -34,7 +34,6 @@ namespace TarifDefterim.UI.Controllers
                 if (user.Role == Role.Admin || user.Role == Role.Cook) return Redirect("/Admin/Home/Index");
                 else if (user.Role == Role.Member)
                 {
-
                     return View();
                 }
             }
