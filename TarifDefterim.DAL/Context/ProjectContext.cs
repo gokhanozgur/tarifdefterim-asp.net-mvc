@@ -20,7 +20,10 @@ namespace TarifDefterim.DAL.Context
 
         public ProjectContext()
         {
-            Database.Connection.ConnectionString = "Server=.;Database=TarifDefterim;uid=sa;pwd=123";
+            Database.Connection.ConnectionString = "Server=.;Database=TarifDefterim;uid=tarifdefterim;pwd=TarifDefterim_18";
+
+            //Database.Connection.ConnectionString = "Server=.;Database=TarifDefterim;uid=sa;pwd=123";
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
