@@ -355,7 +355,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff" />
