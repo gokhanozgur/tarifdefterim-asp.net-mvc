@@ -10,6 +10,11 @@ namespace TarifDefterim.UI.Models.VM
     public class MealVM
     {
 
+        public MealVM()
+        {
+            Categories = new List<Category>();
+        }
+
         public Guid ID { get; set; }
 
         public string Name { get; set; }
@@ -45,6 +50,8 @@ namespace TarifDefterim.UI.Models.VM
         public List<Recipe> Recipes { get; set; }
 
         public List<Comment> Comments { get; set; }
+
+        public List<Category> Categories { get; set; }
 
     }
 }
