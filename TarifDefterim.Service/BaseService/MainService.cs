@@ -15,6 +15,8 @@ namespace TarifDefterim.Service.BaseService
     public class MainService<T> : ICoreService<T> where T : CoreEntity
     {
 
+        // Singleton pattern
+
         private static ProjectContext _dbContext;
 
         public ProjectContext dbContext
@@ -58,6 +60,16 @@ namespace TarifDefterim.Service.BaseService
             return dbContext.Set<T>().Where(x => x.Status == Status.Active || x.Status == Status.Updated).ToList();
         }
 
+        public List<T> GetJustUpdated()
+        {
+            return dbContext.Set<T>().Where(x => x.Status == Status.Updated).ToList();
+        }
+
+        public List<T> GetJustDeleted()
+        {
+            return dbContext.Set<T>().Where(x => x.Status == Status.Deleted).ToList();
+        }
+
         public List<T> GetAll()
         {
             return dbContext.Set<T>().ToList();
@@ -66,6 +78,13 @@ namespace TarifDefterim.Service.BaseService
         public T GetFirstOrDefault(Expression<Func<T, bool>> exp)
         {
             return dbContext.Set<T>().Where(exp).FirstOrDefault();
+        }
+
+        public T GetLastOrDefault(Expression<Func<T,bool>> exp)
+        {
+            // LastOrDefault yapısını kullanmak için arada ToList() yapılması gerekir.
+
+            return dbContext.Set<T>().Where(exp).ToList().LastOrDefault();
         }
 
         public T GetByID(Guid id)

@@ -11,9 +11,8 @@ using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
-    [Authorize]
-    [UserAuthorize(Role.Admin)]
 
+    [UserAuthorize(Role.Admin)]
     public class AppUserController : Controller
     {
         AppUserService _appUserService;
@@ -35,7 +34,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             data.Name = data.Name.ToUpper().Trim();
             data.LastName = data.LastName.ToUpper().Trim();
             data.UserName = data.UserName.ToLower().Trim();
-            data.Email = data.Email.Trim();                   
+            data.Email = data.Email;                   
 
             List<string> UploadedImagePaths = new List<string>();
 

@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_version_1_Layout.cshtml";
+}
+
+@{
+    Html.RenderAction("GetSliderContent","Meal",new { area = ""});
+}
+
+<!-- Content
+================================================== -->
+<div class="container">
+    <!-- Masonry -->
+    <div class="twelve columns">
+        <!-- Headline -->
+        <h3 class="headline">Son Tarifler</h3>
+        <span class="line rb margin-bottom-35"></span>
+        <div class="clearfix"></div>
+        @{
+            Html.RenderAction("GetMealContent", "Meal", new { area = ""});
+        }        
+    </div>   
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
+
+</div>
+<!-- Container / End -->

@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "RecipeDetail";
+    Layout = "~/Views/Shared/_version_1_Layout.cshtml";
+}
+
+@model TarifDefterim.UI.Models.VM.MealVM
+
+<!-- Recipe Background -->
+<div class="recipeBackground">
+    <img src="@Model.RandomImagePath" alt="@Model.Name" />
+</div>
+
+<!-- Content
+================================================== -->
+<div class="container" itemscope itemtype="http://schema.org/Recipe">
+    <!-- Recipe -->
+    <div class="twelve columns">
+        <div class="alignment">
+            <!-- Header -->
+            <section class="recipe-header">
+                <div class="title-alignment">
+                    <h2>@Model.Name</h2>
+                </div>
+            </section>
+
+            <!-- Slider -->
+            <div class="recipeSlider rsDefault">
+
+                @if (Model.MealImages == null)
+                {
+                    <img itemprop="image" class="rsImg" src="@Model.RandomImagePath" alt="@Model.Name" />
+                }
+                else{ 
+                    foreach (var item in Model.MealImages)
+                    {
+                        <img itemprop="image" class="rsImg" src="@item.ImageURL" alt="@Model.Name" />
+                    }
+                }
+                
+                
+            </div>
+
+            <!-- Details -->
+            <section class="recipe-details" itemprop="nutrition">
+                <ul>
+                    <li>Kaç Kişilik? <strong itemprop="recipeYield">@Model.Person kişilik</strong></li>
+                    <li>Hazırlanış: <strong itemprop="prepTime">@Model.PreparationTime @Model.PreparationTimeUnitOf</strong></li>
+                    <li>Pişirme: <strong itemprop="cookTime">@Model.CookingTime @Model.CookingTimeUnitOf</strong></li>
+                </ul>
+                <div class="clearfix"></div>
+            </section>
+
+            <!-- Text -->
+            <p itemprop="description">@Model.Description</p>
+
+            <!-- Ingredients -->
+            <h3>Malzemeler</h3>
+            <ul class="ingredients">               
+                
+                 @if (Model.FoodIngredients != null)
+                 {
+                     int counter = 1;
+
+                     foreach (var item in Model.FoodIngredients)
+                     {
+                        string elementID = "check-" + counter.ToString();
+                        <li>
+                            <input id="@elementID" type="checkbox" name="check" value="@elementID">
+                            <label itemprop="ingredients" for="@elementID">@item.Quantity @item.UnitOf @item.Ingredient.IngredientName</label>
+                        </li>
+                        counter++;
+                     }
+                 }
+
+            </ul>
+
+            <!-- Directions -->
+            <h3>Tarif Adımları</h3>
+            <ol class="directions" itemprop="recipeInstructions">
+
+                @if (Model.Recipes != null)
+                {
+
+                    foreach (var item in Model.Recipes)
+                    {
+                        <li>@item.Description</li>
+                    }
+                }
+
+            </ol>
+
+            <div class="clearfix"></div>
+
+            <div class="margin-top-15"></div>
+
+            <!-- Comments
+            ================================================== -->
+            <h3 class="headline">Yorumlar <span class="comments-amount"></span></h3><span class="line"></span><div class="clearfix"></div>
+
+            <!-- Reviews -->
+            <section class="comments" id="reviews">
+                @foreach (var item in Model.Comments)
+                {
+                    <ul>
+                        <li>
+                            <div class="avatar"><img src="@item.AppUser.CruptedUserImage" alt="" /> </div>
+                            <div class="comment-content">
+                                <div class="arrow-comment"></div>
+                                <div class="comment-by">
+                                    <strong>@item.AppUser.UserName</strong><span class="date">@item.CreatedDate</span>
+                                </div>
+                                <p>@item.UserComment</p>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            </section>
+            <div class="clearfix"></div>
+            <br>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <!-- Add Comment
+                ================================================== -->
+                <h3 class="headline">Sende Yorum Ekle</h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
+
+            <!-- Add Comment Form -->
+                <form method="post" id="add-review" class="add-comment">
+                    <fieldset>
+                        <input type="hidden" name="Slug" value="@Model.Slug" id="Slug"/>
+                        <div>
+                            <label>Yorumla: <span>*</span></label>
+                            <textarea cols="40" rows="3" name="Comment" id="Comment"></textarea>
+                        </div>
+                    </fieldset>
+                    <a href="javascript:;" onclick="AddComment()" class="button medium color">Yorumla!</a><span id="message" style="display:none;"></span>
+                    <div class="clearfix"></div>
+                </form>
+            }
+
+        </div>
+    </div>
+
+    <!-- Sidebar
+    ================================================== -->
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
+</div>
+<!-- Container / End -->
+
+@section script{
+    
+    <script>
+
+        function AddComment() {
+
+            var slug = $("#Slug").val();
+            var comment = $("#Comment").val();
+
+
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { Slug: slug, UserComment: comment },
+                url: "@Url.Action("AddComment","Comment")",
+                success: function (data) {
+                    $("#message").removeAttr("style");
+                    $("#message").append(data).fadeIn(2000);
+                    $("#message").fadeOut(5000);
+                    $("#Comment").val("");
+
+                    GetAddedComment(slug);
+
+                }
+
+            });
+
+        }
+
+        function GetAddedComment(slug) {
+            $.ajax({
+
+                type: "POST",
+                dataType: "Json",
+                data: { Slug: slug },
+                url: "@Url.Action("GetAddedComment","Comment")",
+                success: function (data) {
+                    console.log("içerde")
+                    console.log(data);
+                    
+                    $("#reviews").append("<ul><li><div class='avatar'><img src='" + data.CruptedUserImage + "' alt='' /></div><div class='comment-content'><div class='arrow-comment'></div><div class='comment-by'><strong>" + data.UserName + "</strong><span class='date'>" + data.CreatedDate + "</span></div><p>" + data.UserComment + "</p></div></li></ul>");
+                    $("#reviews").fadeIn(2000);
+                }
+
+            });
+        }
+
+    </script>
+    
+}

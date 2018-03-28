@@ -36,10 +36,10 @@ namespace TarifDefterim.Map.Option
 
             // Comment table relation
 
-            HasMany(x => x.Comments)
-                .WithRequired(x => x.Recipe)
-                .HasForeignKey(x => x.RecipeID)
-                .WillCascadeOnDelete(false);
+            //HasMany(x => x.Comments)
+            //    .WithRequired(x => x.Recipe)
+            //    .HasForeignKey(x => x.RecipeID)
+            //    .WillCascadeOnDelete(false);
         }
 
     }

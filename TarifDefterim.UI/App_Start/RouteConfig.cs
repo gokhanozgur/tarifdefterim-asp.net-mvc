@@ -13,21 +13,7 @@ namespace TarifDefterim.UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
-            // Username kontrolü rotası
-
-            routes.MapRoute(
-              name: "CheckUserName",
-              url: "{controller}/{action}/{id}",
-              defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
-            );
-
-
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            // Dikkat: Default rota her zaman aşağıda kalmalıdır.
 
             // Hata kontrolü rotası
 
@@ -35,7 +21,36 @@ namespace TarifDefterim.UI
               name: "Error",
               url: "Error/{code}",
               defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
-            );           
+            );
+
+
+            // Slug kontrolü rotası
+
+            routes.MapRoute(
+              name: "RecipeDetail",
+              url: "Recipe/RecipeDetail/{slug}",
+              defaults: new { controller = "Recipe", action = "RecipeDetail", slug = "" },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
+            );
+
+            // Default
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );            
+
+            // Username kontrolü rotası
+
+            routes.MapRoute(
+              name: "CheckUserName",
+              url: "{controller}/{action}/{id}",
+              defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
+            );            
+
+                 
 
 
         }

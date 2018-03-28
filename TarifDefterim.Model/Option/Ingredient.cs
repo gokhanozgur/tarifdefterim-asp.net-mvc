@@ -14,6 +14,7 @@ namespace TarifDefterim.Model.Option
         public string Description { get; set; }
 
         public Guid KindID { get; set; }
+
         public virtual List<FoodIngredient> FoodIngredients { get; set; }
 
         /*public virtual List<Benefit> Benefits { get; set; }*/

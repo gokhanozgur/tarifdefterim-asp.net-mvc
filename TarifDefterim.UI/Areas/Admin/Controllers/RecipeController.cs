@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
+using TarifDefterim.UI.Authorize;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
+    [UserAuthorize(Role.Admin,Role.Cook)]
     public class RecipeController : Controller
     {
 
@@ -44,7 +46,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
                 if (CheckMealRecipe(mealID))
                 {
-                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID); // Dikkat                  
+                    List<Recipe> recipeList = _recipeService.GetRecipeInfo(mealID).OrderBy(x => x.Alignment).ToList(); // Dikkat                  
 
 
                     List<RecipeDTO> recipeDtoList = recipeList.Select(x => new RecipeDTO() {
@@ -70,12 +72,12 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         }
 
 
-        public bool AddRecipeFromList(string id, string[] Description, string[] Alignment)
+        public JsonResult AddRecipeFromList(string id, string[] Description, string[] Alignment)
         {
 
             if (id == null || Description.Count() <= 0 || Alignment.Count() <= 0)
             {
-                return false;
+                return Json("İşlem başarısız.", JsonRequestBehavior.AllowGet);
             }
 
             Guid mealID = new Guid(id);
@@ -99,11 +101,12 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             try
             {
                 _recipeService.AddRecipeFromList(recipeList);
-                return true;
+                //_recipeService.Add(recipeList);
+                return Json("İşlem başarılı.", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return false;
+                return Json("İşlem başarısız.", JsonRequestBehavior.AllowGet);
             }            
 
         }

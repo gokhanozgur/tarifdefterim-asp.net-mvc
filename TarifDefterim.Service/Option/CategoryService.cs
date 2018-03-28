@@ -18,5 +18,10 @@ namespace TarifDefterim.Service.Option
 
         }
 
+        public int GetTotalCategory()
+        {
+            return GetActive().Count();
+        }
+
     }
 }

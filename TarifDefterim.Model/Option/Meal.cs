@@ -30,6 +30,8 @@ namespace TarifDefterim.Model.Option
 
         public string VideoURL { get; set; }
 
+        public Status IsSliderActive { get; set; }
+
         public Guid AppUserID { get; set; }
 
         public virtual AppUser AppUser { get; set; }
@@ -47,6 +49,8 @@ namespace TarifDefterim.Model.Option
         public virtual List<FavoriteMeal> FavoriteMeals { get; set; }
 
         public virtual List<FavoriteDinnerTable> FavoriteDinnerTables { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
 
     }
 }

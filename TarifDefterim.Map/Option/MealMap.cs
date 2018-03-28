@@ -25,6 +25,7 @@ namespace TarifDefterim.Map.Option
             Property(x => x.CookingTimeUnitOf).IsOptional();
             Property(x => x.Person).IsOptional();
             Property(x => x.Tricks).HasMaxLength(120).IsOptional();
+            Property(x => x.IsSliderActive).IsOptional();
             Property(x => x.VideoURL).IsOptional();
 
             // Table Relations
@@ -60,7 +61,7 @@ namespace TarifDefterim.Map.Option
             HasMany(x => x.FoodIngredients)
                 .WithRequired(x => x.Meal)
                 //.HasForeignKey(x => x.MealID)
-                .HasForeignKey(x => x.IngredientID)
+                .HasForeignKey(x => x.MealID)
                 .WillCascadeOnDelete(false);
 
             // Recipe table relation
@@ -80,6 +81,13 @@ namespace TarifDefterim.Map.Option
             // FavoriteDinnerTable table relation
 
             HasMany(x => x.FavoriteDinnerTables)
+                .WithRequired(x => x.Meal)
+                .HasForeignKey(x => x.MealID)
+                .WillCascadeOnDelete(false);
+
+            // Comment table relation
+
+            HasMany(x => x.Comments)
                 .WithRequired(x => x.Meal)
                 .HasForeignKey(x => x.MealID)
                 .WillCascadeOnDelete(false);

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="tr">
+ <!--<![endif]-->
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8" />
+    <title>tarifdefterim | CMS</title>
+    <meta content="yeme,içme,tarif" name="description" />
+    <meta content="Gökhan ÖZGÜR" name="author" />
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS
+    ================================================== -->
+    <link href="~/Content/css/version_1/style.css" rel="stylesheet" />
+    <link href="~/Content/css/version_1/colors/green.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Wrapper -->    
+    <div id="wrapper">
+
+        <!-- Header
+        ================================================== -->
+        <header id="header">
+            <!-- Container -->
+            <div class="container">
+                <!-- Logo / Mobile Menu -->
+                <div class="three columns">
+                    <div id="logo">
+                        <h1><a href="/">tarifdefterim</a></h1>
+                    </div>
+                </div>
+
+                <!-- Navigation
+                ================================================== -->
+                <div class="thirteen columns navigation">
+                    <nav id="navigation" class="menu nav-collapse">
+                        <ul>
+                            <li><a href="/" id="current">Anasayfa</a></li>
+                            <li><a href="/About/">Hakkında</a></li>
+                            <li>
+                                <a href="/Recipe/">Tarifler</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                <ul>
+                                    <li><a href="/Recipe/AddRecipe">Tarif Ekle</a></li>
+                                </ul>
+                                }
+                            </li>                           
+                            <li><a href="/Contact">İletişim</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="/AppUser/Profile">@User.Identity.Name</a>
+                                    <ul>
+                                        <li><a href="/AppUser/Profile">Profilim</a></li>
+                                        <li><a href="/Home/Logout">Çıkış</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Home/Login">Üye Girişi</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Container / End -->
+        </header>
+
+        @RenderBody()
+
+        <div class="margin-top-5"></div>        
+
+    </div>
+    <!-- Wrapper / End -->
+    <!-- Footer
+    ================================================== -->
+    @{
+        Html.RenderAction("GetRandomMeal", "Meal", new { area = "" });
+    }
+    <!-- Footer / End -->
+    <!-- Footer Bottom / Start -->
+    <div id="footer-bottom">
+        <!-- Container -->
+        <div class="container">
+            <div class="eight columns">© Copyright 2017 - @DateTime.Now.Year <a href="http://www.gokhanozgur.com">Gökhan ÖZGÜR</a>. Tüm hakları saklıdır.</div>
+        </div>
+        <!-- Container / End -->
+    </div>
+    <!-- Footer Bottom / End -->
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="~/Content/js/version_1/jquery-1.11.0.min.js"></script>
+    <script src="~/Content/js/version_1/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.superfish.js"></script>
+    <script src="~/Content/js/version_1/jquery.royalslider.min.js"></script>
+    <script src="~/Content/js/version_1/responsive-nav.js"></script>
+    <script src="~/Content/js/version_1/hoverIntent.js"></script>
+    <script src="~/Content/js/version_1/isotope.pkgd.min.js"></script>
+    <script src="~/Content/js/version_1/chosen.jquery.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.tooltips.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/version_1/jquery.pricefilter.js"></script>
+    <script src="~/Content/js/version_1/custom.js"></script>
+
+    @RenderSection("script",false);
+
+</body>
+</html>

@@ -15,7 +15,12 @@ namespace TarifDefterim.Service.Option
         public AppUser CheckCredentials(string user, string password)
         {
             return GetFirstOrDefault(x => (x.UserName == user || x.Email == user) && (x.Password == password && x.Status != Status.Deleted));
-        }      
+        }
+
+        public bool CheckCredentialsFromWebSerice(string user, string password)
+        {
+            return Any(x => (x.UserName == user || x.Email == user) && (x.Password == password && x.Status != Status.Deleted));
+        }
 
         public bool IsUserAlreadyTaken(string user)
         {
@@ -27,9 +32,26 @@ namespace TarifDefterim.Service.Option
             return GetFirstOrDefault(x => x.UserName == userName);
         }
 
+        public AppUser FindByUserNameOrEmail(string user)
+        {
+            return GetFirstOrDefault(x => (x.UserName == user || x.Email == user) && x.Status != Status.Deleted);
+        }
+
         public AppUser FindByEmail(string email)
         {
             return GetFirstOrDefault(x => x.Email == email);
+        }
+
+        public int GetTotalAppUser()
+        {
+            return GetActive().Count;
+        }
+
+        public AppUser TakeMealCreatetorFullName(string username)
+        {
+
+            return GetFirstOrDefault(x => x.UserName == username);
+
         }
 
     }

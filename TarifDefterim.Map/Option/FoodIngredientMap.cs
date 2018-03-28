@@ -16,8 +16,8 @@ namespace TarifDefterim.Map.Option
             // Table property settings
 
             ToTable("dbo.FoodIngredients");
-            Property(x => x.Quantity);
-            Property(x => x.UnitOf);
+            Property(x => x.Quantity).IsRequired();
+            Property(x => x.UnitOf).IsRequired();
 
             // Table Relations
 
@@ -25,7 +25,7 @@ namespace TarifDefterim.Map.Option
 
             HasRequired(x => x.Meal)
                 .WithMany(x => x.FoodIngredients)
-                .HasForeignKey(x => x.IngredientID)
+                .HasForeignKey(x => x.MealID)
                 .WillCascadeOnDelete(false);
 
             // Ingredient table relation

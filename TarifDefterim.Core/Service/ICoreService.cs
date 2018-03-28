@@ -18,7 +18,11 @@ namespace TarifDefterim.Core.Service
         void RemoveAll(Expression<Func<T,bool>> exp);
         T GetByID(Guid id);
         T GetFirstOrDefault(Expression<Func<T,bool>> exp);
+        T GetLastOrDefault(Expression<Func<T, bool>> exp);
+
         List<T> GetActive();
+        List<T> GetJustUpdated();
+        List<T> GetJustDeleted();
         List<T> GetByExp(Expression<Func<T,bool>> exp);
         List<T> GetAll();
         bool Any(Expression<Func<T,bool>> exp);

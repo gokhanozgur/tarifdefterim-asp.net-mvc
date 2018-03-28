@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_version_1_Layout.cshtml";
+}
+
+<!-- Titlebar
+================================================== -->
+<section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+        <div class="eight columns">
+            <h2>Yemek Tarifleri</h2>
+        </div>
+    </div>
+    <!-- Container / End -->
+</section>
+
+<!-- Content
+================================================== -->
+<div class="container">
+    <!-- Masonry -->
+    <div class="twelve columns">
+        <!-- Headline -->
+        <h3 class="headline">Son Eklenen Tarifler</h3>
+        <span class="line rb margin-bottom-35"></span>
+        <div class="clearfix"></div>
+        @{
+            Html.RenderAction("GetMealContent", "Recipe", new { area = "" });
+        }  
+    </div>
+    @{
+        Html.RenderAction("GetPopularMeal", "Meal", new { area = "" });
+    }
+
+</div>
+<!-- Container / End -->

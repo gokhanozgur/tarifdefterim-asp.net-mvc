@@ -10,6 +10,8 @@ namespace TarifDefterim.Utility
 {
     public class ImageUploader
     {
+        /* Kullanıcı varsayılan resim yolları */
+
         public static string DefaultProfileImagePath = "/Content/Uploads/User_Images/Original_Images/user_default_image.png";
 
         public static string DefaultXSmallProfileImage = "/Content/Uploads/User_Images/XSmall_Images/user_default_image.png";
@@ -18,7 +20,13 @@ namespace TarifDefterim.Utility
 
         public static string OriginalProfileImagePath = "~/Content/Uploads/User_Images/Original_Images/";
 
-        public static string DefaultMealImagePath = "/Content/Uploads/Meal_Images/Original_Images/default_image.png";
+        /* Yemek varsayılan resim yolları */
+
+        public static string DefaultMealImagePath = "/Content/Uploads/Meal_Images/Original_Images/default_meal_image.jpg";
+
+        public static string DefaultXSmallMealImagePath = "/Content/Uploads/Meal_Images/XSmall_Images/Original_Images/default_meal_image.jpg";
+
+        public static string DefaultCruptedMealImagePath = "/Content/Uploads/Meal_Images/Crupted_Images/Original_Images/default_meal_image.jpg";
 
         public static string OriginalMealImagePath = "~/Content/Uploads/Meal_Images/Original_Images/";
         
@@ -74,10 +82,20 @@ namespace TarifDefterim.Utility
                         
 
                         ImageResizer.ImageBuilder.Current.Build(OriginalImagePath + fileName, XSmallImagePath + fileName, ImageSetting);
+                        
 
-                        ImageSetting.Width = 150;
-                        ImageSetting.Height = 150;
-                        ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        if (saveAsParam == 1)
+                        {
+                            ImageSetting.Width = 150;
+                            ImageSetting.Height = 150;
+                            ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        }
+                        else
+                        {
+                            ImageSetting.Width = 213;
+                            ImageSetting.Height = 133;
+                            ImageSetting.Mode = ImageResizer.FitMode.Crop;
+                        }
 
                         ImageResizer.ImageBuilder.Current.Build(OriginalImagePath + fileName, CruptedImagePath + fileName, ImageSetting);
 
