@@ -31,7 +31,7 @@ namespace TarifDefterim.AuthService.Controllers
 
             if (model.User == null || model.Password == null)
             {
-                url = "http://localhost:57210/Home/login";
+                url = "http://tarifdefterim.tysonsolution.com/Home/login";
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new { Success = true, RedirectUrl = url });
             }
             if (_appUserService.CheckCredentialsFromWebSerice(model.User, model.Password))
@@ -41,23 +41,23 @@ namespace TarifDefterim.AuthService.Controllers
 
                 if (u.Role == Role.Admin || u.Role == Role.Cook || u.Role == Role.Member)
                 {
-                    url = "http://localhost:57210/Home/Index/" + u.ID;
+                    url = "http://tarifdefterim.tysonsolution.com/Home/Index/" + u.ID;
                     return Request.CreateResponse(HttpStatusCode.OK, new { Success = true, RedirectUrl = url });
                 }
                 else
                 {
-                    url = "http://localhost:57210/Home/Index";
+                    url = "http://tarifdefterim.tysonsolution.com/Home/Index";
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, new { Success = true, RedirectUrl = url });
                 }
             }
-            url = "http://localhost:57210/Home/login";
+            url = "http://tarifdefterim.tysonsolution.com/Home/login";
             return Request.CreateResponse(HttpStatusCode.BadRequest, new { Success = true, RedirectUrl = url });
         }
 
         [HttpGet]
         public HttpResponseMessage Logout()
         {
-            var newUrl = "http://localhost:57210/Home/logout";
+            var newUrl = "http://tarifdefterim.tysonsolution.com/Home/logout";
             return Request.CreateResponse(HttpStatusCode.OK, new { Success = true, RedirectUrl = newUrl });
         }
 
