@@ -12,7 +12,7 @@ namespace TarifDefterim.UI.Areas.Admin.Models.VM
 
         public IngredientVM()
         {
-            Kind = new Kind();
+            Kinds = new List<Kind>();
         }
 
         public Guid ID { get; set; }
@@ -26,7 +26,7 @@ namespace TarifDefterim.UI.Areas.Admin.Models.VM
 
         public List<Ingredient> Ingredients { get; set; }
 
-        public Kind Kind { get; set; }
+        public List<Kind> Kinds { get; set; }
 
         public Status Status { get; set; }
 

@@ -12,14 +12,14 @@ namespace TarifDefterim.UI.Areas.Admin.Models.VM
 
         public MealListVM()
         {
-            AppUser = new AppUser();
+            AppUsers = new List<AppUser>();
         }
 
         public List<Meal> Meals { get; set; }
 
         public List<Ingredient> Ingredients { get; set; }
 
-        public AppUser AppUser { get; set; }
+        public List<AppUser> AppUsers { get; set; }
 
         public UnitOf UnitOf { get; set; }
 
