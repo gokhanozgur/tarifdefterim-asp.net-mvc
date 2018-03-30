@@ -13,7 +13,15 @@ namespace TarifDefterim.UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            // Dikkat: Default rota her zaman aşağıda kalmalıdır.           
+            // Dikkat: Default rota her zaman aşağıda kalmalıdır.
+
+            // Hata kontrolü rotası
+
+            routes.MapRoute(
+              name: "Error",
+              url: "Error/{code}",
+              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
+            );
 
 
             // Slug kontrolü rotası
@@ -23,14 +31,6 @@ namespace TarifDefterim.UI
               url: "Recipe/RecipeDetail/{slug}",
               defaults: new { controller = "Recipe", action = "RecipeDetail", slug = "" },
               namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
-            );
-
-            // Hata kontrolü rotası
-
-            routes.MapRoute(
-              name: "Error",
-              url: "Error/{code}",
-              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
             );
 
             // Default

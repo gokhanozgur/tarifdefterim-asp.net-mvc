@@ -421,10 +421,6 @@
     <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TarifDefterim.AuthService\TarifDefterim.AuthService.csproj">
-      <Project>{c30138c4-3494-4b2a-a2fe-c9f75ef5df68}</Project>
-      <Name>TarifDefterim.AuthService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
       <Project>{46d6217c-a286-41c3-b850-3e822f55c95a}</Project>
       <Name>TarifDefterim.Core</Name>
