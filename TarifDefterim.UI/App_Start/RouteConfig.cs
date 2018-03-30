@@ -14,16 +14,7 @@ namespace TarifDefterim.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             // Dikkat: Default rota her zaman aşağıda kalmalıdır.
-
-            // Hata kontrolü rotası
-
-            routes.MapRoute(
-              name: "Error",
-              url: "Error/{code}",
-              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
-            );
-
-
+            
             // Slug kontrolü rotası
 
             routes.MapRoute(
@@ -40,7 +31,16 @@ namespace TarifDefterim.UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "TarifDefterim.UI.Controllers" }
-            );            
+            );
+
+
+            // Hata kontrolü rotası
+
+            routes.MapRoute(
+              name: "Error",
+              url: "Error/{code}",
+              defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
+            );
 
             // Username kontrolü rotası
 
