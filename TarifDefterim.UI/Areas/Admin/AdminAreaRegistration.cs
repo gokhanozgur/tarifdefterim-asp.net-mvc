@@ -19,7 +19,7 @@ namespace TarifDefterim.UI.Areas.Admin
 
             context.MapRoute(
                 "CheckUserName",
-                "Admin/{controller}/{action}/{username}",
+                "Admin/AppUser/{action}/CheckUserName",
                 defaults: new { controller = "AppUser", action = "CheckUserName", username = UrlParameter.Optional },
                 namespaces: new[] { "TarifDefterim.UI.Areas.Admin.Controllers" }
             );

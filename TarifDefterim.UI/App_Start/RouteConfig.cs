@@ -28,20 +28,20 @@ namespace TarifDefterim.UI
 
             routes.MapRoute(
               name: "CheckUserNameFromUI",
-              url: "{controller}/{action}/{username}",
+              url: "Home/CheckUserNameFromRegisterForm/{username}",
               defaults: new { controller = "Home", action = "CheckUserNameFromRegisterForm", username = UrlParameter.Optional },
               namespaces: new[] { "TarifDefterim.UI.Controllers" }
             );
 
-            // Username kontrolü rotası
+            // Email kontrolü rotası
 
             routes.MapRoute(
               name: "CheckEmailFromUI",
-              url: "{controller}/{action}/{email}",
+              url: "Home/CheckEMailFromRegisterForm/{email}",
               defaults: new { controller = "Home", action = "CheckEMailFromRegisterForm", email = UrlParameter.Optional },
               namespaces: new[] { "TarifDefterim.UI.Controllers" }
             );
-            
+
 
             // Default
 

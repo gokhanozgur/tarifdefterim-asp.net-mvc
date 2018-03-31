@@ -71,7 +71,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="login-content">
                     <h1><b>tarifdefterim</b> Kayıt</h1>
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
-                    <form action="/Home/Register" class="login-form" method="post" enctype="multipart/form-data">
+                    <form id="userregister" action="/Home/Register" class="login-form" method="post" enctype="multipart/form-data">
 
                         <div class="row">
                             <div class="col-xs-6">
@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-xs-6">
                                 <input id="Re-Password" type="password" autocomplete="off" placeholder="Şifre tekrar" name="Re-Password" value="" class="form-control form-control-solid placeholder-no-fix form-group" required />
-                                <span id="passwordmachmessage" style="display:none;">Girilen şifreler aynı olmalıdır.</span>
+                                <span id="passwordmachmessage" style="display:none;"></span>
                             </div>
                             <div class="col-xs-12">
                                 <input id="Image" type="file" autocomplete="off" name="Image" value="" class="form-control form-control-solid placeholder-no-fix form-group" />
@@ -106,8 +106,13 @@ License: You must have a valid license purchased only from themeforest(the above
 	                                {
                                        <label style="color:red;">@ViewBag.Message</label>
 	                                }
-                                    <a href="/Home/Login" id="registerform" class="btn btn-success">Girişe Git</a>
-                                    <input type="submit" name="submit" id="registerbutton" value="Kayıt" class="btn green" style="display:none;" />
+                                    <div class="forgot-password">
+                                        <a href="/" style="color:#a4aab2;">Web Sayfasına Dön</a>
+                                    </div> 
+                                    <div class="forgot-password">
+                                        <a href="/Home/Login" id="registerform" style="color:#a4aab2;">Girişe Git</a>
+                                    </div>                                     
+                                    <input type="submit" name="submit" id="registerbutton" value="Kayıt" class="btn green"/>
 
                                     <div id="wait" style="display:none;">
                                         <img src="~/Content/images/bekleyiniz.gif" />
@@ -182,8 +187,24 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
 
+        var passMatch = 0;
+        var checkEmail = 0;
+        var checkUserName = 0;
+
         $(document).ready(function () {
 
+            $("#userregister").submit(function (e) {
+                e.preventDefault();
+
+                if (passMatch == 0 || checkEmail == 0 || checkUserName ==0) {
+                    $("#registerbutton").prop("disabled", true);
+                }
+                else {
+                    $("#registerbutton").prop("disabled", false);
+                }
+
+                $("#registerbutton").prop("disabled", true);
+            });
 
             $("#Re-Password").change(function () {
 
@@ -191,12 +212,19 @@ License: You must have a valid license purchased only from themeforest(the above
                 var p2 = $("#Re-Password").val();
 
                 if (p1 == p2) {
-                    $("#registerbutton").removeAttr("style");
+                    $("#registerbutton").prop("disabled", false);
+                    $("#passwordmachmessage").css("display", "none");
+                    passMatch = 1;
                 }
                 else {
-                    $("#registerbutton").css("display", "none");
-                }
+                    //$("#registerbutton").prop("disabled", true);
 
+                    $("#passwordmachmessage").removeAttr("style");
+                    $("#passwordmachmessage").text("Şifre alanları birbiriyle aynı olmalıdır.");
+                    passMatch = 0;
+
+                }
+                
 
             });
 
@@ -212,22 +240,19 @@ License: You must have a valid license purchased only from themeforest(the above
                     data: { username: username },
                     success: function (data) {
 
-                        if (data != false) {
+                        if (data == false) {
 
                             $("#userinputessage").removeAttr("style");
-                            $("#userinputessage").text("Bu isim kullanıma uygundur.");
-                            $("#registerbutton").removeAttr("style");
-                            $("#userinputessage").removeClass("alert alert-danger");
-                            $("#userinputessage").addClass("alert alert-success");
+                            //$("#userinputessage").text("Bu isim kullanıma uygundur.");
+                            $("#userinputessage").html("");
+                            passMatch = 1;
 
                         }
                         else {
 
                             $("#userinputessage").removeAttr("style");
                             $("#userinputessage").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
-                            $("#registerbutton").css("display", "none");
-                            $("#userinputessage").removeClass("alert alert-sucess");
-                            $("#userinputessage").addClass("alert alert-danger");
+                            passMatch = 0;
 
                         }
 
@@ -253,20 +278,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         if (data == false) {
 
                             $("#emailinputmessage").removeAttr("style");
-                            $("#emailinputmessage").text("Bu isim kullanıma uygundur.");
-                            $("#registerbutton").removeAttr("style");
-                            $("#emailinputmessage").removeClass("alert alert-danger");
-                            $("#emailinputmessage").addClass("alert alert-success");
+                            //$("#emailinputmessage").text("Bu mail kullanıma uygundur.");
+                            $("#emailinputmessage").html("");
+                            passMatch = 1;
 
                         }
                         else {
 
                             $("#emailinputmessage").removeAttr("style");
-                            $("#emailinputmessage").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
-                            $("#emailinputmessage").css("display", "none");
-                            $("#emailinputmessage").removeClass("alert alert-sucess");
-                            $("#emailinputmessage").addClass("alert alert-danger");
-
+                            $("#emailinputmessage").text("Bu mail daha önce alınmıştır.").fadeIn(3000);
+                            passMatch = 0;
                         }
 
                     }
