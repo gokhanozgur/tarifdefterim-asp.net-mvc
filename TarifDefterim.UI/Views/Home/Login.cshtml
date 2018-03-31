@@ -89,7 +89,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-sm-8 text-right">
                                 <div class="forgot-password">
-                                    <a href="/" style="color:#a4aab2;">Web Sayfasına Dön</a>
+                                    <a href="/" id="webpage" style="color:#a4aab2;">Web Sayfasına Dön</a>
                                 </div> 
                                 <div class="forgot-password">
                                     <a href="/Home/Register" id="registerform" style="color:#a4aab2;">Kayıt Ol</a>
@@ -170,6 +170,7 @@ License: You must have a valid license purchased only from themeforest(the above
             $("#wait").css("display", "inline");
             $("#loginbutton").css("display", "none");
             $("#registerform").css("display", "none");
+            $("#webpage").css("display", "none");
             $("#forget-password").css("display", "none");
         });
               
@@ -224,6 +225,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $("#wait").css("display", "none");
                                 $("#loginbutton").removeAttr("style");
                                 $("#registerform").removeAttr("style");
+                                $("#webpage").removeAttr("style");
                                 $("#forget-password").removeAttr("style");
                             });
                         }
