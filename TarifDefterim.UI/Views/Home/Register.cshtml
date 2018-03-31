@@ -82,9 +82,11 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-xs-6">
                                 <input id="UserName" type="text" autocomplete="off" placeholder="Kullanıcı adınız" name="UserName" value="" class="form-control form-control-solid placeholder-no-fix form-group" required />
+                                <span id="userinputessage" style="display:none"></span>
                             </div>
                             <div class="col-xs-6">
                                 <input id="Email" type="email" autocomplete="off" placeholder="E-Mail" name="Email" value="" class="form-control form-control-solid placeholder-no-fix form-group" />
+                                <span id="emailinputmessage" style="display:none"></span>
                             </div>
                             <div class="col-xs-6">
                                 <input id="Password" type="password" autocomplete="off" placeholder="Şifre" name="Password" value="" class="form-control form-control-solid placeholder-no-fix form-group" required />
@@ -105,7 +107,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                        <label style="color:red;">@ViewBag.Message</label>
 	                                }
                                     <a href="/Home/Login" id="registerform" class="btn btn-success">Girişe Git</a>
-                                    <input type="submit" name="submit" id="loginbutton" value="Kayıt" class="btn green" />
+                                    <input type="submit" name="submit" id="registerbutton" value="Kayıt" class="btn green" style="display:none;" />
 
                                     <div id="wait" style="display:none;">
                                         <img src="~/Content/images/bekleyiniz.gif" />
@@ -179,7 +181,101 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
-       
+
+        $(document).ready(function () {
+
+
+            $("#Re-Password").change(function () {
+
+                var p1 = $("#Password").val();
+                var p2 = $("#Re-Password").val();
+
+                if (p1 == p2) {
+                    $("#registerbutton").removeAttr("style");
+                }
+                else {
+                    $("#registerbutton").css("display", "none");
+                }
+
+
+            });
+
+            $("#UserName").change(function () {
+
+                var username = $("#UserName").val();
+
+                $.ajax({
+
+                    url:"@Url.Action("CheckUserNameFromRegisterForm", "Home")",
+                    type: "POST",
+                    datatype: "Json",
+                    data: { username: username },
+                    success: function (data) {
+
+                        if (data != false) {
+
+                            $("#userinputessage").removeAttr("style");
+                            $("#userinputessage").text("Bu isim kullanıma uygundur.");
+                            $("#registerbutton").removeAttr("style");
+                            $("#userinputessage").removeClass("alert alert-danger");
+                            $("#userinputessage").addClass("alert alert-success");
+
+                        }
+                        else {
+
+                            $("#userinputessage").removeAttr("style");
+                            $("#userinputessage").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
+                            $("#registerbutton").css("display", "none");
+                            $("#userinputessage").removeClass("alert alert-sucess");
+                            $("#userinputessage").addClass("alert alert-danger");
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+
+            $("#Email").change(function () {
+
+                var email = $("#Email").val();
+
+                $.ajax({
+
+                    url:"@Url.Action("CheckEMailFromRegisterForm", "Home")",
+                    type: "POST",
+                    datatype: "Json",
+                    data: { email: email },
+                    success: function (data) {
+
+                        if (data == false) {
+
+                            $("#emailinputmessage").removeAttr("style");
+                            $("#emailinputmessage").text("Bu isim kullanıma uygundur.");
+                            $("#registerbutton").removeAttr("style");
+                            $("#emailinputmessage").removeClass("alert alert-danger");
+                            $("#emailinputmessage").addClass("alert alert-success");
+
+                        }
+                        else {
+
+                            $("#emailinputmessage").removeAttr("style");
+                            $("#emailinputmessage").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
+                            $("#emailinputmessage").css("display", "none");
+                            $("#emailinputmessage").removeClass("alert alert-sucess");
+                            $("#emailinputmessage").addClass("alert alert-danger");
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+        });
 
     </script>
 </body>

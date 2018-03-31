@@ -114,5 +114,19 @@ namespace TarifDefterim.UI.Controllers
 
         }
 
+        public JsonResult CheckUserNameFromRegisterForm(string username)
+        {
+            bool isValid = _appUserService.IsUserAlreadyTaken(username);
+
+            return Json(isValid, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckEMailFromRegisterForm(string email)
+        {
+            bool isValid = _appUserService.IsUserAlreadyTaken(email);
+
+            return Json(isValid, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

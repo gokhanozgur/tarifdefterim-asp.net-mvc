@@ -24,6 +24,25 @@ namespace TarifDefterim.UI
               namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
             );
 
+            // Username kontrolü rotası
+
+            routes.MapRoute(
+              name: "CheckUserNameFromUI",
+              url: "{controller}/{action}/{username}",
+              defaults: new { controller = "Home", action = "CheckUserNameFromRegisterForm", username = UrlParameter.Optional },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );
+
+            // Username kontrolü rotası
+
+            routes.MapRoute(
+              name: "CheckEmailFromUI",
+              url: "{controller}/{action}/{email}",
+              defaults: new { controller = "Home", action = "CheckEMailFromRegisterForm", email = UrlParameter.Optional },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );
+            
+
             // Default
 
             routes.MapRoute(
@@ -40,18 +59,7 @@ namespace TarifDefterim.UI
               name: "Error",
               url: "Error/{code}",
               defaults: new { controller = "Error", action = "Page404", code = UrlParameter.Optional }
-            );
-
-            // Username kontrolü rotası
-
-            routes.MapRoute(
-              name: "CheckUserName",
-              url: "{controller}/{action}/{id}",
-              defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
-            );            
-
-                 
-
+            );  
 
         }
     }

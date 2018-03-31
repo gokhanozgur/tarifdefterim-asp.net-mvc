@@ -181,6 +181,7 @@ License: You must have a valid license purchased only from themeforest(the above
         $(document).ajaxStart(function () {
             $("#wait").css("display", "inline");
             $("#loginbutton").css("display", "none");
+            $("#registerform").css("display", "none");
             $("#forget-password").css("display", "none");
         });
               
@@ -234,6 +235,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $(document).ajaxComplete(function () {
                                 $("#wait").css("display", "none");
                                 $("#loginbutton").removeAttr("style");
+                                $("#registerform").removeAttr("style");
                                 $("#forget-password").removeAttr("style");
                             });
                         }
