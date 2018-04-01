@@ -202,8 +202,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 else {
                     $("#registerbutton").prop("disabled", false);
                 }
-
-                $("#registerbutton").prop("disabled", true);
             });
 
             $("#Re-Password").change(function () {
@@ -217,8 +215,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     passMatch = 1;
                 }
                 else {
-                    //$("#registerbutton").prop("disabled", true);
 
+                    $("#registerbutton").prop("disabled", true);
                     $("#passwordmachmessage").removeAttr("style");
                     $("#passwordmachmessage").text("Şifre alanları birbiriyle aynı olmalıdır.");
                     passMatch = 0;
@@ -241,7 +239,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     success: function (data) {
 
                         if (data == false) {
-
+                            $("#registerbutton").prop("disabled", false);
                             $("#userinputessage").removeAttr("style");
                             //$("#userinputessage").text("Bu isim kullanıma uygundur.");
                             $("#userinputessage").html("");
@@ -249,7 +247,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         }
                         else {
-
+                            $("#registerbutton").prop("disabled", true);
                             $("#userinputessage").removeAttr("style");
                             $("#userinputessage").text("Bu isim daha önce alınmıştır.").fadeIn(3000);
                             passMatch = 0;
@@ -276,7 +274,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     success: function (data) {
 
                         if (data == false) {
-
+                            $("#registerbutton").prop("disabled", false);
                             $("#emailinputmessage").removeAttr("style");
                             //$("#emailinputmessage").text("Bu mail kullanıma uygundur.");
                             $("#emailinputmessage").html("");
@@ -284,7 +282,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         }
                         else {
-
+                            $("#registerbutton").prop("disabled", true);
                             $("#emailinputmessage").removeAttr("style");
                             $("#emailinputmessage").text("Bu mail daha önce alınmıştır.").fadeIn(3000);
                             passMatch = 0;
