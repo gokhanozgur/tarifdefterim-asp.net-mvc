@@ -26,8 +26,17 @@ namespace TarifDefterim.UI.Controllers
 
             try
             {
-                _subscriberService.Add(subscriber);
-                return Json("Kayıt işlemi başarılı.", JsonRequestBehavior.AllowGet);
+
+                if (!_subscriberService.IsExistMail(email))
+                {
+                    _subscriberService.Add(subscriber);
+                    return Json("Kayıt işlemi başarılı.", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Girilen mail daha önceden kayıtlıdır.", JsonRequestBehavior.AllowGet);
+                }
+                
             }
             catch (Exception ex)
             {

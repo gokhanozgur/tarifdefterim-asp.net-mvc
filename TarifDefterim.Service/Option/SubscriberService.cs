@@ -11,7 +11,10 @@ namespace TarifDefterim.Service.Option
     public class SubscriberService:MainService<Subscriber>
     {
 
-
+        public bool IsExistMail(string email)
+        {
+            return Any(x => x.Email == email);
+        }
 
     }
 }
