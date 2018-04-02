@@ -24,7 +24,16 @@ namespace TarifDefterim.UI
               namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
             );
 
-            
+            // Slug kontrolü rotası
+
+            routes.MapRoute(
+              name: "GetMealListByCategory",
+              url: "Recipe/GetMealListByCategory/{categorySlug}",
+              defaults: new { controller = "Recipe", action = "GetMealListByCategory", categorySlug = "" },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
+            );
+
+
             // Username kontrolü rotası
 
             routes.MapRoute(

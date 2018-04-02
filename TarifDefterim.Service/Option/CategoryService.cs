@@ -34,5 +34,11 @@ namespace TarifDefterim.Service.Option
 
         }
 
+        public Category GetCategoryIdBySlug(string slug)
+        {
+            Category category = GetFirstOrDefault(x => x.Slug == slug);
+            return category;
+        }
+
     }
 }
