@@ -47,6 +47,11 @@
                             <li><a href="/About/">Hakkında</a></li>
                             <li>
                                 <a href="/Recipe/">Tarifler</a>
+                                <ul>
+                                    @{
+                                        Html.RenderAction("GetActiveCategory", "Category", new { area = "" });
+                                    }
+                                </ul>                                
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                 <ul>
@@ -54,7 +59,7 @@
                                 </ul>
                                 }
                             </li>                           
-                            <li><a href="/Contact">İletişim</a></li>
+                            @*<li><a href="/Contact">İletişim</a></li>*@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li>

@@ -343,6 +343,7 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -407,6 +408,8 @@
     <Content Include="Views\Recipe\AddRecipe.cshtml" />
     <Content Include="Views\Shared\_version_1_Footer.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Shared\_version_1_Menu_Category_List.cshtml" />
+    <Content Include="Views\Recipe\GetMealListByCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -422,6 +425,7 @@
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
+    <Folder Include="Views\Category\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Meal\" />
     <Folder Include="Views\Subscriber\" />

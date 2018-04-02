@@ -1,0 +1,6 @@
+﻿@model List<TarifDefterim.Model.Option.Category>
+
+@foreach (var item in Model)
+{
+    <li><a href="/Recipe/GetMealListByCategory/@item.Slug">@item.CategoryName</a></li>
+}

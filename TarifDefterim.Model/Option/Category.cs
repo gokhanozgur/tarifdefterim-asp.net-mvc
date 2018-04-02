@@ -13,6 +13,8 @@ namespace TarifDefterim.Model.Option
 
         public string Description { get; set; }
 
+        public string Slug { get; set; }
+
         public virtual List<AssignedCategory> AssignedCategories { get; set; }
 
         /*public virtual List<SubCategory> SubCategories { get; set; }*/

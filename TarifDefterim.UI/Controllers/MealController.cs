@@ -200,5 +200,6 @@ namespace TarifDefterim.UI.Controllers
             return PartialView("_version_1_Right_Column", mealList);
 
         }
+
     }
 }

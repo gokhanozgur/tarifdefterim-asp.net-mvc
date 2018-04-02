@@ -23,5 +23,16 @@ namespace TarifDefterim.Service.Option
             return GetActive().Count();
         }
 
+        public bool IsExistSlugName(Guid id, string slug)
+        {
+            List<Category> IsExist = GetByExp(x => x.ID == id && x.Slug == slug);
+
+            if (IsExist.Count > 0)
+                return true;
+            else
+                return false;
+
+        }
+
     }
 }

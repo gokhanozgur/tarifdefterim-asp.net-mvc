@@ -7,6 +7,7 @@ using TarifDefterim.Model.Option;
 using TarifDefterim.Service.Option;
 using TarifDefterim.UI.Areas.Admin.Models.DTO;
 using TarifDefterim.UI.Authorize;
+using TarifDefterim.Utility;
 
 namespace TarifDefterim.UI.Areas.Admin.Controllers
 {
@@ -28,6 +29,19 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddCategory(Category data)
         {
+
+            string slug = GenerateSlug.GenerateSlugURL(data.CategoryName);
+
+            bool IsExistSlugName = _categoryService.IsExistSlugName(data.ID, slug);
+
+            if (!IsExistSlugName)
+            {
+                data.Slug = slug;
+            }
+            else
+            {
+                data.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+            }
 
             try
             {
