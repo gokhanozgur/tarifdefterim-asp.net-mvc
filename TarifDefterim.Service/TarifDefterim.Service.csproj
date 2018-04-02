@@ -58,6 +58,7 @@
     <Compile Include="Option\MealImageService.cs" />
     <Compile Include="Option\MealService.cs" />
     <Compile Include="Option\RecipeService.cs" />
+    <Compile Include="Option\SubscriberService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

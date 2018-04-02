@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "SubscriberList";
+    Layout = "~/Areas/Admin/Views/Shared/_panelLayout.cshtml";
+}
+
+@model List<TarifDefterim.Model.Option.Subscriber>
+
+@section style{
+
+    <link href="~/Areas/Admin/Content/css/datatables.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/datatables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+}
+
+
+@section style2{
+
+    <style>
+        table thead th {
+            text-align: center;
+        }
+
+        table tfoot th {
+            text-align: center;
+        }
+
+        table tbody tr td {
+            text-align: center;
+        }
+    </style>
+
+}
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    Abone Listesi
+    <small>Aboneler</small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="note note-info">
+    <p> Bu sayfada abone listeleri görüntülenmektedir. </p>
+</div>
+
+@Html.Partial("_messages")
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green">
+                    <i class="icon-list font-green"></i>
+                    <span class="caption-subject bold uppercase">Abone Listesi</span>
+                </div>
+                <div class="tools"> </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Kayıt Zamanı</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Kayıt Zamanı</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ID</td>
+                                <td>@item.Email</td>
+                                <td>@item.CreatedDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Areas/Admin/Content/js/datatable.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/datatables.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/datatables.bootstrap.js"></script>
+    <script src="~/Areas/Admin/Content/js/bootstrap-datepicker.min.js"></script>
+
+}
+
+@section scripts2{
+
+    <script src="~/Areas/Admin/Content/js/table-datatables-buttons.min.js"></script>
+
+}
+

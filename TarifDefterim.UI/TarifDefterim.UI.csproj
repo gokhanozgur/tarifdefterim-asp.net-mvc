@@ -303,6 +303,7 @@
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Subscriber\SubscriberList.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -322,6 +323,7 @@
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
     <Compile Include="Areas\Admin\Controllers\MealController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubscriberController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\FoodIngredientDTO.cs" />
@@ -346,6 +348,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
+    <Compile Include="Controllers\SubscriberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -421,6 +424,7 @@
     <Folder Include="Content\Uploads\User_Images\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Meal\" />
+    <Folder Include="Views\Subscriber\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
