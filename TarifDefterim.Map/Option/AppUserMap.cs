@@ -22,6 +22,7 @@ namespace TarifDefterim.Map.Option
             Property(x => x.Email).HasMaxLength(100).IsOptional();
             Property(x => x.Password).HasMaxLength(50).IsRequired();
             Property(x => x.PhoneNumber).HasMaxLength(11).IsOptional();
+            Property(x => x.Address).HasMaxLength(255).IsOptional();
             Property(x => x.Birthdate).HasColumnType("datetime2").IsOptional();
             Property(x => x.UserImage).HasMaxLength(250).IsOptional();
             Property(x => x.XSmallUserImage).IsOptional();

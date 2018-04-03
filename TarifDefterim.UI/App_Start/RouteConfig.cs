@@ -14,6 +14,44 @@ namespace TarifDefterim.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             // Dikkat: Default rota her zaman aşağıda kalmalıdır.
+            
+            // Slug kontrolü rotası
+
+            routes.MapRoute(
+              name: "RecipeDetail",
+              url: "Recipe/RecipeDetail/{slug}",
+              defaults: new { controller = "Recipe", action = "RecipeDetail", slug = "" },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
+            );
+
+            // Slug kontrolü rotası
+
+            routes.MapRoute(
+              name: "GetMealListByCategory",
+              url: "Recipe/GetMealListByCategory/{categorySlug}",
+              defaults: new { controller = "Recipe", action = "GetMealListByCategory", categorySlug = "" },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
+            );
+
+
+            // Username kontrolü rotası
+
+            routes.MapRoute(
+              name: "CheckUserNameFromUI",
+              url: "Home/CheckUserNameFromRegisterForm/{username}",
+              defaults: new { controller = "Home", action = "CheckUserNameFromRegisterForm", username = UrlParameter.Optional },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );
+
+            // Email kontrolü rotası
+
+            routes.MapRoute(
+              name: "CheckEmailFromUI",
+              url: "Home/CheckEMailFromRegisterForm/{email}",
+              defaults: new { controller = "Home", action = "CheckEMailFromRegisterForm", email = UrlParameter.Optional },
+              namespaces: new[] { "TarifDefterim.UI.Controllers" }
+            );
+
 
             // Hata kontrolü rotası
 
@@ -24,15 +62,6 @@ namespace TarifDefterim.UI
             );
 
 
-            // Slug kontrolü rotası
-
-            routes.MapRoute(
-              name: "RecipeDetail",
-              url: "Recipe/RecipeDetail/{slug}",
-              defaults: new { controller = "Recipe", action = "RecipeDetail", slug = "" },
-              namespaces: new[] { "TarifDefterim.UI.Controllers" } // Area içerisindeki aynı isimdeki controller ile çakışmaması için kullanıyoruz.
-            );
-
             // Default
 
             routes.MapRoute(
@@ -40,18 +69,7 @@ namespace TarifDefterim.UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "TarifDefterim.UI.Controllers" }
-            );            
-
-            // Username kontrolü rotası
-
-            routes.MapRoute(
-              name: "CheckUserName",
-              url: "{controller}/{action}/{id}",
-              defaults: new { controller = "AppUser", action = "CheckUserName", id = UrlParameter.Optional }
-            );            
-
-                 
-
+            );  
 
         }
     }

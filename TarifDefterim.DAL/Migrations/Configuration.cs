@@ -18,45 +18,6 @@ namespace TarifDefterim.DAL.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
-            context.AppUsers.AddOrUpdate(
-
-                x => x.ID, new Model.Option.AppUser()
-                {
-                    Name = "ADMIN",
-                    LastName = "ADMINISTRATOR",
-                    UserName = "admin",
-                    Email = "g.ozgur@outlook.com",
-                    Password = "202cb962ac59075b964b07152d234b70",
-                    Role = Model.Option.Role.Admin,
-                    Status = Core.Enum.Status.Active,
-                    UserImage = "/Content/Uploads/User_Images/Original_Images/user_default_image.png",
-                    XSmallUserImage = "/Content/Uploads/User_Images/XSmall_Images/user_default_image.png",
-                    CruptedUserImage = "/Content/Uploads/User_Images/Crupted_Images/user_default_image.png"
-
-                }
-
-            );
-
-            context.AppUsers.AddOrUpdate(
-
-                x => x.ID, new Model.Option.AppUser()
-                {
-                    Name = "GÖKHAN",
-                    LastName = "ÖZGÜR",
-                    UserName = "gozgur",
-                    Email = "g.ozgur@outlook.com",
-                    Password = "202cb962ac59075b964b07152d234b70",
-                    Role = Model.Option.Role.Admin,
-                    Status = Core.Enum.Status.Active,
-                    UserImage = "/Content/Uploads/User_Images/Original_Images/user_default_image.png",
-                    XSmallUserImage = "/Content/Uploads/User_Images/XSmall_Images/user_default_image.png",
-                    CruptedUserImage = "/Content/Uploads/User_Images/Crupted_Images/user_default_image.png"
-
-                }
-
-            );
-
         }
     }
 }

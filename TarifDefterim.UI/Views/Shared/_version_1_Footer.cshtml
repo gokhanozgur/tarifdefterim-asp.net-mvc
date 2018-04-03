@@ -44,11 +44,49 @@
             <span class="line"></span>
             <div class="clearfix"></div>
             <p>Her gün yeni bir lezzetten haber almak için bültene abone olmayı unutmayınız.</p>
-            <form action="#" method="get">
-                <input class="newsletter" type="text" placeholder="ornek@mail.com" value="" />
-                <button class="newsletter-btn" type="submit">Abone Ol</button>
-            </form>
+                <input class="newsletter" type="text" id="subscriberemail" name="subscriberemail" placeholder="ornek@mail.com" value="" />
+                <input class="newsletter-btn" type="button" name="addsubscriber" id="subscriberform" value="Abone Ol" onclick="AddSubscriber()" />
+            <span id="subscribermessage"style="display:none"></span>
         </div>
     </div>
     <!-- Container / End -->
 </div>
+
+<script>
+
+        function AddSubscriber() {
+
+            var email = $("#subscriberemail").val();
+            console.log(email);
+
+            if (email != "") {
+
+                $.ajax({
+
+                    url: "@Url.Action("AddSubscriber", "Subscriber")",
+                    type: "POST",
+                    datatype: "Json",
+                    data: { email: email },
+                    success: function (data) {
+
+                        if (data != "Empty") {
+                            $("#subscribermessage").html("");
+                            $("#subscribermessage").removeAttr("style");
+                            $("#subscribermessage").append(data).fadeIn(3000);
+                            $("#subscribermessage").fadeOut(10000);
+                        }
+                        else {
+                            $("#subscribermessage").html("");
+                            $("#subscribermessage").removeAttr("style");
+                            $("#subscribermessage").append(data).fadeIn(3000);
+                            $("#subscribermessage").fadeOut(10000);
+                        }
+
+                    }
+
+                })
+            }
+
+        }
+
+</script>

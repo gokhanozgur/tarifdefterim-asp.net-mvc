@@ -14,6 +14,16 @@ namespace TarifDefterim.UI.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+
+            // Username kontrolü rotası
+
+            context.MapRoute(
+                "CheckUserName",
+                "Admin/AppUser/CheckUserName/",
+                defaults: new { controller = "AppUser", action = "CheckUserName", username = UrlParameter.Optional },
+                namespaces: new[] { "TarifDefterim.UI.Areas.Admin.Controllers" }
+            );
+
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",

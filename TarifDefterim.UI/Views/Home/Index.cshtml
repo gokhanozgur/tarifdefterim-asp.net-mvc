@@ -16,6 +16,10 @@
         <h3 class="headline">Son Tarifler</h3>
         <span class="line rb margin-bottom-35"></span>
         <div class="clearfix"></div>
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <label style="color:red;">@ViewBag.SuccessMessage</label>
+        }
         @{
             Html.RenderAction("GetMealContent", "Meal", new { area = ""});
         }        

@@ -21,6 +21,7 @@ namespace TarifDefterim.DAL.Context
         public ProjectContext()
         {
             Database.Connection.ConnectionString = "Server=.;Database=TarifDefterim;uid=sa;pwd=123";
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -45,6 +46,7 @@ namespace TarifDefterim.DAL.Context
             modelBuilder.Configurations.Add(new RecipeMap());
             modelBuilder.Configurations.Add(new RecipeLikeMap());
             //modelBuilder.Configurations.Add(new SubCategoryMap());
+            modelBuilder.Configurations.Add(new SubscriberMap());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             Database.SetInitializer<ProjectContext>(null); //The model backing the <Database> context has changed since the database was created hatasını gidermek için kullandım.
@@ -89,6 +91,8 @@ namespace TarifDefterim.DAL.Context
         public DbSet<RecipeLike> RecipeLikes { get; set; }
 
         /*public DbSet<SubCategory> SubCategories { get; set; }*/
+
+        public DbSet<Subscriber> Subscriber { get; set; }
 
 
         public override int SaveChanges()

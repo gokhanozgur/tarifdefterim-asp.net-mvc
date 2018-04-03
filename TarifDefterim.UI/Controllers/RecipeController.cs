@@ -20,6 +20,8 @@ namespace TarifDefterim.UI.Controllers
         FoodIngredientService _foodIngredient;
         RecipeService _recipeService;
         CommentService _commentService;
+        CategoryService _categoryService;
+        AssignedCategoryService _assignedCategoryService;
 
         public RecipeController()
         {
@@ -28,6 +30,8 @@ namespace TarifDefterim.UI.Controllers
             _foodIngredient = new FoodIngredientService();
             _recipeService = new RecipeService();
             _commentService = new CommentService();
+            _categoryService = new CategoryService();
+            _assignedCategoryService = new AssignedCategoryService();
         }
         
         public ActionResult Index()
@@ -87,7 +91,9 @@ namespace TarifDefterim.UI.Controllers
         {
 
             List<Meal> mealList = new List<Meal>();
-            mealList = _mealService.GetSliderMeals().OrderByDescending(x => x.CreatedDate).ToList();
+
+            mealList = _mealService.GetActive().OrderByDescending(x => x.CreatedDate).ToList();
+
 
             List<MealVM> modelList = new List<MealVM>();
 
@@ -129,7 +135,65 @@ namespace TarifDefterim.UI.Controllers
         public ActionResult AddRecipe()
         {
             return View();
-        }            
+        }
+        
+
+        public ActionResult GetMealListByCategory(string categorySlug, int page = 1)
+        {
+
+            Category category = _categoryService.GetCategoryIdBySlug(categorySlug);
+
+            List<Meal> mealList = new List<Meal>();
+
+            mealList = _mealService.GetActive().OrderByDescending(x => x.CreatedDate).ToList();
+
+            List<AssignedCategory> assignedCategory = _assignedCategoryService.GetByExp(x => x.CategoryID == category.ID);
+
+            List<MealVM> modelList = new List<MealVM>();
+
+            foreach (var item in mealList)
+            {
+                foreach (var item2 in assignedCategory)
+                {
+                    if (item.ID == item2.MealID)
+                    {
+
+                        MealVM model = new MealVM();
+                        model.ID = item.ID;
+                        model.Name = item.Name;
+                        model.Description = item.Description;
+                        model.Slug = item.Slug;
+                        model.PreparationTime = item.PreparationTime;
+                        model.PreparationTimeUnitOf = item.PreparationTimeUnitOf;
+                        model.CookingTime = item.CookingTime;
+                        model.CookingTimeUnitOf = item.CookingTimeUnitOf;
+                        model.Person = item.Person;
+                        model.Tricks = item.Tricks;
+                        model.VideoURL = item.VideoURL;
+
+                        MealImage mImage = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                        if (mImage == null)
+                        {
+                            model.RandomImagePath = ImageUploader.DefaultMealImagePath;
+                        }
+                        else
+                        {
+                            model.RandomImagePath = mImage.ImageURL;
+                        }
+
+                        modelList.Add(model);
+
+                    }
+                }
+            }
+
+            // ToPagetList kullanmak için NuGet Package Manager`dan PagetList referanslara eklenir.
+
+            return View(modelList.ToPagedList(page, 6));
+
+        }
+
 
     }
 }

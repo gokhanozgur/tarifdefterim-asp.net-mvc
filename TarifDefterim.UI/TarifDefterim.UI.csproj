@@ -303,7 +303,8 @@
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Areas\Admin\Views\Subscriber\SubscriberList.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -322,6 +323,7 @@
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
     <Compile Include="Areas\Admin\Controllers\MealController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubscriberController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\FoodIngredientDTO.cs" />
@@ -341,15 +343,18 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
+    <Compile Include="Controllers\SubscriberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\VM\MealVM.cs" />
+    <Compile Include="Models\VM\UserRegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +407,9 @@
     <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
     <Content Include="Views\Recipe\AddRecipe.cshtml" />
     <Content Include="Views\Shared\_version_1_Footer.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Shared\_version_1_Menu_Category_List.cshtml" />
+    <Content Include="Views\Recipe\GetMealListByCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -417,14 +425,12 @@
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
+    <Folder Include="Views\Category\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Meal\" />
+    <Folder Include="Views\Subscriber\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TarifDefterim.AuthService\TarifDefterim.AuthService.csproj">
-      <Project>{c30138c4-3494-4b2a-a2fe-c9f75ef5df68}</Project>
-      <Name>TarifDefterim.AuthService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
       <Project>{46d6217c-a286-41c3-b850-3e822f55c95a}</Project>
       <Name>TarifDefterim.Core</Name>
