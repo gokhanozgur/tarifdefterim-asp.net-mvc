@@ -51,12 +51,14 @@
     <Compile Include="Option\AppUserService.cs" />
     <Compile Include="Option\AssignedCategoryService.cs" />
     <Compile Include="Option\CategoryService.cs" />
+    <Compile Include="Option\CommentService.cs" />
     <Compile Include="Option\FoodIngredientService.cs" />
     <Compile Include="Option\IngredientService.cs" />
     <Compile Include="Option\KindService.cs" />
     <Compile Include="Option\MealImageService.cs" />
     <Compile Include="Option\MealService.cs" />
     <Compile Include="Option\RecipeService.cs" />
+    <Compile Include="Option\SubscriberService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

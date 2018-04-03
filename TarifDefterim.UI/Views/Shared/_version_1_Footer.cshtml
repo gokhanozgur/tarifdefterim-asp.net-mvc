@@ -1,0 +1,92 @@
+﻿<div id="footer">
+    <!-- Container -->
+    <div class="container">
+        <div class="five columns">
+            <!-- Headline -->
+            <h3 class="headline footer">Hakkında</h3>
+            <span class="line"></span>
+            <div class="clearfix"></div>
+            <p>TarifDefterim bir girişim projesidir.</p>
+        </div>
+        <div class="three columns">
+            <!-- Headline -->
+            <h3 class="headline footer">Menuler</h3>
+            <span class="line"></span>
+            <div class="clearfix"></div>
+            <ul class="footer-links">
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="/About/">Hakkında</a></li>
+                <li><a href="/Recipe/">Tarifler</a></li>
+                <li><a href="/Contact">İletişim</a></li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li><a href="/Home/Login">Üye Girişi</a></li>
+                }
+            </ul>
+        </div>
+        <div class="three columns">
+            <!-- Headline -->
+            <h3 class="headline footer">Rasgele Tarif</h3>
+            <span class="line"></span>
+            <div class="clearfix"></div>
+            <ul class="footer-links">
+                @model IEnumerable<TarifDefterim.UI.Models.VM.MealVM>
+                
+                @foreach (var item in Model)
+                {
+                    <li><a href="/Recipe/RecipeDetail/@item.Slug">@item.Name</a></li>
+                }
+            </ul>
+        </div>
+        <div class="five columns">
+            <!-- Headline -->
+            <h3 class="headline footer">Haber Bülteni</h3>
+            <span class="line"></span>
+            <div class="clearfix"></div>
+            <p>Her gün yeni bir lezzetten haber almak için bültene abone olmayı unutmayınız.</p>
+                <input class="newsletter" type="text" id="subscriberemail" name="subscriberemail" placeholder="ornek@mail.com" value="" />
+                <input class="newsletter-btn" type="button" name="addsubscriber" id="subscriberform" value="Abone Ol" onclick="AddSubscriber()" />
+            <span id="subscribermessage"style="display:none"></span>
+        </div>
+    </div>
+    <!-- Container / End -->
+</div>
+
+<script>
+
+        function AddSubscriber() {
+
+            var email = $("#subscriberemail").val();
+            console.log(email);
+
+            if (email != "") {
+
+                $.ajax({
+
+                    url: "@Url.Action("AddSubscriber", "Subscriber")",
+                    type: "POST",
+                    datatype: "Json",
+                    data: { email: email },
+                    success: function (data) {
+
+                        if (data != "Empty") {
+                            $("#subscribermessage").html("");
+                            $("#subscribermessage").removeAttr("style");
+                            $("#subscribermessage").append(data).fadeIn(3000);
+                            $("#subscribermessage").fadeOut(10000);
+                        }
+                        else {
+                            $("#subscribermessage").html("");
+                            $("#subscribermessage").removeAttr("style");
+                            $("#subscribermessage").append(data).fadeIn(3000);
+                            $("#subscribermessage").fadeOut(10000);
+                        }
+
+                    }
+
+                })
+            }
+
+        }
+
+</script>

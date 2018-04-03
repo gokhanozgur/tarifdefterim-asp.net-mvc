@@ -50,5 +50,7 @@ namespace TarifDefterim.Model.Option
 
         public virtual List<FavoriteDinnerTable> FavoriteDinnerTables { get; set; }
 
+        public virtual List<Comment> Comments { get; set; }
+
     }
 }

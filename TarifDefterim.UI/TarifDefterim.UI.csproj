@@ -142,9 +142,6 @@
     <Content Include="Areas\Admin\Content\images\login\bg1.jpg" />
     <Content Include="Areas\Admin\Content\images\login\bg2.jpg" />
     <Content Include="Areas\Admin\Content\images\login\bg3.jpg" />
-    <Content Include="Areas\Admin\Content\images\login\bg4.jpg" />
-    <Content Include="Areas\Admin\Content\images\login\login-invert.png" />
-    <Content Include="Areas\Admin\Content\images\login\logo.png" />
     <Content Include="Areas\Admin\Content\img\remove-icon-small.png" />
     <Content Include="Areas\Admin\Content\js\dropzone.min.js" />
     <Content Include="Areas\Admin\Content\js\form-dropzone.min.js" />
@@ -191,7 +188,6 @@
     <Content Include="Content\css\version_1\responsive.css" />
     <Content Include="Content\css\version_1\style.css" />
     <Content Include="Content\images\bekleyiniz.gif" />
-    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\version_1\author-photo.png" />
     <Content Include="Content\images\version_1\bg\bedge_grunge.png" />
     <Content Include="Content\images\version_1\bg\brushed_alu.png" />
@@ -307,6 +303,8 @@
     <Content Include="Areas\Admin\Views\Ingredient\IngredientList.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\UpdateIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Meal\MealImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Subscriber\SubscriberList.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -325,6 +323,7 @@
     <Compile Include="Areas\Admin\Controllers\KindController.cs" />
     <Compile Include="Areas\Admin\Controllers\MealController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecipeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubscriberController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\FoodIngredientDTO.cs" />
@@ -344,20 +343,23 @@
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Authorize\UserCurrentInfo.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
+    <Compile Include="Controllers\SubscriberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\VM\MealVM.cs" />
+    <Compile Include="Models\VM\UserRegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff" />
@@ -403,6 +405,11 @@
     <Content Include="Views\Shared\_version_1_Slider.cshtml" />
     <Content Include="Views\Shared\_version_1_MealList.cshtml" />
     <Content Include="Views\Shared\_version_1_RecipePage_MealList.cshtml" />
+    <Content Include="Views\Recipe\AddRecipe.cshtml" />
+    <Content Include="Views\Shared\_version_1_Footer.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Shared\_version_1_Menu_Category_List.cshtml" />
+    <Content Include="Views\Recipe\GetMealListByCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -413,11 +420,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AssignedCategory\" />
+    <Folder Include="Areas\Admin\Views\Comment\" />
     <Folder Include="Areas\Admin\Views\FoodIngredient\" />
     <Folder Include="Areas\Admin\Views\Recipe\" />
     <Folder Include="Content\Uploads\Meal_Images\" />
     <Folder Include="Content\Uploads\User_Images\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Meal\" />
+    <Folder Include="Views\Subscriber\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TarifDefterim.Core\TarifDefterim.Core.csproj">
@@ -444,6 +455,9 @@
       <Project>{dc7dfb5b-919b-4e42-9f62-51b5703acff5}</Project>
       <Name>TarifDefterim.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

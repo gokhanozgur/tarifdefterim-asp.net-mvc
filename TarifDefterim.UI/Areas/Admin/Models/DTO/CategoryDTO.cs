@@ -13,6 +13,8 @@ namespace TarifDefterim.UI.Areas.Admin.Models.DTO
         public Guid ID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
+
+        public string Slug { get; set; }
         public Status Status { get; set; }
 
     }

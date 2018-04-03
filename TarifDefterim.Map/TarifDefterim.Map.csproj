@@ -63,6 +63,7 @@
     <Compile Include="Option\MealMap.cs" />
     <Compile Include="Option\RecipeLikeMap.cs" />
     <Compile Include="Option\RecipeMap.cs" />
+    <Compile Include="Option\SubscriberMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -219,10 +219,10 @@
                             <p id="row">
                                 Malzemeler:
                                 @Html.DropDownList("IngredientID",Model.Ingredients.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.IngredientName}),"Seçiniz", new { @class = "form-control" })
-                                Adet:
+                                Miktar:
                                 <select class="form-control" id="Quantity" name="Quantity" required>
                                     <option value="-1">Seçiniz</option>
-                                    @for (int i = 1; i <= 50; i++)
+                                    @for (int i = 1; i <= 1000; i++)
                                     {
                                         <option value="@i">@i</option>
                                     }

@@ -34,7 +34,7 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
             data.Name = data.Name.ToUpper().Trim();
             data.LastName = data.LastName.ToUpper().Trim();
             data.UserName = data.UserName.ToLower().Trim();
-            data.Email = data.Email.Trim();                   
+            data.Email = data.Email;                   
 
             List<string> UploadedImagePaths = new List<string>();
 
@@ -178,10 +178,10 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         }
         
-        public JsonResult CheckUserName(string id)
+        public JsonResult CheckUserName(string username)
         {
 
-            bool isValid = _appUserService.IsUserAlreadyTaken(id);
+            bool isValid = _appUserService.IsUserAlreadyTaken(username);
 
             return Json(isValid, JsonRequestBehavior.AllowGet);
 

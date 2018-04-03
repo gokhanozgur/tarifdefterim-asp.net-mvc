@@ -29,9 +29,16 @@ namespace TarifDefterim.Map.Option
 
             // Recipre table relation
 
-            HasRequired(x => x.Recipe)
+            //HasRequired(x => x.Recipe)
+            //    .WithMany(x => x.Comments)
+            //    .HasForeignKey(x => x.RecipeID)
+            //    .WillCascadeOnDelete(false);
+
+            // Meak table relation
+
+            HasRequired(x => x.Meal)
                 .WithMany(x => x.Comments)
-                .HasForeignKey(x => x.RecipeID)
+                .HasForeignKey(x => x.MealID)
                 .WillCascadeOnDelete(false);
 
 

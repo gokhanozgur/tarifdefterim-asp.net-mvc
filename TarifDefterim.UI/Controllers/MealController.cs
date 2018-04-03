@@ -116,5 +116,90 @@ namespace TarifDefterim.UI.Controllers
             return PartialView("_version_1_MealList", modelList.ToPagedList(page,6));
 
         }
+
+        [ChildActionOnly]
+        public ActionResult GetRandomMeal()
+        {
+            
+            List<Meal> randomMealList = _mealService.GetActive().Take(5).ToList();
+
+            List<MealVM> mealList = new List<MealVM>();
+
+            foreach (var item in randomMealList)
+            {
+                MealVM model = new MealVM();
+                model.ID = item.ID;
+                model.Name = item.Name;
+                model.Description = item.Description;
+                model.Slug = item.Slug;
+                model.PreparationTime = item.PreparationTime;
+                model.PreparationTimeUnitOf = item.PreparationTimeUnitOf;
+                model.CookingTime = item.CookingTime;
+                model.CookingTimeUnitOf = item.CookingTimeUnitOf;
+                model.Person = item.Person;
+                model.Tricks = item.Tricks;
+                model.VideoURL = item.VideoURL;
+
+                MealImage mImage = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                if (mImage == null)
+                {
+                    model.RandomImagePath = ImageUploader.DefaultMealImagePath;
+                }
+                else
+                {
+                    model.RandomImagePath = mImage.CruptedMealImage;
+                }
+
+                mealList.Add(model);
+            }
+
+
+            return PartialView("_version_1_Footer", mealList);
+
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetPopularMeal()
+        {
+
+            List<Meal> randomMealList = _mealService.GetActive().Take(5).ToList();
+
+            List<MealVM> mealList = new List<MealVM>();
+
+            foreach (var item in randomMealList)
+            {
+                MealVM model = new MealVM();
+                model.ID = item.ID;
+                model.Name = item.Name;
+                model.Description = item.Description;
+                model.Slug = item.Slug;
+                model.PreparationTime = item.PreparationTime;
+                model.PreparationTimeUnitOf = item.PreparationTimeUnitOf;
+                model.CookingTime = item.CookingTime;
+                model.CookingTimeUnitOf = item.CookingTimeUnitOf;
+                model.Person = item.Person;
+                model.Tricks = item.Tricks;
+                model.VideoURL = item.VideoURL;
+
+                MealImage mImage = _mealImage.TakeFirstMealImagePath(item.ID);
+
+                if (mImage == null)
+                {
+                    model.RandomImagePath = ImageUploader.DefaultMealImagePath;
+                }
+                else
+                {
+                    model.RandomImagePath = mImage.ImageURL;
+                }
+
+                mealList.Add(model);
+            }
+
+
+            return PartialView("_version_1_Right_Column", mealList);
+
+        }
+
     }
 }
