@@ -47,6 +47,7 @@ namespace TarifDefterim.UI.Controllers
                 else if (user.Role == Role.Member) return View();
             }
 
+
             return View();
 
         }
