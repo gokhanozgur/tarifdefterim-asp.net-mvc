@@ -72,10 +72,22 @@ namespace TarifDefterim.UI.Areas.Admin.Controllers
 
         public ActionResult UpdateCategory(Guid id)
         {
-
             Category category = _categoryService.GetByID(id);
 
             CategoryDTO model = new CategoryDTO();
+
+            string slug = GenerateSlug.GenerateSlugURL(model.CategoryName);
+
+            bool IsExistSlugName = _categoryService.IsExistSlugName(model.ID, slug);
+
+            if (!IsExistSlugName)
+            {
+                model.Slug = slug;
+            }
+            else
+            {
+                model.Slug = slug + "-" + DateTime.Now.ToShortDateString();
+            }
 
             model.ID = category.ID;
             model.CategoryName = category.CategoryName;
