@@ -1,7 +1,9 @@
-Projede startup ayarýnda deðiþiklik yapýldýðý için console komutlarýnda aþaðýdaki komutlar uygulanýr.
+Bu proje katmanli mimari projesi olup ASP.NET MVC, Entity Framework, Web API, Javascript, AJAX gibi teknolojiler kullanÄ±lmÄ±ÅŸtÄ±r.
+
+Projede startup ayarÄ±nda deÄŸiÅŸiklik yapÄ±ldÄ±ÄŸÄ± iÃ§in console komutlarÃ½nda aÃ¾aÃ°Ã½daki komutlar uygulanÃ½r.
 
 1- Enable-Migrations -ProjectName "TarifDefterim.DAL" -StartUpProjectName "TarifDefterim.UI" -Verbose
-	1.1 Tüm sayfalarda yetki ve hata bazýnda korumalar olduðu için ilk kullanýcýyý açýlan konfigürasyon sýnýfýnda AutomaticMigrationsEnabled = true; yapýlýr ve  ilk kullanýcýyý aþaðýdaki kod ile seed ediyorum.
+	1.1 TÃ¼m sayfalarda yetki ve hata bazÄ±nda korumalar olduÄŸu iÃ§in ilk kullanÄ±cÄ±yÄ± aÃ§Ä±lan konfigÃ¼rasyon sayfasÄ±nda AutomaticMigrationsEnabled = true; yaparak, ilk kullanÄ±cÄ±yÄ± aÅŸaÄŸÄ±daki kod ile seed ediyorum.
 	1.1.1
             context.AppUsers.AddOrUpdate(
 
@@ -26,8 +28,8 @@ Projede startup ayarýnda deðiþiklik yapýldýðý için console komutlarýnda aþaðýdak
                 
                 x => x.ID, new Model.Option.AppUser()
                 {
-                    Name = "GÖKHAN",
-                    LastName = "ÖZGÜR",
+                    Name = "GÃ–KHAN",
+                    LastName = "Ã–ZGÃœR",
                     UserName = "gozgur",
                     Email = "g.ozgur@outlook.com",
                     Password = "202cb962ac59075b964b07152d234b70",
