@@ -1,4 +1,21 @@
-Bu proje katmanli mimari projesi olup ASP.NET MVC, Entity Framework, Web API, Javascript, AJAX gibi teknolojiler kullanılmıştır.
+Bu proje katmanli mimari projesi olup aşağıdaki teknolojiler kullanılmıştır.
+
+Object Oriented Programming, 
+N-tier Architecture,
+Code First
+ASP.NET MVC,
+Wep API, 
+RESTful, 
+Javascript,
+jQuery,
+AJAX,
+Entity Framework, 
+Html,
+Css, 
+Bootstrap, 
+GitHub, 
+BitBucket
+
 
 Projede startup ayarında değişiklik yapıldığı için console komutlarýnda aþaðýdaki komutlar uygulanýr.
 
